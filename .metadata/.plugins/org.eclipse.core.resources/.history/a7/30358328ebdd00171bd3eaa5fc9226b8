@@ -1,0 +1,26 @@
+package carte;
+
+import java.awt.Image;
+import java.io.File;
+
+import javax.imageio.ImageIO;
+
+public class Sprites {
+	private Image spriteCaseJouable;
+	private Image spriteCaseChemin;
+
+	private static Sprites sprite = null;
+	
+	private Sprites () {
+		this.chargeSpriteCaseJouable();
+	}
+	
+	public static Sprites getInstance() {
+		sprite = new Sprites(); 
+		return sprite;
+	}
+	public void chargeSpriteCaseJouable(){
+		this.spriteCaseJouable = ImageIO.read(new File("image/herbe.png"));
+	}
+
+}

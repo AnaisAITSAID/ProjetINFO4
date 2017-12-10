@@ -1,0 +1,13 @@
+package carte;
+
+public class Carte {
+	private int carte [][];
+	
+	public Carte () {
+		this.chargeCarte();
+	}
+	
+	private chargeCarte() {
+		
+	}
+}

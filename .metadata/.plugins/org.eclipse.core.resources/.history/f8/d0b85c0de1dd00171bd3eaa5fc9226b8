@@ -1,0 +1,15 @@
+package jeu;
+
+import carte.CarteFichier;
+import utils.Constantes;
+
+public class Jeu {
+	public static void main(String [] args){
+		CarteFichier singleton = CarteFichier.getInstance();
+		for (int i = 0; i < Constantes.taille; ++i) {
+			for (int j = 0; j < Constantes.taille; ++j) {
+				singleton.getCarte()[i][j];
+			}			
+		}
+	}
+}

@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<qualifiedTypeNameHistroy>
+<fullyQualifiedTypeName name="java.io.InputStream"/>
+<fullyQualifiedTypeName name="java.lang.reflect.Array"/>
+<fullyQualifiedTypeName name="java.lang.Integer"/>
+<fullyQualifiedTypeName name="java.util.ArrayList"/>
+<fullyQualifiedTypeName name="carte.CarteFichier"/>
+<fullyQualifiedTypeName name="utils.Constantes"/>
+<fullyQualifiedTypeName name="java.awt.Button"/>
+<fullyQualifiedTypeName name="javax.swing.JButton"/>
+<fullyQualifiedTypeName name="utils.Constantes.Type"/>
+<fullyQualifiedTypeName name="carte.Case"/>
+<fullyQualifiedTypeName name="carte.CaseChemin"/>
+</qualifiedTypeNameHistroy>

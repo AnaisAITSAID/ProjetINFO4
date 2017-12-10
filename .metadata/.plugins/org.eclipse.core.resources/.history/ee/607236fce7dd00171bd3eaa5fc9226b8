@@ -1,0 +1,6 @@
+package carte;
+
+public class CaseChemin extends Case {
+	private boolean estPrise;
+	
+}

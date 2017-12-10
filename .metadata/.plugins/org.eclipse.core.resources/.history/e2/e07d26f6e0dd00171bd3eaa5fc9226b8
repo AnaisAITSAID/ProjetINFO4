@@ -1,0 +1,10 @@
+package jeu;
+
+import carte.CarteFichier;
+
+public class Jeu {
+	public static void main(String [] args){
+		CarteFichier singleton = CarteFichier.getInstance();
+		
+	}
+}

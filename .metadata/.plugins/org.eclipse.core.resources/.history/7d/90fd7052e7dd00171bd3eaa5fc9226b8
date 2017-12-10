@@ -1,0 +1,6 @@
+package carte;
+
+public class Case {
+	private int type;
+	
+}

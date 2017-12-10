@@ -1,0 +1,19 @@
+package jeu;
+
+import javax.swing.JFrame;
+
+public class Jeu extends JFrame{
+	
+	public Jeu () {
+		/* création d'une fenêtre */
+	}
+	
+	public interfaceUtilisateur () {
+		/* création de l'interface utilisateur */
+		/* il faut ajouter des JPanel 
+	}
+	
+	public static void main(String [] args){
+		 
+	}
+}

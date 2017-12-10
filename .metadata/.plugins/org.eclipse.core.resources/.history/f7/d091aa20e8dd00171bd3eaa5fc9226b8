@@ -1,0 +1,9 @@
+package carte;
+
+import javax.swing.JButton;
+
+public class Case extends JButton {
+	private Type type; 
+	private int posX;
+	private int posY;
+}

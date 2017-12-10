@@ -1,0 +1,9 @@
+package carte;
+
+public class CaseChemin extends Case {
+	
+	public CaseChemin{
+		this.type = 
+	}
+	
+}

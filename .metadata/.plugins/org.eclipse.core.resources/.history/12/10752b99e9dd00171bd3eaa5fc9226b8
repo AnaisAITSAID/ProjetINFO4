@@ -1,0 +1,18 @@
+package carte;
+
+import javax.swing.JButton;
+
+import utils.Constantes.Type;
+
+public class Case extends JButton {
+	private Type type; 
+	private int posX;
+	private int posY;
+	
+	public Case (Type type, int x, int y) {
+		this.type = type;
+		this.x = y;
+	}
+	
+	
+}

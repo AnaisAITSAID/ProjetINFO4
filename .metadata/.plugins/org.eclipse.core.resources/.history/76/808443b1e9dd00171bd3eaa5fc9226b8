@@ -1,0 +1,11 @@
+package carte;
+
+import utils.Constantes.Type;
+
+public class CaseJouable {
+	private boolean estPrise;
+	
+	public CaseJouable(int x, int y) {
+		super(Type.CaseChemin, x, y);
+	}
+}

@@ -1,0 +1,50 @@
+package carte;
+
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+
+import utils.Constantes;
+
+public class CarteFichier {
+	private String nomFichier = "carte/carte.txt";
+	private int    carte [][];
+	private static CarteFichier carteFichier = null;
+	
+	private CarteFichier () {
+		this.chargeFichier();
+	}
+	
+	public static CarteFichier getInstance() {
+		carteFichier = new CarteFichier(); 
+		return carteFichier;
+	}
+	public void chargeFichier(){
+		File fichierCarte = new File (this.nomFichier);
+		this.carte = new int [Constantes.taille][Constantes.taille];
+		try{
+			//InputStream ips=new FileInputStream(fichierCarte); 
+			//InputStreamReader ipsr=new InputStreamReader(ips);
+			//BufferedReader br=new BufferedReader(ipsr);
+			String ligne;
+			Scanner scanner = new Scanner (fichierCarte);
+			for (int i = 0; (ligne=br.readLine())!=null; ++i) {
+				for (int j = 0; !(ligne=br.readLine()).equals('\n'); ++j) {
+					System.out.print(ligne);					
+				}
+				System.out.println();					
+
+			}
+			br.close(); 
+		}		
+		catch (Exception e){
+			System.err.println(e.toString());
+		}
+	}
+
+	public int[][] getCarte() {
+		return carte;
+	}
+}
