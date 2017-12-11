@@ -1,0 +1,19 @@
+package carte;
+
+import java.awt.Graphics;
+
+import utils.Constantes.Type;
+
+public class CaseJouable extends Case{
+	private boolean estPrise;
+	
+	public CaseJouable(int x, int y) {
+		super(Type.CaseChemin, x, y);
+		this.estPrise = false;
+	}
+	@Override
+	public void draw(Graphics g) {
+		g.drawImage(sprite.getSpriteCaseJouable(), getX(), getY(), 40, 40, null);
+	}
+	
+}

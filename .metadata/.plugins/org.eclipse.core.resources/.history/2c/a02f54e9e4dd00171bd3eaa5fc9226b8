@@ -1,7 +1,0 @@
-package carte;
-
-public class Carte {
-	public Carte () {
-		
-	}
-}

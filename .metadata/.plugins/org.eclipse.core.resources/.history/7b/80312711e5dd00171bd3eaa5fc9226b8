@@ -1,9 +1,0 @@
-package carte;
-
-public class Carte {
-	private int carte [][];
-	
-	public Carte () {
-		chargeCarte();
-	}
-}

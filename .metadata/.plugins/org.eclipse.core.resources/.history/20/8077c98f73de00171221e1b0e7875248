@@ -1,0 +1,26 @@
+package jeu;
+
+import javax.swing.JFrame;
+
+public class Jeu extends JFrame{
+	
+	public Jeu () {
+		/* création d'une fenêtre */
+		setTitle("Tower Defense");
+		setResizable(false);
+		
+		setLocationRelativeTo(null);
+		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+	}
+	
+	public void interfaceUtilisateur () {
+		/* création de l'interface utilisateur */
+		/* pour commencer on se contentera d'ajouter la carte */
+		Carte carte = new Carte ();
+	}
+	
+	public static void main(String [] args){
+		 Jeu jeu = new Jeu ();
+		 jeu.interfaceUtilisateur();
+	}
+}
