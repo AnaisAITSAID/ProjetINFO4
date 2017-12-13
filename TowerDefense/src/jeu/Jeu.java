@@ -7,14 +7,21 @@ import javax.swing.JFrame;
 import carte.Carte;
 
 public class Jeu extends JFrame{
-	
+	/* crï¿½ation d'une fenï¿½tre */
 	public Jeu () {
-		/* création d'une fenêtre */		
+		
+		this.setTitle("Tower Defense");
+		this.setSize(400,400);
+		this.setLocationRelativeTo(null);
+		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		
 	}
-	
+	/* crï¿½ation de l'interface utilisateur */
+	/* pour commencer on se contentera d'ajouter la carte */
 	public void interfaceUtilisateur () {
-		/* création de l'interface utilisateur */
-		/* pour commencer on se contentera d'ajouter la carte */		
+		Carte carte = new Carte();
+		this.setContentPane(carte);
+		this.setVisible(true);
 	}
 	
 	public static void main(String [] args){

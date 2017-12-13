@@ -13,7 +13,7 @@ public class CaseJouable extends Case{
 	}
 	@Override
 	public void dessiner(Graphics g) {
-		/* dessine l'image de la case */
+		g.drawImage(sprite.getSpriteCaseJouable(), getX(), getY(), null);
 	}
 	
 }

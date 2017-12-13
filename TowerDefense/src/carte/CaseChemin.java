@@ -8,10 +8,10 @@ public class CaseChemin extends Case {
 	public CaseChemin(int x, int y){
 		super(Type.CaseChemin, x, y);
 	}
-
+	/* dessine l'image de la case */
 	@Override
 	public void dessiner(Graphics g) {
-		/* dessine l'image de la case */
+		g.drawImage(sprite.getSpriteCaseChemin(), getX(), getY(), null);
 	}
 	
 }
