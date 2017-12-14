@@ -5,11 +5,10 @@ import java.awt.Rectangle;
 
 import utils.Constantes.Type;
 
-public abstract class Case  {
+public abstract class Case extends AffichageSprite {
 	private Type type; 
 	private int x;
 	private int y;
-	Sprites sprite = Sprites.getInstance();
 	
 	public Case (Type type, int x, int y) {
 		this.type = type;
@@ -27,5 +26,4 @@ public abstract class Case  {
 	public int getY() {
 		return y;
 	}
-	public abstract void dessiner(Graphics g);
 }

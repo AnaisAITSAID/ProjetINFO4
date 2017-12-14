@@ -1,7 +1,5 @@
 package jeu;
 
-import java.awt.FlowLayout;
-
 import javax.swing.JFrame;
 
 import carte.Carte;

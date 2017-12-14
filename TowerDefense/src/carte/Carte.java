@@ -9,8 +9,10 @@ import utils.Constantes.Type;
 
 public class Carte extends JPanel{
 	private Case carte [][];
+	private Chemin chemin;
 	
 	public Carte () {
+		this.chemin = new Chemin();
 		this.chargeCarte();
 	}
 	
@@ -19,8 +21,10 @@ public class Carte extends JPanel{
 		CarteFichier singleton = CarteFichier.getInstance();
 		for (int i = 0; i < Constantes.taille; ++i) {
 			for (int j = 0; j < Constantes.taille; ++j) {
-				if (singleton.getCarte()[j][i] == 1)
+				if (singleton.getCarte()[j][i] == 1){
+					this.chemin.inserer(i*Constantes.tailleCase, j*Constantes.tailleCase);
 					this.carte[j][i] = new CaseChemin(i*Constantes.tailleCase, j*Constantes.tailleCase);
+				}
 				else if (singleton.getCarte()[j][i] == 0)
 					this.carte[j][i] = new CaseJouable(i*Constantes.tailleCase, j*Constantes.tailleCase);
 			}			
@@ -35,5 +39,4 @@ public class Carte extends JPanel{
 			}			
 		}
 	}
-
 }
