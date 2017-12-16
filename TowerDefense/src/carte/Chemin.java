@@ -3,7 +3,7 @@ package carte;
 import java.util.ArrayList;
 
 public class Chemin {
-	private ArrayList<CaseChemin> chemin;
+	private static ArrayList<CaseChemin> chemin;
 	
 	public Chemin (){
 		this.chemin = new ArrayList<CaseChemin>();
@@ -17,8 +17,8 @@ public class Chemin {
 		return this.chemin.get(i);
 	}
 	
-	public CaseChemin getArrive(){
-		int taille = this.chemin.size();
-		return this.chemin.get(taille-1);	
+	public static CaseChemin getArrive(){
+		int taille = chemin.size();
+		return chemin.get(taille-1);	
 	}
 }

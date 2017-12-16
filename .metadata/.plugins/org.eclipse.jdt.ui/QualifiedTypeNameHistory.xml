@@ -11,5 +11,7 @@
 <fullyQualifiedTypeName name="carte.CaseJouable"/>
 <fullyQualifiedTypeName name="carte.CaseChemin"/>
 <fullyQualifiedTypeName name="utils.Constantes.Type"/>
+<fullyQualifiedTypeName name="carte.AffichageSprite"/>
+<fullyQualifiedTypeName name="carte.Chateau"/>
 <fullyQualifiedTypeName name="utils.Constantes"/>
 </qualifiedTypeNameHistroy>

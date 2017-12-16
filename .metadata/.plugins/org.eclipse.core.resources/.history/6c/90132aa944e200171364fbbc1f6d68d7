@@ -1,0 +1,13 @@
+package carte;
+
+import java.awt.Graphics;
+
+public class Chateau extends AffichageSprite {
+
+	@Override
+	public void dessiner(Graphics g) {
+		Chemin.getArrive()
+		g.drawImage(sprite.getSpriteCaseChemin(), getX(), getY(), null);
+	}
+
+}

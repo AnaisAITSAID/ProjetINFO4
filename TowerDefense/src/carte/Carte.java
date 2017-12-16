@@ -33,10 +33,14 @@ public class Carte extends JPanel{
 	/* C'est ici que l'on va dessiner les cases une par une dans la carte*/		
 	@Override 
 	public void paintComponent(Graphics g) {
+		Chateau chateau = new Chateau();
+		
 		for (int i = 0; i < Constantes.taille; ++i) {
 			for (int j = 0; j < Constantes.taille; ++j) {
 				carte[j][i].dessiner(g);
 			}			
 		}
+		chateau.dessiner(g);
+		
 	}
 }

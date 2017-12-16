@@ -9,12 +9,14 @@ import javax.imageio.ImageIO;
 public class Sprites {
 	private Image spriteCaseJouable;
 	private Image spriteCaseChemin;
+	private Image spriteChateau;
 
 	private static Sprites sprite = null;
 	
 	private Sprites () {
 		this.chargeSpriteCaseJouable();
 		this.chargeSpriteCaseChemin();
+		this.chargeSpriteChateau();
 	}
 	
 
@@ -39,13 +41,24 @@ public class Sprites {
 			e.printStackTrace();
 		}
 	}
+	public void chargeSpriteChateau(){
+		try {
+			this.spriteChateau = ImageIO.read(new File("image/chateau.png"));
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
 
 	public Image getSpriteCaseJouable() {
-		return spriteCaseJouable;
+		return this.spriteCaseJouable;
 	}
 
 	public Image getSpriteCaseChemin() {
-		return spriteCaseChemin;
+		return this.spriteCaseChemin;
 	}
-
+	
+	public Image getSpriteChateau() {
+		return this.spriteChateau;
+	}
 }

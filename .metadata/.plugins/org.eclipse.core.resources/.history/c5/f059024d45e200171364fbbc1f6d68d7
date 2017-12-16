@@ -1,0 +1,23 @@
+package carte;
+
+import java.awt.Graphics;
+
+import utils.Constantes;
+
+public class Chateau extends AffichageSprite {
+
+	private int vieChateau;
+	
+	public Chateau() {
+		super();
+		this.vieChateau = Constantes.vieChateau;
+	}
+
+	@Override
+	public void dessiner(Graphics g) {
+		CaseChemin arrive = Chemin.getArrive();
+		System.out.println();
+		g.drawImage(sprite.getSpriteCaseChemin(), arrive.getX(), arrive.getY(), null);
+	}
+
+}
