@@ -10,6 +10,7 @@ public class Sprites {
 	private Image spriteCaseJouable;
 	private Image spriteCaseChemin;
 	private Image spriteChateau;
+	private Image spriteEnnemi;
 
 	private static Sprites sprite = null;
 	
@@ -17,8 +18,12 @@ public class Sprites {
 		this.chargeSpriteCaseJouable();
 		this.chargeSpriteCaseChemin();
 		this.chargeSpriteChateau();
+		this.chargeSpriteEnnemi();
+
 	}
 	
+
+
 
 	public static Sprites getInstance() {
 		sprite = new Sprites(); 
@@ -49,6 +54,15 @@ public class Sprites {
 			e.printStackTrace();
 		}
 	}
+	
+	public void chargeSpriteEnnemi(){
+		try {
+			this.spriteEnnemi = ImageIO.read(new File("image/ennemi.png"));
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
 
 	public Image getSpriteCaseJouable() {
 		return this.spriteCaseJouable;
@@ -60,5 +74,8 @@ public class Sprites {
 	
 	public Image getSpriteChateau() {
 		return this.spriteChateau;
+	}
+	public Image getSpriteEnnemi() {
+		return this.spriteEnnemi;
 	}
 }

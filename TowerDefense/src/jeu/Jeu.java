@@ -20,6 +20,13 @@ public class Jeu extends JFrame{
 		Carte carte = new Carte();
 		this.setContentPane(carte);
 		this.setVisible(true);
+		try {
+			Thread.sleep(200);
+		} catch (InterruptedException e) {
+			e.printStackTrace();
+		} // test 
+		getContentPane().validate(); // test 
+        getContentPane().repaint(); //test 
 	}
 	
 	public static void main(String [] args){

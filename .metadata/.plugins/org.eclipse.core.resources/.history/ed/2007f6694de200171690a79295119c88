@@ -9,8 +9,8 @@ import utils.Constantes.Type;
 
 public class Carte extends JPanel{
 	private Case carte [][];
+	Chateau chateau;
 	private Chemin chemin;
-	Ennemi ennemi = new Ennemi (10, 10); // test
 	
 	public Carte () {
 		this.chemin = new Chemin();
@@ -34,18 +34,13 @@ public class Carte extends JPanel{
 	/* C'est ici que l'on va dessiner les cases une par une dans la carte*/		
 	@Override 
 	public void paintComponent(Graphics g) {
-		Chateau chateau = new Chateau();
+		
 		
 		for (int i = 0; i < Constantes.taille; ++i) {
 			for (int j = 0; j < Constantes.taille; ++j) {
 				carte[j][i].dessiner(g);
 			}			
 		}
-		System.out.println("cammanver");
-		ennemi.dessiner(g); // test
-		ennemi.deplacer(); // test 
-
-
 		chateau.dessiner(g);
 		
 	}

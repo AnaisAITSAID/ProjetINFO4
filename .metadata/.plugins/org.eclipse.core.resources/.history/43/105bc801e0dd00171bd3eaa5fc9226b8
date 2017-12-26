@@ -1,5 +1,0 @@
-package utils;
-
-public class Constantes {
-	static final int taille = 6;
-}

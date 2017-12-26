@@ -13,8 +13,8 @@ public class Chemin {
 		this.chemin.add(new CaseChemin(posX, posY));
 	}
 
-	public CaseChemin getPos(int i) {
-		return this.chemin.get(i);
+	public static CaseChemin getPos(int i) {
+		return chemin.get(i);
 	}
 	
 	public static CaseChemin getArrive(){

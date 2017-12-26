@@ -1,9 +1,0 @@
-package carte;
-
-public class CaseJouable {
-	private boolean estPrise;
-	
-	public CaseJouable() {
-		
-	}
-}

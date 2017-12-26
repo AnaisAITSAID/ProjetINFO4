@@ -10,7 +10,6 @@ import utils.Constantes.Type;
 public class Carte extends JPanel{
 	private Case carte [][];
 	private Chemin chemin;
-	Ennemi ennemi = new Ennemi (10, 10); // test
 	
 	public Carte () {
 		this.chemin = new Chemin();
@@ -41,11 +40,6 @@ public class Carte extends JPanel{
 				carte[j][i].dessiner(g);
 			}			
 		}
-		System.out.println("cammanver");
-		ennemi.dessiner(g); // test
-		ennemi.deplacer(); // test 
-
-
 		chateau.dessiner(g);
 		
 	}
