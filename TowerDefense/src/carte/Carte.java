@@ -10,7 +10,8 @@ import utils.Constantes.Type;
 public class Carte extends JPanel{
 	private Case carte [][];
 	private Chemin chemin;
-	Ennemi ennemi = new Ennemi (10, 10); // test
+	private Vague la_vague= new Vague();
+	//Ennemi ennemi = new Ennemi (10, 10); // test
 	
 	public Carte () {
 		this.chemin = new Chemin();
@@ -42,9 +43,24 @@ public class Carte extends JPanel{
 			}			
 		}
 		System.out.println("cammanver");
-		ennemi.dessiner(g); // test
-		ennemi.deplacer(); // test 
-
+		//ennemi.dessiner(g); // test
+		//ennemi.deplacer(); // test 
+		
+		//tentative de déplacement des ennemis
+		for(int i=0;i<4;i++) {
+			Ennemi e;
+			e=la_vague.getEnnemi(i);
+			e.dessiner(g);
+			//e.deplacer();
+			if(i>0) {
+				for(int j=i-1;j>=0;j--) {
+					Ennemi e2;
+					e2=la_vague.getEnnemi(j);
+					e2.deplacer();
+				}
+				
+			}
+		}
 
 		chateau.dessiner(g);
 		
