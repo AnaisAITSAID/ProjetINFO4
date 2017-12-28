@@ -1,0 +1,53 @@
+package carte;
+
+import java.awt.Point;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
+import java.awt.event.MouseMotionListener;
+
+import jeu.Jeu;
+
+public class Souris_position implements MouseMotionListener, MouseListener{
+
+	@Override
+	public void mouseClicked(MouseEvent evenement) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void mouseEntered(MouseEvent evenement) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void mouseExited(MouseEvent evenement) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void mousePressed(MouseEvent evenement) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void mouseReleased(MouseEvent evenement) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void mouseDragged(MouseEvent evenement) {
+		// TODO Auto-generated method stub
+		Carte.pt_souris=new Point(evenement.getX(),evenement.getY());
+	}
+
+	@Override
+	public void mouseMoved(MouseEvent evenement ) {
+		Carte.pt_souris=new Point(evenement.getX(),evenement.getY());
+	}
+
+}

@@ -6,14 +6,20 @@ import carte.Carte;
 
 public class Jeu extends JFrame{
 	/* cr�ation d'une fen�tre */
+	
+	public static int largeur;
+	public static int hauteur;
 	public Jeu () {
 		
 		this.setTitle("Tower Defense");
 		this.setSize(400,400);
+		this.largeur=this.getWidth();
+		this.hauteur=this.getHeight();
 		this.setLocationRelativeTo(null);
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		
 	}
+	
 	/* cr�ation de l'interface utilisateur */
 	/* pour commencer on se contentera d'ajouter la carte */
 	public void interfaceUtilisateur () {

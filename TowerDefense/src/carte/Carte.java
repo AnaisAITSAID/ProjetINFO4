@@ -1,6 +1,8 @@
 package carte;
 
+import java.awt.Color;
 import java.awt.Graphics;
+import java.awt.Point;
 import java.util.Iterator;
 
 import javax.swing.JPanel;
@@ -11,7 +13,14 @@ public class Carte extends JPanel implements Runnable{
 	private Case carte [][];
 	private Chemin chemin;
 	private Vague la_vague;
-
+	
+	public static int largeur;
+	public static int hauteur; 
+	//point où se trouve la souris 
+	public static Point pt_souris= new Point(0,0);
+	
+	//partie réservée aux achats dans l'IHM
+	public Achats zone_achats;
 	//Ennemi ennemi = new Ennemi (10, 10); // test
 	
 	public Carte () {
@@ -42,12 +51,22 @@ public class Carte extends JPanel implements Runnable{
 			}			
 			System.out.println();
 		}
+		
+		//zone des achats
+		zone_achats=new Achats();
 	}
 	/* C'est ici que l'on va dessiner les cases une par une dans la carte*/		
 	@Override 
 	public void paintComponent(Graphics g) {
-		Chateau chateau = new Chateau();
 		
+		largeur=getWidth();
+		hauteur=getHeight();
+		
+		g.setColor(new Color(100,100,100));
+		g.fillRect(0, 0, largeur, hauteur);
+		g.setColor(new Color(0,0,0));
+		//g.drawLine((carte[0][0]).getX()-1,0,(carte[0][0]).getX()-1,(carte[Constantes.taille-1][0]).getY()+1);
+		Chateau chateau = new Chateau();
 		for (int i = 0; i < Constantes.taille; ++i) {
 			for (int j = 0; j < Constantes.taille; ++j) {
 				carte[j][i].dessiner(g);
@@ -83,8 +102,11 @@ public class Carte extends JPanel implements Runnable{
 		}*/
 
 		chateau.dessiner(g);
+		zone_achats.dessiner(g);
 		
 	}
+
+
 
 	@Override
 	public void run() {
