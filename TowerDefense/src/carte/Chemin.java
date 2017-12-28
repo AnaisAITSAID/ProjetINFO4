@@ -25,4 +25,23 @@ public class Chemin {
 	public int tailleChemin () {
 		return chemin.size();
 	}
+	
+	public static int orientationCaseSuivante (int i) {
+		int value = 1;  
+
+		if (i != chemin.size() - 1) {
+			CaseChemin caseCourante = chemin.get(i);
+			CaseChemin caseSuivante = chemin.get(i+1);
+			if (caseCourante.getX() < caseSuivante.getX()) { // droite 
+				value = 1;
+			} else if (caseCourante.getY() < caseSuivante.getY()){ // haut
+				value = 2;
+			} else if (caseCourante.getX() > caseSuivante.getX()){ // gauche 
+				value = 3;
+			} else { // bas
+				value = 4;
+			}	
+		}
+		return value;
+	}
 }

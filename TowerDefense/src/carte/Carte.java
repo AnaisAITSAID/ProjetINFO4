@@ -28,7 +28,9 @@ public class Carte extends JPanel implements Runnable{
 		this.la_vague = new Vague();
 
 		this.chargeCarte();
-		
+		Thread thread = new Thread(this);
+		thread.start();
+
 	}
 	
 	private void chargeCarte() {
@@ -79,7 +81,7 @@ public class Carte extends JPanel implements Runnable{
 		// pour chaque ennemis 
 		
 		for (Ennemi  ennemi : la_vague.getCollec_ennemi()) {
-			if (ennemi.isBouge()) {
+			if (ennemi != null && ennemi.isBouge()) {
 			//	System.out.println(++test);
 				ennemi.dessiner(g);
 			}

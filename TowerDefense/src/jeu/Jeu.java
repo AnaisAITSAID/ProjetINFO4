@@ -26,8 +26,6 @@ public class Jeu extends JFrame{
 		Carte carte = new Carte();
 		this.setContentPane(carte);
 		this.setVisible(true);
-		Thread thread = new Thread(carte);
-		thread.start();
  
 	}
 	

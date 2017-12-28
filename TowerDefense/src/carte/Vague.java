@@ -12,13 +12,14 @@ public class Vague {
 	public Vague() {
 		num_vague = num_vague + 1;
 		pts_vie = pts_vie + 10;
-		collec_ennemi = new Ennemi [this.nb_ennemis];
+		
 	}
 	
 	public boolean ennemisMorts() {
 		boolean stop = true;
 		
 		for (Ennemi ennemi : this.collec_ennemi) {
+			System.out.println(stop);
 			if (ennemi.isBouge()) {
 				stop = false; 
 				break;
@@ -30,9 +31,12 @@ public class Vague {
 	}
 	
 	public void lancer_Vague() {
+		collec_ennemi = new Ennemi [this.nb_ennemis];
+		int caseCourante = 0; 
 		for(int i=0 ; i < nb_ennemis; i++) {
-			Ennemi e= new Ennemi(pts_vie,argent_donne);
+			Ennemi e= new Ennemi(pts_vie,argent_donne, caseCourante);
 			collec_ennemi[i] = e;
+			--caseCourante;
 		}
 	}
 
@@ -40,6 +44,8 @@ public class Vague {
 		return collec_ennemi;
 	}
 
-	
+	public Ennemi getEnnemi(int i) {
+		return this.collec_ennemi[i];
+	}
 	
 }
