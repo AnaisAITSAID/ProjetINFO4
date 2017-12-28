@@ -13,7 +13,7 @@ public class Carte extends JPanel implements Runnable{
 	private Case carte [][];
 	private Chemin chemin;
 	private Vague la_vague;
-	
+	private Chateau chateau;
 	public static int largeur;
 	public static int hauteur; 
 	//point où se trouve la souris 
@@ -26,7 +26,7 @@ public class Carte extends JPanel implements Runnable{
 	public Carte () {
 		this.chemin = new Chemin();
 		this.la_vague = new Vague();
-
+		this.chateau = new Chateau();
 		this.chargeCarte();
 		Thread thread = new Thread(this);
 		thread.start();
@@ -49,9 +49,8 @@ public class Carte extends JPanel implements Runnable{
 				
 				if (singleton.getCarte()[Constantes.taille -1 -j][i] == 1)
 					this.chemin.inserer(i*Constantes.tailleCase, (Constantes.taille -1-j)*Constantes.tailleCase);
-				System.out.print(singleton.getCarte()[Constantes.taille -1 -j][i] );
 			}			
-			System.out.println();
+			
 		}
 		
 		//zone des achats
@@ -68,41 +67,21 @@ public class Carte extends JPanel implements Runnable{
 		g.fillRect(0, 0, largeur, hauteur);
 		g.setColor(new Color(0,0,0));
 		//g.drawLine((carte[0][0]).getX()-1,0,(carte[0][0]).getX()-1,(carte[Constantes.taille-1][0]).getY()+1);
-		Chateau chateau = new Chateau();
+		
 		for (int i = 0; i < Constantes.taille; ++i) {
 			for (int j = 0; j < Constantes.taille; ++j) {
 				carte[j][i].dessiner(g);
 			}			
 		}
-		//ennemi.dessiner(g); // test
-		//ennemi.deplacer(); // test 
-		
-		//tentative de déplacement des ennemis
-		// pour chaque ennemis 
-		
+
 		for (Ennemi  ennemi : la_vague.getCollec_ennemi()) {
-			if (ennemi != null && ennemi.isBouge()) {
+			if (ennemi != null && ennemi.isBouge() && !ennemi.estArrive()) {
 			//	System.out.println(++test);
 				ennemi.dessiner(g);
 			}
 
 		}
 		
-		/*for(int i = 0; i < 4; i++) {
-			Ennemi e;
-			e = la_vague.getEnnemi(i);
-			e.dessiner(g);
-
-			if(i > 0) {
-				for(int j = i-1; j >= 0; j--) {
-					Ennemi e2;
-					e2 = la_vague.getEnnemi(j);
-					e2.deplacer();
-				}
-				
-			}
-		}*/
-
 		chateau.dessiner(g);
 		zone_achats.dessiner(g);
 		
@@ -113,19 +92,21 @@ public class Carte extends JPanel implements Runnable{
 	@Override
 	public void run() {
 		la_vague.lancer_Vague();
-		while (true) {
-			
+		while (!chateau.gameOver()) {
 			if (!la_vague.ennemisMorts()) {
 				for (Ennemi  ennemi : la_vague.getCollec_ennemi()) {
 					try {
 						Thread.sleep(200);
 					} catch (InterruptedException e) {
-						// TODO Auto-generated catch block
-						e.printStackTrace();
-												
+						e.printStackTrace();												
 					}
-					ennemi.deplacer();
-					
+					if (chateau.gameOver()) break;
+					if (ennemi.estArrive() && ennemi.isBouge()) {
+						this.chateau.setVieChateau(ennemi.attaquer());
+						System.out.println("Points de vie : " + this.chateau.getVieChateau());
+					} else if (ennemi.isBouge()) {
+						ennemi.deplacer();	
+					}
 					repaint();
 				}
 				
@@ -133,6 +114,6 @@ public class Carte extends JPanel implements Runnable{
 				la_vague.lancer_Vague();
 			}
 		}
-		
+		System.out.println("GameOver");
 	}
 }

@@ -2,6 +2,8 @@ package carte;
 
 import java.util.ArrayList;
 
+import utils.Constantes;
+
 public class Chemin {
 	private static ArrayList<CaseChemin> chemin;
 	
@@ -26,20 +28,20 @@ public class Chemin {
 		return chemin.size();
 	}
 	
-	public static int orientationCaseSuivante (int i) {
-		int value = 1;  
+	public static Constantes.Orientation orientationCaseSuivante (int i) {
+		Constantes.Orientation value = Constantes.Orientation.Droite;  
 
 		if (i != chemin.size() - 1) {
 			CaseChemin caseCourante = chemin.get(i);
 			CaseChemin caseSuivante = chemin.get(i+1);
 			if (caseCourante.getX() < caseSuivante.getX()) { // droite 
-				value = 1;
+				value = Constantes.Orientation.Droite;
 			} else if (caseCourante.getY() < caseSuivante.getY()){ // haut
-				value = 2;
+				value = Constantes.Orientation.Haut;
 			} else if (caseCourante.getX() > caseSuivante.getX()){ // gauche 
-				value = 3;
+				value = Constantes.Orientation.Gauche;
 			} else { // bas
-				value = 4;
+				value = Constantes.Orientation.Bas;
 			}	
 		}
 		return value;

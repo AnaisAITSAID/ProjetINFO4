@@ -16,10 +16,9 @@ public class Vague {
 	}
 	
 	public boolean ennemisMorts() {
-		boolean stop = true;
+		boolean stop = false;
 		
 		for (Ennemi ennemi : this.collec_ennemi) {
-			System.out.println(stop);
 			if (ennemi.isBouge()) {
 				stop = false; 
 				break;

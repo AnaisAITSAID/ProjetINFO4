@@ -8,4 +8,12 @@ public class Constantes {
 		CaseJouable,
 		CaseChemin;
 	}
+	
+	public static enum Orientation{
+		Inconnu,
+		Droite,
+		Haut,
+		Gauche,
+		Bas
+	}
 }
