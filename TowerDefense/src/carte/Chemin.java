@@ -21,4 +21,8 @@ public class Chemin {
 		int taille = chemin.size();
 		return chemin.get(taille-1);	
 	}
+	
+	public int tailleChemin () {
+		return chemin.size();
+	}
 }
