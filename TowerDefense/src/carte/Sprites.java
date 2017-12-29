@@ -21,60 +21,79 @@ public class Sprites {
 		this.chargeSpriteEnnemi();
 
 	}
-	
-
-
 
 	public static Sprites getInstance() {
 		sprite = new Sprites(); 
 		return sprite;
 	}
+	/**
+	 * Fonction permettant de charger les sprites des cases jouables
+	 */
 	public void chargeSpriteCaseJouable(){
 		try {
 			this.spriteCaseJouable = ImageIO.read(new File("image/herbe.png"));
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 	}
 	
+	/**
+	 * Fonction permettant de charger les sprites des cases du chemin
+	 */
 	public void chargeSpriteCaseChemin(){
 		try {
 			this.spriteCaseChemin = ImageIO.read(new File("image/sol.png"));
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 	}
+	
+	/**
+	 * Fonction permettant de charger le sprite du château
+	 */
 	public void chargeSpriteChateau(){
 		try {
 			this.spriteChateau = ImageIO.read(new File("image/chateau.png"));
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 	}
 	
+	/**
+	 * Fonction permettant de charger les sprites des ennemis
+	 */
 	public void chargeSpriteEnnemi(){
 		try {
 			this.spriteEnnemi = ImageIO.read(new File("image/ennemi.png"));
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 	}
 
+	/**
+	 * @return le sprite des cases jouables
+	 */
 	public Image getSpriteCaseJouable() {
 		return this.spriteCaseJouable;
 	}
 
+	/**
+	 * @return le sprite des cases du chemin
+	 */
 	public Image getSpriteCaseChemin() {
 		return this.spriteCaseChemin;
 	}
 	
+	/**
+	 * @return le sprite du château
+	 */
 	public Image getSpriteChateau() {
 		return this.spriteChateau;
 	}
+	
+	/**
+	 * @return le sprite de l'ennemi
+	 */
 	public Image getSpriteEnnemi() {
 		return this.spriteEnnemi;
 	}
