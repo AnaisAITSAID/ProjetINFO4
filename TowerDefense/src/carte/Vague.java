@@ -9,12 +9,20 @@ public class Vague {
 	private int argent_donne = pts_vie;
 	private Ennemi collec_ennemi [];
 
+	/**
+	 * Constructeur de la classe vague
+	 */
 	public Vague() {
 		num_vague = num_vague + 1;
 		pts_vie = pts_vie + 10;
 		
 	}
 	
+	/**
+	 * Cette fonction permet de vérifier si tous les ennemis sont morts.
+	 * Si tel est la cas, la vague est arrêtée. 
+	 * @return
+	 */
 	public boolean ennemisMorts() {
 		boolean stop = false;
 		
@@ -29,6 +37,10 @@ public class Vague {
 		return stop;
 	}
 	
+	/**
+	 * Fonction permettant de créer une vague. 
+	 * Tous les ennemis sont créés un à un. 
+	 */
 	public void lancer_Vague() {
 		collec_ennemi = new Ennemi [this.nb_ennemis];
 		int caseCourante = 0; 
@@ -38,11 +50,20 @@ public class Vague {
 			--caseCourante;
 		}
 	}
-
+	
+	/**
+	 * Fonction qui renvoie un tableau d'ennemis (la vague)
+	 * @return
+	 */
 	public Ennemi [] getCollec_ennemi() {
 		return collec_ennemi;
 	}
 
+	/**
+	 * Fonction qui renvoie l'ennemi à une position donnée dans la vague.
+	 * @param i
+	 * @return ennemi à la position i dans la vague
+	 */
 	public Ennemi getEnnemi(int i) {
 		return this.collec_ennemi[i];
 	}

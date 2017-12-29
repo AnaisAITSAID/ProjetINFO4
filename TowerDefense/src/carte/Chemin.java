@@ -26,7 +26,7 @@ public class Chemin {
 	/**
 	 * 
 	 * @param i
-	 * @return
+	 * @return La case à la position i
 	 */
 	public static CaseChemin getPos(int i) {
 		return chemin.get(i);
@@ -50,7 +50,8 @@ public class Chemin {
 	}
 	
 	/*
-	 * 
+	 * Fonction permettant dans quelle direction se trouve la case suivante
+	 * en comparant les coordonnées de la case courante et celles de la case suivante
 	 */
 	public static Constantes.Orientation orientationCaseSuivante (int i) {
 		Constantes.Orientation value = Constantes.Orientation.Droite;  

@@ -10,6 +10,9 @@ public class CarteFichier {
 	private int    carte [][];
 	private static CarteFichier carteFichier = null;
 	
+	/**
+	 * Constructeur de la classe CarteFichier
+	 */
 	private CarteFichier () {
 		this.chargeFichier();
 	}
@@ -18,6 +21,12 @@ public class CarteFichier {
 		carteFichier = new CarteFichier(); 
 		return carteFichier;
 	}
+	
+	/**
+	 * Le fichier carte.txt contient une matrice de 1 et 0.
+	 * Les 1 correspondent aux cases du chemin et les 0 correspondent aux cases jouables.
+	 * Cette fonction permet de charger cette matrice dans le champs carte[][].
+	 */
 	public void chargeFichier(){
 		File fichierCarte = new File (this.nomFichier);
 		this.carte = new int [Constantes.taille][Constantes.taille];
@@ -37,6 +46,10 @@ public class CarteFichier {
 		}
 	}
 
+	/**
+	 * Fonction permettant de récupérer la carte.
+	 * @return le tableau d'entiers correspondant à la matrice de la carte.
+	 */
 	public int[][] getCarte() {
 		return carte;
 	}
