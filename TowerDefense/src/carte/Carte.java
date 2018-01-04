@@ -1,6 +1,7 @@
 package carte;
 
 import java.awt.Color;
+import java.awt.Frame;
 import java.awt.Graphics;
 import java.awt.Point;
 import java.util.Iterator;
@@ -21,17 +22,19 @@ public class Carte extends JPanel implements Runnable{
 	public static Point pt_souris= new Point(0,0);
 	
 	//partie réservée aux achats dans l'IHM
-	public Achats zone_achats;
+	public static Achats zone_achats;
 	//Ennemi ennemi = new Ennemi (10, 10); // test
 	
 	/**
 	 * Constructeur de la classe carte
 	 */
-	public Carte () {
+	public Carte (Frame fenetre) {
 		this.chemin = new Chemin();
 		this.la_vague = new Vague();
 		this.chateau = new Chateau();
 		this.chargeCarte();
+		fenetre.addMouseListener(new Souris_position());
+		fenetre.addMouseMotionListener(new Souris_position());
 		Thread thread = new Thread(this);
 		thread.start();
 
@@ -56,10 +59,9 @@ public class Carte extends JPanel implements Runnable{
 				
 				if (singleton.getCarte()[Constantes.taille -1 -j][i] == 1)
 					this.chemin.inserer(i*Constantes.tailleCase, (Constantes.taille -1-j)*Constantes.tailleCase);
-			}			
+			}	
 			
 		}
-		
 		//zone des achats
 		zone_achats=new Achats();
 	}

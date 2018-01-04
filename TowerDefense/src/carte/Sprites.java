@@ -11,6 +11,7 @@ public class Sprites {
 	private Image spriteCaseChemin;
 	private Image spriteChateau;
 	private Image spriteEnnemi;
+	private Image spriteTour1;
 
 	private static Sprites sprite = null;
 	
@@ -19,6 +20,7 @@ public class Sprites {
 		this.chargeSpriteCaseChemin();
 		this.chargeSpriteChateau();
 		this.chargeSpriteEnnemi();
+		this.chargeSpriteTour1();
 
 	}
 
@@ -71,6 +73,16 @@ public class Sprites {
 	}
 
 	/**
+	 * Fonction permettant de charger les sprites des ennemis
+	 */
+	public void chargeSpriteTour1(){
+		try {
+			this.spriteTour1 = ImageIO.read(new File("image/tour1.png"));
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+	}
+	/**
 	 * @return le sprite des cases jouables
 	 */
 	public Image getSpriteCaseJouable() {
@@ -96,5 +108,12 @@ public class Sprites {
 	 */
 	public Image getSpriteEnnemi() {
 		return this.spriteEnnemi;
+	}
+	
+	/**
+	 * @return le sprite de la tour1
+	 */
+	public Image getSpriteTour1() {
+		return this.spriteTour1;
 	}
 }
