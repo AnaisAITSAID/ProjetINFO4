@@ -1,6 +1,7 @@
 package carte;
 
 import java.awt.Color;
+import java.awt.Dimension;
 import java.awt.Frame;
 import java.awt.Graphics;
 import java.awt.Point;
@@ -31,13 +32,15 @@ public class Achats extends JPanel{
 		System.out.println("largeur du jeu\n " + Jeu.largeur);
 		System.out.println("hauteur du jeu\n " + Jeu.hauteur);
 		for(int i=0; i<nb_produits;i++) {
-			boutons_produits[i]=new Rectangle(((Constantes.tailleCase *5)) - ((nb_produits*(taille_bouton+espace))/2) + ((taille_bouton+espace)*i),(Constantes.tailleCase *5)+(taille_bouton/2),taille_bouton,taille_bouton);
+			boutons_produits[i]=new Rectangle(((Constantes.tailleCase *5)) - ((nb_produits*(taille_bouton+espace))/2) + ((taille_bouton+espace)*i),10,taille_bouton,taille_bouton);
 		}
 			 
 	}
 	
 	@Override 
 	public void paintComponent(Graphics g) {
+		super.paintComponent(g);
+		setBackground(Color.ORANGE);  
 		for(int i=0;i<nb_produits;i++) {
 			g.setColor(new Color(0, 0, 0));
 			g.fillRect(boutons_produits[i].x, boutons_produits[i].y, taille_bouton,taille_bouton);
@@ -48,7 +51,16 @@ public class Achats extends JPanel{
 		}
 	}
 
-
+	/*@Override
+	public Dimension getPreferredSize() {
+		return new Dimension(Jeu.largeur, Jeu.hauteur - Constantes.taille*Constantes.tailleCase);
+	}*/
+	
+	/*@Override
+	public Dimension getPreferredSize() {
+		return new Dimension(1,1);
+	}*/
+	
 	public static int getTaille_bouton() {
 		return taille_bouton;
 	}

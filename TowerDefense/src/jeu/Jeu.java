@@ -7,6 +7,7 @@ import java.awt.Point;
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
+import javax.swing.JPanel;
 
 import carte.Achats;
 import carte.Carte;
@@ -27,9 +28,9 @@ public class Jeu extends JFrame{
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
 		Dimension dimension = java.awt.Toolkit.getDefaultToolkit().getScreenSize();
-		largeur= (int)dimension.getHeight();
-		hauteur= (int)dimension.getWidth();
-		setSize(hauteur, largeur);
+		largeur= (int)dimension.getWidth();
+		hauteur= (int)dimension.getHeight();
+		setSize(largeur, hauteur);
 		this.setResizable(false);
 		this.addMouseListener(new Souris_position());
 		this.addMouseMotionListener(new Souris_position());
@@ -41,27 +42,27 @@ public class Jeu extends JFrame{
 	public void interfaceUtilisateur () {
 		Carte carte = new Carte();
 		Achats zone_achats=new Achats();
-		this.setLayout(new GridBagLayout());
-		GridBagConstraints gc= new GridBagConstraints();
-		gc.gridx = 0;
-		gc.gridy = 0;
-		gc.fill = GridBagConstraints.BOTH;
-		gc.weightx = 1;
-		gc.weighty = 0.70;
-
-		
-		this.add(carte, gc);
-
-		gc.gridx = 0;
-		gc.gridy = 1;
-		gc.fill = GridBagConstraints.BOTH;
-		gc.gridwidth = 1;
-		gc.weightx = 1;
-		gc.weighty = 0.30;
-		this.add(zone_achats, gc);
-
+		JPanel jp  = new JPanel();
+		jp.setLayout(new GridBagLayout());
+		GridBagConstraints gbc = new GridBagConstraints();
+		gbc.weightx = 1;
+		gbc.weighty = 1;
+		 
+		gbc.gridx = 0;
+		gbc.gridwidth = 2;
+		gbc.gridheight = 2;
+		gbc.gridy = 0;
+		gbc.fill = GridBagConstraints.BOTH;
+		jp.add(carte, gbc);
+		 
+		gbc.gridx = 0;
+		gbc.gridwidth = 1;
+		gbc.gridheight = 1;
+		gbc.gridy = 2;
+		jp.add( zone_achats, gbc);
+		this.add(jp);
 		this.setVisible(true);
- 
+		
 	}
 	
 	public static void main(String [] args){
