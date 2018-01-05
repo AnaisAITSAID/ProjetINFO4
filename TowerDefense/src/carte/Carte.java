@@ -19,23 +19,18 @@ public class Carte extends JPanel implements Runnable{
 	public static int largeur;
 	public static int hauteur; 
 	
-	//point où se trouve la souris 
-	public static Point pt_souris= new Point(0,0);
-	
-	//partie réservée aux achats dans l'IHM
-	public static Achats zone_achats;
+
 	//Ennemi ennemi = new Ennemi (10, 10); // test
 	
 	/**
 	 * Constructeur de la classe carte
 	 */
-	public Carte (Frame fenetre) {
+	public Carte () {
 		this.chemin = new Chemin();
 		this.la_vague = new Vague();
 		this.chateau = new Chateau();
 		this.chargeCarte();
-		fenetre.addMouseListener(new Souris_position());
-		fenetre.addMouseMotionListener(new Souris_position());
+		
 		Thread thread = new Thread(this);
 		thread.start();
 
@@ -100,8 +95,7 @@ public class Carte extends JPanel implements Runnable{
 			//System.out.println();
 			
 		}
-		//zone des achats
-		zone_achats=new Achats();
+
 	}
 	
 	/**
@@ -134,9 +128,7 @@ public class Carte extends JPanel implements Runnable{
 		
 		//on dessine le château
 		chateau.dessiner(g);
-		
-		//on dessine la zone d'achats
-		zone_achats.dessiner(g);
+
 		
 	}
 

@@ -42,12 +42,12 @@ public class Souris_position implements MouseMotionListener, MouseListener{
 	@Override
 	public void mouseDragged(MouseEvent evenement) {
 		// TODO Auto-generated method stub
-		Carte.pt_souris=new Point(evenement.getX(),evenement.getY()-Carte.zone_achats.getTaille_bouton()/2);
+		//Achats.pt_souris=new Point(evenement.getX(),evenement.getY()-Jeu.zone_achats.getTaille_bouton()/2);
 	}
 
 	@Override
 	public void mouseMoved(MouseEvent evenement ) {
-		Carte.pt_souris=new Point(evenement.getX(),evenement.getY()-Carte.zone_achats.getTaille_bouton()/2);
+		//Achats.pt_souris=new Point(evenement.getX(),evenement.getY()-Carte.zone_achats.getTaille_bouton()/2);
 	}
 
 }

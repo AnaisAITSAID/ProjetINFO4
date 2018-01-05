@@ -9,6 +9,11 @@ public class Constantes {
 		CaseChemin;
 	}
 	
+	public static enum Type_tour{
+		TourForte,
+		TourRapide;
+	}
+	
 	public static enum Orientation{
 		Inconnu,
 		Droite,
