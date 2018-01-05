@@ -1,5 +1,6 @@
 package jeu;
 
+import java.awt.Dimension;
 import java.awt.Frame;
 
 import javax.swing.JFrame;
@@ -16,11 +17,14 @@ public class Jeu extends JFrame{
 		
 		this.setTitle("Tower Defense");
 		
-		this.setExtendedState(JFrame.MAXIMIZED_BOTH);
+//		this.setExtendedState(JFrame.MAXIMIZED_BOTH);
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		largeur=this.getWidth();
-		hauteur=this.getHeight();
-		//this.setResizable(false);
+
+		Dimension dimension = java.awt.Toolkit.getDefaultToolkit().getScreenSize();
+		largeur= (int)dimension.getHeight();
+		hauteur= (int)dimension.getWidth();
+		setSize(hauteur, largeur);
+		this.setResizable(false);
 		
 	}
 	

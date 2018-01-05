@@ -71,4 +71,12 @@ public class Chemin {
 		}
 		return value;
 	}
+
+	public void inserer(CaseChemin case1) {
+		
+		chemin.add(case1);
+		
+	}
+
+
 }
