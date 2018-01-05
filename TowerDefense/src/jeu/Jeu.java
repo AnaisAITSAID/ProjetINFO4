@@ -1,15 +1,11 @@
 package jeu;
 
-import java.awt.BorderLayout;
 import java.awt.Dimension;
-import java.awt.FlowLayout;
-import java.awt.Frame;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
-import java.awt.GridLayout;
-import java.awt.Insets;
 import java.awt.Point;
 
+import javax.swing.JButton;
 import javax.swing.JFrame;
 
 import carte.Achats;
@@ -47,19 +43,23 @@ public class Jeu extends JFrame{
 		Achats zone_achats=new Achats();
 		this.setLayout(new GridBagLayout());
 		GridBagConstraints gc= new GridBagConstraints();
-		gc.fill=GridBagConstraints.BOTH;
-		gc.insets=new Insets(1,1,1,1);
-		gc.ipady=gc.anchor=GridBagConstraints.WEST;
-		gc.weightx=4;
-		gc.weighty=4;
-		gc.gridx=0;
-		gc.gridy=0;
-	
-		this.add(carte,gc);
-		gc.gridx=0;
-		gc.gridy=1;
-	
-		this.add(zone_achats,gc);
+		gc.gridx = 0;
+		gc.gridy = 0;
+		gc.fill = GridBagConstraints.BOTH;
+		gc.weightx = 1;
+		gc.weighty = 0.70;
+
+		
+		this.add(carte, gc);
+
+		gc.gridx = 0;
+		gc.gridy = 1;
+		gc.fill = GridBagConstraints.BOTH;
+		gc.gridwidth = 1;
+		gc.weightx = 1;
+		gc.weighty = 0.30;
+		this.add(zone_achats, gc);
+
 		this.setVisible(true);
  
 	}

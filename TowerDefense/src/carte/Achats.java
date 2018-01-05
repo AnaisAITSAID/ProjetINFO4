@@ -31,24 +31,21 @@ public class Achats extends JPanel{
 		System.out.println("largeur du jeu\n " + Jeu.largeur);
 		System.out.println("hauteur du jeu\n " + Jeu.hauteur);
 		for(int i=0; i<nb_produits;i++) {
-			boutons_produits[i]=new Rectangle(((Constantes.taille*Constantes.tailleCase)/2) - ((nb_produits*(taille_bouton+espace))/2) + ((taille_bouton+espace)*i),(Constantes.taille*Constantes.tailleCase)+(taille_bouton/2),taille_bouton,taille_bouton);
+			boutons_produits[i]=new Rectangle(((Constantes.tailleCase *5)) - ((nb_produits*(taille_bouton+espace))/2) + ((taille_bouton+espace)*i),(Constantes.tailleCase *5)+(taille_bouton/2),taille_bouton,taille_bouton);
 		}
 			 
-		
 	}
 	
 	@Override 
 	public void paintComponent(Graphics g) {
 		for(int i=0;i<nb_produits;i++) {
-			g.setColor(new Color(0, 0, 0, 0));
+			g.setColor(new Color(0, 0, 0));
 			g.fillRect(boutons_produits[i].x, boutons_produits[i].y, taille_bouton,taille_bouton);
 			if(boutons_produits[i].contains(Jeu.pt_souris)) {
 				g.setColor(new Color(255, 255, 245, 90));
 				g.fillRect(boutons_produits[i].x, boutons_produits[i].y, taille_bouton,taille_bouton);
 			}
 		}
-		
-		
 	}
 
 
