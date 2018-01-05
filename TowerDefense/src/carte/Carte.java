@@ -1,6 +1,7 @@
 package carte;
 
 import java.awt.Color;
+import java.awt.Dimension;
 import java.awt.Frame;
 import java.awt.Graphics;
 import java.awt.Point;
@@ -132,7 +133,10 @@ public class Carte extends JPanel implements Runnable{
 		
 	}
 
-
+	@Override
+	public Dimension getPreferredSize() {
+		return new Dimension(Constantes.taille*Constantes.tailleCase, Constantes.taille*Constantes.tailleCase);
+	}
 
 	@Override
 	/**
