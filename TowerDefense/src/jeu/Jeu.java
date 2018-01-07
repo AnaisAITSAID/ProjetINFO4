@@ -1,5 +1,6 @@
 package jeu;
 
+import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
@@ -43,6 +44,8 @@ public class Jeu extends JFrame{
 		Carte carte = new Carte();
 		Achats zone_achats=new Achats();
 		JPanel jp  = new JPanel();
+		JPanel infoTour = new JPanel();
+		JPanel infoJoueur = new JPanel();
 		jp.setLayout(new GridBagLayout());
 		GridBagConstraints gbc = new GridBagConstraints();
 		gbc.weightx = 1;
@@ -54,15 +57,24 @@ public class Jeu extends JFrame{
 		gbc.gridy = 0;
 		gbc.fill = GridBagConstraints.BOTH;
 		jp.add(carte, gbc);
-		 
+		
+		gbc.gridx = 2;
+		jp.add(infoTour, gbc);
+		
 		gbc.gridx = 0;
 		gbc.gridwidth = 1;
 		gbc.gridheight = 1;
 		gbc.gridy = 2;
 		jp.add( zone_achats, gbc);
+		
+		gbc.gridy = 2;
+		gbc.gridx = 2;
+		jp.add(infoJoueur, gbc);
+		
 		this.add(jp);
 		this.setVisible(true);
-		
+		infoTour.setBackground(Color.BLUE);
+		infoJoueur.setBackground(Color.green);
 	}
 	
 	public static void main(String [] args){
