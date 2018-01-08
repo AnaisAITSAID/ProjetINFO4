@@ -10,9 +10,13 @@ public class TourForte extends Tour{
 		super(case_position,Type_tour.TourForte);
 	}
 
+	public TourForte(int x, int y) {
+		super(x,y,Type_tour.TourForte);
+	}
 	@Override
 	public void dessiner(Graphics g) {
-		g.drawImage(sprite.getSpriteTour1(),getXcaseposition(), getYcaseposition(),null);
+		g.drawImage(sprite.getSpriteTour1(),getX(), getY(),null);
+		
 		
 	}
 }

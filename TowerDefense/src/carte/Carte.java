@@ -17,6 +17,7 @@ public class Carte extends JPanel implements Runnable{
 	private Chemin chemin;
 	private Vague la_vague;
 	private Chateau chateau;
+	private Tour[] tours_joueur;
 	public static int largeur;
 	public static int hauteur; 
 	
@@ -31,7 +32,7 @@ public class Carte extends JPanel implements Runnable{
 		this.la_vague = new Vague();
 		this.chateau = new Chateau();
 		this.chargeCarte();
-		
+		this.tours_joueur = new Tour [0];
 		Thread thread = new Thread(this);
 		thread.start();
 

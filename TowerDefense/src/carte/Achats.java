@@ -1,16 +1,16 @@
 package carte;
 
 import java.awt.Color;
-import java.awt.Dimension;
-import java.awt.Frame;
 import java.awt.Graphics;
-import java.awt.Point;
 import java.awt.Rectangle;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 
 import javax.swing.JPanel;
 
 import jeu.Jeu;
 import utils.Constantes;
+import utils.Constantes.Type_tour;
 
 
 public class Achats extends JPanel{
@@ -19,13 +19,31 @@ public class Achats extends JPanel{
 	private static int taille_bouton=60;
 	private static int espace=2;
 	private Rectangle[] boutons_produits=new Rectangle[nb_produits];
-	
-	
+	private Type_tour tour_achetee;
+	private Color couleur=Color.BLACK;
 
+	//classe interne pour la position de la souris
+	private class Souris_position extends MouseAdapter{
+
+		@Override
+		public void mouseClicked(MouseEvent evenement) {
+			if(boutons_produits[0].contains(evenement.getPoint())) {
+				tour_achetee=Type_tour.TourForte;
+			}else if(boutons_produits[1].contains(evenement.getPoint())){
+				tour_achetee=Type_tour.TourRapide;
+			}
+		
+		}
+
+
+
+	}
 	
 	public Achats() {
 		
 		charger_achats();
+		
+		this.addMouseMotionListener(new Souris_position());
 	}
 	
 	public void charger_achats() {
@@ -40,15 +58,12 @@ public class Achats extends JPanel{
 	@Override 
 	public void paintComponent(Graphics g) {
 		super.paintComponent(g);
-		setBackground(Color.ORANGE);  
-		for(int i=0;i<nb_produits;i++) {
-			g.setColor(new Color(0, 0, 0));
-			g.fillRect(boutons_produits[i].x, boutons_produits[i].y, taille_bouton,taille_bouton);
-			if(boutons_produits[i].contains(Jeu.pt_souris)) {
-				g.setColor(new Color(255, 255, 245, 90));
-				g.fillRect(boutons_produits[i].x, boutons_produits[i].y, taille_bouton,taille_bouton);
-			}
-		}
+		setBackground(Color.ORANGE); 
+		Tour tour_forte_dessin=new TourForte(boutons_produits[0].x,boutons_produits[0].y);
+		System.out.println("x et y"+ boutons_produits[0].x + boutons_produits[0].y);
+		tour_forte_dessin.dessiner(g);
+		Tour tour_rapide_dessin=new TourRapide(boutons_produits[1].x,boutons_produits[1].y);
+		tour_rapide_dessin.dessiner(g);
 	}
 
 	/*@Override

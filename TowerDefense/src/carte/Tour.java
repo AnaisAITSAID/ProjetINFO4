@@ -1,10 +1,31 @@
 package carte;
 
+import java.awt.Graphics;
+
+import utils.Constantes;
 import utils.Constantes.Type_tour;
 
 public abstract class Tour extends AffichageSprite{
 		private Type_tour type_tour;
 		private Case case_position;
+		private int x;
+		public int getX() {
+			return x;
+		}
+
+		public void setX(int x) {
+			this.x = x;
+		}
+
+		public int getY() {
+			return y;
+		}
+
+		public void setY(int y) {
+			this.y = y;
+		}
+
+		private int y;
 		private int degats;
 		private int portee;
 		private int vitesse;
@@ -13,6 +34,13 @@ public abstract class Tour extends AffichageSprite{
 		public Tour(Case case_position, Type_tour type_tour) {
 			this.case_position=case_position;
 			this.type_tour=type_tour;
+		}
+		
+		public Tour(int x, int y, Type_tour type_tour) {
+			this.x=x;
+			this.y=y;
+			this.type_tour=type_tour;
+
 		}
 
 		public int getXcaseposition() {
@@ -70,4 +98,7 @@ public abstract class Tour extends AffichageSprite{
 		public void setNiveau(int niveau) {
 			this.niveau = niveau;
 		}
+		
+
+		
 }

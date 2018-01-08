@@ -12,15 +12,14 @@ import javax.swing.JPanel;
 
 import carte.Achats;
 import carte.Carte;
-import carte.Souris_position;
+
 
 public class Jeu extends JFrame{
 	/* crï¿½ation d'une fenï¿½tre */
 	
 	public static int largeur;
 	public static int hauteur;
-	//point où se trouve la souris 
-		public static Point pt_souris= new Point(0,0);
+	
 	public Jeu () {
 		
 		this.setTitle("Tower Defense");
@@ -33,8 +32,7 @@ public class Jeu extends JFrame{
 		hauteur= (int)dimension.getHeight();
 		setSize(largeur, hauteur);
 		this.setResizable(false);
-		this.addMouseListener(new Souris_position());
-		this.addMouseMotionListener(new Souris_position());
+		
 		
 	}
 	
