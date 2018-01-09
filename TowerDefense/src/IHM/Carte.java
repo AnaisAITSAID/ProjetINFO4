@@ -1,28 +1,42 @@
-package carte;
+package IHM;
 
 import java.awt.Color;
 import java.awt.Dimension;
-import java.awt.Frame;
 import java.awt.Graphics;
-import java.awt.Point;
-import java.util.Iterator;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
+import java.util.ArrayList;
 
 import javax.swing.JPanel;
 
+import Element.CarteFichier;
+import Element.Case;
+import Element.CaseChemin;
+import Element.CaseJouable;
+import Element.Chateau;
+import Element.Chemin;
+import Element.Ennemi;
+import Element.Tour;
+import Element.TourForte;
+import Element.TourRapide;
+import Element.Vague;
 import utils.Constantes;
-import utils.Constantes.Orientation;
+import utils.Constantes.Type;
+import utils.Constantes.Type_tour;
 
 public class Carte extends JPanel implements Runnable{
+
+
+
 	private Case carte [][];
 	private Chemin chemin;
 	private Vague la_vague;
 	private Chateau chateau;
-	private Tour[] tours_joueur;
+	private ArrayList<Tour> tours_joueur;
+	private Type_tour typeTourAjoutee;
 	public static int largeur;
 	public static int hauteur; 
 	
-
-	//Ennemi ennemi = new Ennemi (10, 10); // test
 	
 	/**
 	 * Constructeur de la classe carte
@@ -32,10 +46,10 @@ public class Carte extends JPanel implements Runnable{
 		this.la_vague = new Vague();
 		this.chateau = new Chateau();
 		this.chargeCarte();
-		this.tours_joueur = new Tour [0];
+		this.tours_joueur = new ArrayList<Tour>();
 		Thread thread = new Thread(this);
 		thread.start();
-
+		this.addMouseListener(new SelectCase());
 	}
 	/* Cete fonction permet de charger dans le chemin les bonnes cases. Elle prend 
 	 * en paramètre la case à tester ainsi que son orientation (pour ne pas 
@@ -128,17 +142,49 @@ public class Carte extends JPanel implements Runnable{
 
 		}
 		
+		for (Tour tour : this.tours_joueur) {
+			tour.dessiner(g);
+		}
 		//on dessine le château
 		chateau.dessiner(g);
 
 		
 	}
+	public void setTypeTourAjoutee(Type_tour typeTourAjoutee) {
+		this.typeTourAjoutee = typeTourAjoutee;
+	}
+	
+	//classe interne pour la position de la souris
+	private class SelectCase extends MouseAdapter{
 
+		@Override
+		public void mouseClicked(MouseEvent evenement) {
+			for (int i = 0; i < Constantes.taille; ++i) {
+				for (int j = 0; j < Constantes.taille; ++j) {
+					if (carte[i][j].contain(evenement.getX(), evenement.getY()) && carte[i][j].getType() == Type.CaseJouable) {
+						ajouterTour(typeTourAjoutee, carte[i][j]);
+					}
+				}
+			}
+			repaint();
+		}
+	}
+	
+	public void ajouterTour (Type_tour type, Case case_position) {
+		if (type == Type_tour.TourForte) {
+			this.tours_joueur.add(new TourForte(case_position));
+		} else if(type == Type_tour.TourRapide) {
+			this.tours_joueur.add(new TourRapide(case_position));			
+		}
+	}
+	
 	@Override
 	public Dimension getPreferredSize() {
 		return new Dimension(Constantes.taille*Constantes.tailleCase, Constantes.taille*Constantes.tailleCase);
 	}
 
+	
+	
 	@Override
 	/**
 	 * Fonction qui lance la vague puis fait avancer les ennemis.

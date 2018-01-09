@@ -1,4 +1,4 @@
-package carte;
+package utils;
 
 import java.awt.Image;
 import java.io.File;
@@ -11,7 +11,8 @@ public class Sprites {
 	private Image spriteCaseChemin;
 	private Image spriteChateau;
 	private Image spriteEnnemi;
-	private Image spriteTour1;
+	private Image spriteTourForte;
+	private Image spriteTourForteAchat;
 
 	private static Sprites sprite = null;
 	
@@ -20,8 +21,17 @@ public class Sprites {
 		this.chargeSpriteCaseChemin();
 		this.chargeSpriteChateau();
 		this.chargeSpriteEnnemi();
-		this.chargeSpriteTour1();
+		this.chargespriteTourForte();
+		this.chargespriteTourAchat();
 
+	}
+
+	private void chargespriteTourAchat() {
+		try {
+			this.spriteTourForteAchat = ImageIO.read(new File("image/tour1.png"));
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
 	}
 
 	public static Sprites getInstance() {
@@ -75,9 +85,9 @@ public class Sprites {
 	/**
 	 * Fonction permettant de charger les sprites des ennemis
 	 */
-	public void chargeSpriteTour1(){
+	public void chargespriteTourForte(){
 		try {
-			this.spriteTour1 = ImageIO.read(new File("image/tour1.png"));
+			this.spriteTourForte = ImageIO.read(new File("image/tour1.png"));
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
@@ -113,7 +123,11 @@ public class Sprites {
 	/**
 	 * @return le sprite de la tour1
 	 */
-	public Image getSpriteTour1() {
-		return this.spriteTour1;
+	public Image getspriteTourForte() {
+		return this.spriteTourForte;
+	}
+	
+	public Image getspriteTourForteAchat() {
+		return this.spriteTourForteAchat;
 	}
 }

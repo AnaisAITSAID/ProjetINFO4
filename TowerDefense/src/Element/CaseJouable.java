@@ -1,4 +1,4 @@
-package carte;
+package Element;
 
 import java.awt.Graphics;
 

@@ -1,8 +1,6 @@
-package carte;
+package Element;
 
-import java.awt.Graphics;
-import java.awt.Rectangle;
-
+import utils.Constantes;
 import utils.Constantes.Type;
 
 public abstract class Case extends AffichageSprite {
@@ -28,5 +26,12 @@ public abstract class Case extends AffichageSprite {
 
 	public int getY() {
 		return y;
+	}
+	
+	public boolean contain(int x, int y) {
+		if (x <= this.x + Constantes.tailleCase && x >= this.x &&
+		    	y <= this.y + Constantes.tailleCase && y >= this.y)
+		    	return true;
+		    return false;
 	}
 }

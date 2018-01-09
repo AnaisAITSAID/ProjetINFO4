@@ -1,17 +1,18 @@
-package jeu;
+package IHM;
 
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.Point;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 
-import carte.Achats;
-import carte.Carte;
+import utils.Constantes.Type_tour;
 
 
 public class Jeu extends JFrame{
@@ -19,7 +20,8 @@ public class Jeu extends JFrame{
 	
 	public static int largeur;
 	public static int hauteur;
-	
+	Achats zone_achats;
+	Carte carte;
 	public Jeu () {
 		
 		this.setTitle("Tower Defense");
@@ -32,15 +34,15 @@ public class Jeu extends JFrame{
 		hauteur= (int)dimension.getHeight();
 		setSize(largeur, hauteur);
 		this.setResizable(false);
-		
-		
+		zone_achats = new Achats();
+		carte = new Carte();
+		zone_achats.addMouseListener(new Souris_position());
 	}
 	
 	/* cr�ation de l'interface utilisateur */
 	/* pour commencer on se contentera d'ajouter la carte */
 	public void interfaceUtilisateur () {
-		Carte carte = new Carte();
-		Achats zone_achats=new Achats();
+		
 		JPanel jp  = new JPanel();
 		JPanel infoTour = new JPanel();
 		JPanel infoJoueur = new JPanel();
@@ -73,6 +75,21 @@ public class Jeu extends JFrame{
 		this.setVisible(true);
 		infoTour.setBackground(Color.BLUE);
 		infoJoueur.setBackground(Color.green);
+	}
+	
+	
+	//classe interne pour la position de la souris
+	private class Souris_position extends MouseAdapter{
+
+		@Override
+		public void mouseClicked(MouseEvent evenement) {
+			
+			if(zone_achats.getBoutons_produits()[0].contain(evenement.getX(), evenement.getY())) {
+				carte.setTypeTourAjoutee(Type_tour.TourForte);
+			}else if(zone_achats.getBoutons_produits()[1].contain(evenement.getX(), evenement.getY())){
+				carte.setTypeTourAjoutee(Type_tour.TourRapide);
+			}
+		}
 	}
 	
 	public static void main(String [] args){

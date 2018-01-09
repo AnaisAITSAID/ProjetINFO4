@@ -1,4 +1,4 @@
-package carte;
+package Element;
 
 import java.awt.Graphics;
 
@@ -16,7 +16,7 @@ public class TourRapide extends Tour{
 	
 	@Override
 	public void dessiner(Graphics g) {
-		g.drawImage(sprite.getSpriteTour1(),getX(), getY(),null);
+	//	g.drawImage(sprite.getSpriteTour1(),getX(), getY(),null);
 		
 	}
 }
