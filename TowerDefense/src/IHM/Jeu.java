@@ -12,6 +12,7 @@ import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 
+import Element.Chateau;
 import utils.Constantes.Type_tour;
 
 
@@ -20,23 +21,29 @@ public class Jeu extends JFrame{
 	
 	public static int largeur;
 	public static int hauteur;
-	Achats zone_achats;
-	Carte carte;
+	private Achats zone_achats;
+	private Carte carte;
+	private Chateau joueur; 
+	
+	
 	public Jeu () {
 		
 		this.setTitle("Tower Defense");
-		
-//		this.setExtendedState(JFrame.MAXIMIZED_BOTH);
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
 		Dimension dimension = java.awt.Toolkit.getDefaultToolkit().getScreenSize();
 		largeur= (int)dimension.getWidth();
 		hauteur= (int)dimension.getHeight();
 		setSize(largeur, hauteur);
+		
 		this.setResizable(false);
-		zone_achats = new Achats();
+		
 		carte = new Carte();
+		
+		zone_achats = new Achats();
 		zone_achats.addMouseListener(new Souris_position());
+		
+		joueur=new Chateau();
 	}
 	
 	/* cr�ation de l'interface utilisateur */
@@ -44,8 +51,8 @@ public class Jeu extends JFrame{
 	public void interfaceUtilisateur () {
 		
 		JPanel jp  = new JPanel();
-		JPanel infoTour = new JPanel();
-		JPanel infoJoueur = new JPanel();
+		InfosTour infoTour = new InfosTour();
+		InfosJoueur infoJoueur = new InfosJoueur(this.joueur);
 		jp.setLayout(new GridBagLayout());
 		GridBagConstraints gbc = new GridBagConstraints();
 		gbc.weightx = 1;

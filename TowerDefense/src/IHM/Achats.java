@@ -39,8 +39,6 @@ public class Achats extends JPanel{
 	}
 
 	public void charger_achats() {
-		System.out.println("largeur du jeu\n " + Jeu.largeur);
-		System.out.println("hauteur du jeu\n " + Jeu.hauteur);
 		for(int i=0; i<nb_produits;i++) {
 			boutons_produits[i]=new BoutonsProduits(((Constantes.tailleCase *5)) - ((nb_produits*(taille_bouton+espace))/2) + ((taille_bouton+espace)*i),10);
 		}

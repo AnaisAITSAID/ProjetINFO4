@@ -3,7 +3,7 @@ package Element;
 import java.util.ArrayList;
 
 public class Vague {
-	private static int num_vague = 0;
+	public static int num_vague = 0;
 	private int nb_ennemis = 4;  
 	private int pts_vie = 100;
 	private int argent_donne = pts_vie;

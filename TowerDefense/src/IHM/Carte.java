@@ -34,6 +34,7 @@ public class Carte extends JPanel implements Runnable{
 	private Chateau chateau;
 	private ArrayList<Tour> tours_joueur;
 	private Type_tour typeTourAjoutee;
+	private Tour tour_infos;
 	public static int largeur;
 	public static int hauteur; 
 	
@@ -162,7 +163,12 @@ public class Carte extends JPanel implements Runnable{
 			for (int i = 0; i < Constantes.taille; ++i) {
 				for (int j = 0; j < Constantes.taille; ++j) {
 					if (carte[i][j].contain(evenement.getX(), evenement.getY()) && carte[i][j].getType() == Type.CaseJouable) {
-						ajouterTour(typeTourAjoutee, carte[i][j]);
+						if(((CaseJouable)carte[i][j]).getTour()==null) {
+							ajouterTour(typeTourAjoutee, carte[i][j]);
+						}else{
+							tour_infos = ((CaseJouable)carte[i][j]).getTour();
+						}
+						
 					}
 				}
 			}
@@ -170,8 +176,11 @@ public class Carte extends JPanel implements Runnable{
 		}
 	}
 	
+	public Tour getTour_infos() {
+		return tour_infos;
+	}
 	public void ajouterTour (Type_tour type, Case case_position) {
-		if (type == Type_tour.TourForte) {
+		if (type == Type_tour.TourForte ) {
 			this.tours_joueur.add(new TourForte(case_position));
 		} else if(type == Type_tour.TourRapide) {
 			this.tours_joueur.add(new TourRapide(case_position));			

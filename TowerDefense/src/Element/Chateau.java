@@ -7,6 +7,7 @@ import utils.Constantes;
 public class Chateau extends AffichageSprite {
 
 	private int vieChateau;		//correspond aux points de vie du joueur
+	private int argent;
 	
 	/**
 	 * Constructeur de la classe château
@@ -14,7 +15,10 @@ public class Chateau extends AffichageSprite {
 	public Chateau() {
 		super();
 		this.vieChateau = Constantes.vieChateau;
+		this.argent= Constantes.argent;
 	}
+
+
 
 	@Override
 	/**
@@ -50,5 +54,9 @@ public class Chateau extends AffichageSprite {
 		if (this.vieChateau == 0)
 			return true;
 		return false;
+	}
+	
+	public int getArgent() {
+		return argent;
 	}
 }
