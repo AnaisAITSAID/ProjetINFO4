@@ -212,6 +212,18 @@ public class Carte extends JPanel implements Runnable{
 						e.printStackTrace();												
 					}
 					if (chateau.gameOver()) break;
+					for(Tour tour:tours_joueur) {
+						try {
+							Thread.sleep(200);
+						} catch (InterruptedException e) {
+							e.printStackTrace();												
+						}
+						tour.viser(la_vague.getCollec_ennemi());
+						
+						if(!ennemi.isBouge()) {
+							la_vague.supprimerEnnemi(ennemi);
+						}
+					}
 					if (ennemi.estArrive() && ennemi.isBouge()) {
 						this.chateau.setVieChateau(ennemi.attaquer());
 						System.out.println("Points de vie : " + this.chateau.getVieChateau());

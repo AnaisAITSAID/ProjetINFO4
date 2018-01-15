@@ -1,7 +1,5 @@
 package Element;
 
-import java.util.ArrayList;
-
 public class Vague {
 	public static int num_vague = 0;
 	private int nb_ennemis = 4;  
@@ -66,6 +64,23 @@ public class Vague {
 	 */
 	public Ennemi getEnnemi(int i) {
 		return this.collec_ennemi[i];
+	}
+	
+	public void supprimerEnnemi(Ennemi e) {
+		int ind = 0;
+		boolean trouve=false;
+		for(int i = 0; i < nb_ennemis; i++ ) {
+			if(collec_ennemi[i] == e) {
+				ind = i;
+				trouve = true;
+			}
+		}
+		if(trouve == true) {
+			for(int j = ind; j<nb_ennemis-1;j++) {
+				collec_ennemi[j] = collec_ennemi[j+1];
+			}
+			nb_ennemis--;
+		}
 	}
 	
 }
