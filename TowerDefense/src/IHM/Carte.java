@@ -205,6 +205,7 @@ public class Carte extends JPanel implements Runnable{
 		la_vague.lancer_Vague();
 		while (!chateau.gameOver()) {
 			if (!la_vague.ennemisMorts()) {
+				
 				for (Ennemi  ennemi : la_vague.getCollec_ennemi()) {
 					try {
 						Thread.sleep(200);
@@ -215,6 +216,7 @@ public class Carte extends JPanel implements Runnable{
 					for(Tour tour:tours_joueur) {
 						try {
 							Thread.sleep(200);
+							
 						} catch (InterruptedException e) {
 							e.printStackTrace();												
 						}

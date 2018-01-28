@@ -117,11 +117,11 @@ public abstract class Tour extends AffichageSprite{
 		}
 		
 		public boolean ennemiAPortée(Ennemi e) {
-			if (((Math.abs(case_position.getX() - e.getCaseCourante().getX())) <= portee) && ((Math.abs(case_position.getY() - e.getCaseCourante().getY()) <= portee)))  {
-				return true;
-			}else {
-				return false;
-			}	
-		
+			if (e.getCaseCourante() != null) {
+				if (((Math.abs(case_position.getX() - e.getCaseCourante().getX())) <= portee) && ((Math.abs(case_position.getY() - e.getCaseCourante().getY()) <= portee)))  {
+					return true;
+				}	
+			}
+			return false;		
 		}
 }

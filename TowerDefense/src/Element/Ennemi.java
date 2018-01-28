@@ -102,6 +102,7 @@ public class Ennemi extends AffichageSprite {
 	public void setPointsDeVie(int pointsDeVie) {
 		this.pointsDeVie = pointsDeVie;
 		if(this.pointsDeVie <= 0) {
+			System.out.println("pt : " + this.pointsDeVie);
 			bouge = false;
 		}
 	}
