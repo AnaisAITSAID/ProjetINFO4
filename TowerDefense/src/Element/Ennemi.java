@@ -51,10 +51,16 @@ public class Ennemi extends AffichageSprite {
 
 
 	public void deplacer () {
-		this.frame += vitesse;
-		if (this.frame == 40) {
-			++this.caseCourante;
-			this.frame = 0;
+		try {
+			Thread.sleep(200);
+			this.frame += vitesse;
+			if (this.frame >= 40) {
+				++this.caseCourante;
+				this.frame = 0;
+			}
+
+		} catch (InterruptedException e) {
+			e.printStackTrace();												
 		}
 	}
 	
@@ -65,7 +71,7 @@ public class Ennemi extends AffichageSprite {
 	 * direction vont les ennemis et donc sur quelle case les dessiner.
 	 */
 	public void dessiner(Graphics g) {
-		if (this.caseCourante >= 0) {
+		if (this.caseCourante >= 0 && isBouge()) {
 			CaseChemin caseChemin = Chemin.getPos(caseCourante);
 			if (Chemin.orientationCaseSuivante(this.caseCourante) == Constantes.Orientation.Droite) {
 				g.drawImage(sprite.getSpriteEnnemi(), caseChemin.getX() + this.frame, caseChemin.getY(), null);							
@@ -102,7 +108,6 @@ public class Ennemi extends AffichageSprite {
 	public void setPointsDeVie(int pointsDeVie) {
 		this.pointsDeVie = pointsDeVie;
 		if(this.pointsDeVie <= 0) {
-			System.out.println("pt : " + this.pointsDeVie);
 			bouge = false;
 		}
 	}

@@ -110,8 +110,10 @@ public abstract class Tour extends AffichageSprite implements Runnable{
 		}
 		
 		public boolean ennemiAPortée(Ennemi e) {
-			if (e.getCaseCourante() != null) {
+			if (e != null && e.getCaseCourante() != null) {
 				if (((Math.abs(case_position.getX() - e.getCaseCourante().getX())) <= portee) && ((Math.abs(case_position.getY() - e.getCaseCourante().getY()) <= portee)))  {
+					System.out.println("ennemi " + Math.abs(case_position.getX()));
+
 					return true;
 				}	
 			}
@@ -122,23 +124,26 @@ public abstract class Tour extends AffichageSprite implements Runnable{
 		public void run() {
 			while (true) {
 				//int i=0;
-				System.out.println("enneis visé " + Vague.nb_ennemis);
-				for(int i = 0; i < Vague.nb_ennemis; ++i) {
-					Ennemi e = Vague.collec_ennemi[i];
-					
-					while(ennemiAPortée(e) && e.isBouge()) {
-						e.setPointsDeVie(e.getPointsDeVie()-degats);
-						//System.out.println("points de vie de l'ennemi " + i + "sont" + e.getPointsDeVie());
-						try {
-							Thread.sleep(this.vitesse*30);
+				//System.out.println("enneis visé " + Vague.nb_ennemis);
+				try {
+					for(int i = 0; i < Vague.nb_ennemis; ++i) {
+						
+						while(Vague.collec_ennemi[i] != null && Vague.collec_ennemi[i].isBouge() && ennemiAPortée(Vague.collec_ennemi[i])) {
+							Vague.collec_ennemi[i].setPointsDeVie(Vague.collec_ennemi[i].getPointsDeVie()-degats);
+							
+							try {
+								Thread.sleep(this.vitesse*10);
+							}
+							catch (InterruptedException e1) {
+								// TODO Auto-generated catch block
+								e1.printStackTrace();
+							}				
 						}
-						catch (InterruptedException e1) {
-							// TODO Auto-generated catch block
-							e1.printStackTrace();
-						}				
-					}
-					//i++;
-				} 
+						//i++;
+					} 					
+				} catch (NullPointerException e) {
+					System.err.println("ennemis deja tué");
+				}
 			}
 
 		}

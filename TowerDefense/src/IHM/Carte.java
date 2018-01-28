@@ -182,10 +182,10 @@ public class Carte extends JPanel implements Runnable{
 	}
 	public void ajouterTour (Type_tour type, Case case_position) {
 		if (type == Type_tour.TourForte ) {
-			Tour nouvelle_tour = new TourForte(case_position);
-			Thread t = new Thread(nouvelle_tour);
-			t.start();
+			Tour nouvelle_tour = new TourForte(case_position);			
 			this.tours_joueur.add(nouvelle_tour);
+			Thread t = new Thread(this.tours_joueur.get(this.tours_joueur.size()-1));
+			t.start();
 		} else if(type == Type_tour.TourRapide) {
 			this.tours_joueur.add(new TourRapide(case_position));			
 		}
@@ -210,29 +210,24 @@ public class Carte extends JPanel implements Runnable{
 		while (!chateau.gameOver()) {
 			if (!la_vague.ennemisMorts()) {
 				
-				for (Ennemi  ennemi : la_vague.getCollec_ennemi()) {
-					try {
-						Thread.sleep(200);
-					} catch (InterruptedException e) {
-						e.printStackTrace();												
-					}
+				for (int i = 0; i < Vague.nb_ennemis; ++i) {
 					if (chateau.gameOver()) break;
-
-					if(!ennemi.isBouge()) {
-						la_vague.supprimerEnnemi(ennemi);
+					if(!Vague.collec_ennemi[i].isBouge()){
+						la_vague.supprimerEnnemi(Vague.collec_ennemi[i]);						
 					}
-					//}
-					if (ennemi.estArrive() && ennemi.isBouge()) {
-						this.chateau.setVieChateau(ennemi.attaquer());
+					
+					if (Vague.collec_ennemi[i].estArrive() && Vague.collec_ennemi[i].isBouge()) {
+						this.chateau.setVieChateau(Vague.collec_ennemi[i].attaquer());
 						System.out.println("Points de vie : " + this.chateau.getVieChateau());
-					} else if (ennemi.isBouge()) {
-						ennemi.deplacer();	
-					}
+					} 
+					if (Vague.collec_ennemi[i].isBouge()) {
+						Vague.collec_ennemi[i].deplacer();
+					} 
+
 					repaint();
 				}
 				
 			} else {
-				System.out.println("Vague number : " + Vague.num_vague);
 				la_vague.lancer_Vague();
 				
 			}
