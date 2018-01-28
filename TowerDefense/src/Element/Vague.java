@@ -2,10 +2,10 @@ package Element;
 
 public class Vague {
 	public static int num_vague = 0;
-	private int nb_ennemis = 4;  
+	public static int nb_ennemis = 4;  
 	private int pts_vie = 100;
 	private int argent_donne = pts_vie;
-	private Ennemi collec_ennemi [];
+	public static volatile Ennemi collec_ennemi [];
 
 	/**
 	 * Constructeur de la classe vague
@@ -32,6 +32,7 @@ public class Vague {
 				stop = true;
 			}
 		}
+		if (nb_ennemis == 0) collec_ennemi = null; // le garbage libere la ressource
 		return stop;
 	}
 	
@@ -40,9 +41,12 @@ public class Vague {
 	 * Tous les ennemis sont créés un à un. 
 	 */
 	public void lancer_Vague() {
+		this.nb_ennemis = 4;
 		collec_ennemi = new Ennemi [this.nb_ennemis];
 		int caseCourante = 0; 
+		
 		for(int i=0 ; i < nb_ennemis; i++) {
+			System.out.println("e : " + i);
 			Ennemi e= new Ennemi(pts_vie,argent_donne, caseCourante);
 			collec_ennemi[i] = e;
 			--caseCourante;
@@ -63,7 +67,7 @@ public class Vague {
 	 * @return ennemi à la position i dans la vague
 	 */
 	public Ennemi getEnnemi(int i) {
-		return this.collec_ennemi[i];
+		return collec_ennemi[i];
 	}
 	
 	public void supprimerEnnemi(Ennemi e) {
@@ -81,6 +85,7 @@ public class Vague {
 			}
 			nb_ennemis--;
 		}
+
 	}
 	
 }

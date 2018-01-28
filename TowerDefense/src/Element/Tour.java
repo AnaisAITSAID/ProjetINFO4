@@ -5,7 +5,7 @@ import java.awt.Graphics;
 import utils.Constantes;
 import utils.Constantes.Type_tour;
 
-public abstract class Tour extends AffichageSprite{
+public abstract class Tour extends AffichageSprite implements Runnable{
 		private Type_tour type_tour;
 		private Case case_position;
 		private int x;
@@ -105,15 +105,8 @@ public abstract class Tour extends AffichageSprite{
 			this.y = y;
 		}
 		
-		public void viser(Ennemi[] ennemis) {
-			int i=0;
-			for(Ennemi e:ennemis) {
-				while(ennemiAPortée(e) && e.isBouge()) {
-					e.setPointsDeVie(e.getPointsDeVie()-degats);
-					System.out.println("points de vie de l'ennemi " + i + "sont" + e.getPointsDeVie());
-				}
-				i++;
-			}
+		public void viser() {
+			
 		}
 		
 		public boolean ennemiAPortée(Ennemi e) {
@@ -123,5 +116,30 @@ public abstract class Tour extends AffichageSprite{
 				}	
 			}
 			return false;		
+		}
+		
+		@Override
+		public void run() {
+			while (true) {
+				//int i=0;
+				System.out.println("enneis visé " + Vague.nb_ennemis);
+				for(int i = 0; i < Vague.nb_ennemis; ++i) {
+					Ennemi e = Vague.collec_ennemi[i];
+					
+					while(ennemiAPortée(e) && e.isBouge()) {
+						e.setPointsDeVie(e.getPointsDeVie()-degats);
+						//System.out.println("points de vie de l'ennemi " + i + "sont" + e.getPointsDeVie());
+						try {
+							Thread.sleep(this.vitesse*30);
+						}
+						catch (InterruptedException e1) {
+							// TODO Auto-generated catch block
+							e1.printStackTrace();
+						}				
+					}
+					//i++;
+				} 
+			}
+
 		}
 }
