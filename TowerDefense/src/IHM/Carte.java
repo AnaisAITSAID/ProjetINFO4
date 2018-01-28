@@ -37,7 +37,7 @@ public class Carte extends JPanel implements Runnable{
 	private Tour tour_infos;
 	public static int largeur;
 	public static int hauteur; 
-	
+
 	
 	/**
 	 * Constructeur de la classe carte
@@ -166,8 +166,6 @@ public class Carte extends JPanel implements Runnable{
 					if (carte[i][j].contain(evenement.getX(), evenement.getY()) && carte[i][j].getType() == Type.CaseJouable) {
 						if(((CaseJouable)carte[i][j]).getTour()==null) {
 							ajouterTour(typeTourAjoutee, carte[i][j]);
-						}else{
-							tour_infos = ((CaseJouable)carte[i][j]).getTour();
 						}
 						
 					}
@@ -177,9 +175,9 @@ public class Carte extends JPanel implements Runnable{
 		}
 	}
 	
-	public Tour getTour_infos() {
+	/*public Tour getTour_infos() {
 		return tour_infos;
-	}
+	}*/
 	public void ajouterTour (Type_tour type, Case case_position) {
 		if (type == Type_tour.TourForte ) {
 			Tour nouvelle_tour = new TourForte(case_position);			
@@ -234,4 +232,11 @@ public class Carte extends JPanel implements Runnable{
 		}
 		System.out.println("GameOver");
 	}
+	
+	public Case getCarte(int i, int j) {
+		return carte[i][j];
+	}
+	
+	
+
 }

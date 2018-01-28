@@ -51,7 +51,7 @@ public class Jeu extends JFrame{
 	public void interfaceUtilisateur () {
 		
 		JPanel jp  = new JPanel();
-		InfosTour infoTour = new InfosTour();
+		InfosTour infoTour = new InfosTour(this.carte);
 		InfosJoueur infoJoueur = new InfosJoueur(this.joueur);
 		jp.setLayout(new GridBagLayout());
 		GridBagConstraints gbc = new GridBagConstraints();
