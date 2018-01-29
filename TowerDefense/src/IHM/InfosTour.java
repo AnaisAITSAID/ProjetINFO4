@@ -22,6 +22,7 @@ public class InfosTour extends JPanel{
 	public InfosTour(Carte carte) {
 		this.carte = carte;
 		this.tour = null;
+		
 	}
 
 	public void setTour(Tour tour) {
@@ -42,14 +43,17 @@ public class InfosTour extends JPanel{
 		}
 	}
 	
-	private class SelectCase extends MouseAdapter{
+	public class SelectTour extends MouseAdapter{
 
 		@Override
 		public void mouseClicked(MouseEvent evenement) {
+			System.out.println("lapin11");
 			for (int i = 0; i < Constantes.taille; ++i) {
 				for (int j = 0; j < Constantes.taille; ++j) {
-					if(carte.getCarte(i, j).contain(evenement.getX(), evenement.getY()) && carte.getCarte(i, j).getType() == Type.CaseJouable && ((CaseJouable)carte.getCarte(i, j)).getTour()!=null) {
-						setTour(((CaseJouable)carte.getCarte(i, j)).getTour());
+					System.out.println("lapin1");
+					if(carte.getCarte(j, i).contain(evenement.getX(), evenement.getY()) && carte.getCarte(j, i).getType() == Type.CaseJouable && ((CaseJouable)carte.getCarte(j, i)).getTour()!=null) {
+						setTour(((CaseJouable)carte.getCarte(j, i)).getTour());
+						System.out.println("lapin2");
 					}
 				}
 			}

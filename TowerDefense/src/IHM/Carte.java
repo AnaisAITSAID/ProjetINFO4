@@ -20,6 +20,7 @@ import Element.Tour;
 import Element.TourForte;
 import Element.TourRapide;
 import Element.Vague;
+import IHM.InfosTour.SelectTour;
 import utils.Constantes;
 import utils.Constantes.Type;
 import utils.Constantes.Type_tour;
@@ -34,11 +35,12 @@ public class Carte extends JPanel implements Runnable{
 	private Chateau chateau;
 	private ArrayList<Tour> tours_joueur;
 	private Type_tour typeTourAjoutee;
-	private Tour tour_infos;
+	//private Tour tour_infos;
 	public static int largeur;
 	public static int hauteur; 
-
+	private InfosTour i_t;
 	
+
 	/**
 	 * Constructeur de la classe carte
 	 */
@@ -51,6 +53,7 @@ public class Carte extends JPanel implements Runnable{
 		Thread thread = new Thread(this);
 		thread.start();
 		this.addMouseListener(new SelectCase());
+		
 	}
 	/* Cete fonction permet de charger dans le chemin les bonnes cases. Elle prend 
 	 * en paramètre la case à tester ainsi que son orientation (pour ne pas 
@@ -238,5 +241,8 @@ public class Carte extends JPanel implements Runnable{
 	}
 	
 	
-
+	public void setI_t(InfosTour i_t) {
+		this.i_t = i_t;
+		this.addMouseListener(i_t.new SelectTour());
+	}
 }

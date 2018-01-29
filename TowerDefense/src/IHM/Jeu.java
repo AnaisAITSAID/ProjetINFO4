@@ -53,6 +53,9 @@ public class Jeu extends JFrame{
 		JPanel jp  = new JPanel();
 		InfosTour infoTour = new InfosTour(this.carte);
 		InfosJoueur infoJoueur = new InfosJoueur(this.joueur);
+		
+		carte.setI_t(infoTour);
+
 		jp.setLayout(new GridBagLayout());
 		GridBagConstraints gbc = new GridBagConstraints();
 		gbc.weightx = 1;
@@ -82,7 +85,7 @@ public class Jeu extends JFrame{
 		this.setVisible(true);
 		infoTour.setBackground(Color.BLUE);
 		infoJoueur.setBackground(Color.green);
-	}
+			}
 	
 	
 	//classe interne pour la position de la souris
