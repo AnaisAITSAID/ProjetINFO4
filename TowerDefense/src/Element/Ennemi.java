@@ -1,6 +1,6 @@
 package Element;
 
-import java.awt.Graphics;
+import java.awt.Graphics2D;
 
 import utils.Constantes;
 
@@ -14,6 +14,8 @@ public class Ennemi extends AffichageSprite {
 	private boolean bouge; // un ennemi ne bouge plus si il est mort ou si il est arrivé 
 	private int vitesse;
 	private int frame;
+	private int realX;
+	private int realY;
 	
 	/**
 	 * Constructeur de la classe ennemi
@@ -29,6 +31,8 @@ public class Ennemi extends AffichageSprite {
 		this.bouge = true;
 		this.vitesse = 20;
 		this.frame = 0;
+		this.realX = 0;
+		this.realY = 0;
 	}
 
 	/**
@@ -70,19 +74,36 @@ public class Ennemi extends AffichageSprite {
 	 * Cette fonction fait appel à la fonction orientationCaseSuivante afin de savoir dans quelle 
 	 * direction vont les ennemis et donc sur quelle case les dessiner.
 	 */
-	public void dessiner(Graphics g) {
+	public void dessiner(Graphics2D g) {
 		if (this.caseCourante >= 0 && isBouge()) {
 			CaseChemin caseChemin = Chemin.getPos(caseCourante);
 			if (Chemin.orientationCaseSuivante(this.caseCourante) == Constantes.Orientation.Droite) {
-				g.drawImage(sprite.getSpriteEnnemi(), caseChemin.getX() + this.frame, caseChemin.getY(), null);							
+				g.drawImage(sprite.getSpriteEnnemi(), caseChemin.getX() + this.frame, caseChemin.getY(), null);
+				this.realX = caseChemin.getX() + this.frame;
+				this.realY = caseChemin.getY();
 			} else if (Chemin.orientationCaseSuivante(this.caseCourante) == Constantes.Orientation.Haut) {
 				g.drawImage(sprite.getSpriteEnnemi(), caseChemin.getX(), caseChemin.getY() + this.frame, null);							
+				this.realX = caseChemin.getX();
+				this.realY = caseChemin.getY() + this.frame;
 			} else if (Chemin.orientationCaseSuivante(this.caseCourante) == Constantes.Orientation.Gauche) {
 				g.drawImage(sprite.getSpriteEnnemi(), caseChemin.getX() - this.frame, caseChemin.getY(), null);							
+				this.realX = caseChemin.getX() - this.frame;
+				this.realY = caseChemin.getY();
 			} else {
-				g.drawImage(sprite.getSpriteEnnemi(), caseChemin.getX(), caseChemin.getY() - this.frame, null);											
+				g.drawImage(sprite.getSpriteEnnemi(), caseChemin.getX(), caseChemin.getY() - this.frame, null);
+				this.realX = caseChemin.getX();
+				this.realY = caseChemin.getY() - this.frame;
+
 			}
 		}
+	}
+
+	public int getRealX() {
+		return this.realX + 20;
+	}
+
+	public int getRealY() {
+		return this.realY +20;
 	}
 
 	/**

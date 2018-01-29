@@ -1,6 +1,6 @@
 package Element;
 
-import java.awt.Graphics;
+import java.awt.Graphics2D;
 
 import utils.Constantes;
 
@@ -24,7 +24,7 @@ public class Chateau extends AffichageSprite {
 	/**
 	 * Fonction permettant de dessiner le château sur la dernière case du chemin
 	 */
-	public void dessiner(Graphics g) {
+	public void dessiner(Graphics2D g) {
 		CaseChemin arrive = Chemin.getArrive();
 		g.drawImage(sprite.getSpriteChateau(), arrive.getX(), arrive.getY(), null);
 	}

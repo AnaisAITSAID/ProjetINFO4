@@ -1,6 +1,6 @@
 package Element;
 
-import java.awt.Graphics;
+import java.awt.Graphics2D;
 
 import utils.Constantes;
 
@@ -27,7 +27,7 @@ public class BoutonsProduits extends AffichageSprite{
 
 
 	@Override
-	public void dessiner(Graphics g) {
+	public void dessiner(Graphics2D g) {
 		g.drawImage(sprite.getspriteTourForteAchat(), this.x, this.y,null);
 	}
 	

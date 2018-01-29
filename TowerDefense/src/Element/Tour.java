@@ -1,21 +1,24 @@
 package Element;
 
+import java.awt.Color;
 import java.awt.Graphics;
+import java.awt.Graphics2D;
+import java.awt.geom.Line2D;
 
+import IHM.Carte;
 import utils.Constantes;
 import utils.Constantes.Type_tour;
 
 public abstract class Tour extends AffichageSprite implements Runnable{
 		private Type_tour type_tour;
 		private Case case_position;
-		private int x;
 
-
-		private int y;
 		private int degats;
 		private int portee;
 		private int vitesse;
 		private int niveau;
+		private boolean displayLaser = false;
+		private Laser laser;
 		
 		public Tour(Case case_position, Type_tour type_tour, int portee, int vitesse, int niveau, int degats) {
 			this.case_position=case_position;
@@ -25,13 +28,7 @@ public abstract class Tour extends AffichageSprite implements Runnable{
 			this.vitesse=vitesse;
 			this.niveau=niveau;
 		}
-		
-		public Tour(int x, int y, Type_tour type_tour) {
-			this.x=x;
-			this.y=y;
-			this.type_tour=type_tour;
 
-		}
 
 		public int getXcaseposition() {
 			return case_position.getX();
@@ -88,31 +85,12 @@ public abstract class Tour extends AffichageSprite implements Runnable{
 		public void setNiveau(int niveau) {
 			this.niveau = niveau;
 		}
-		
-		public int getX() {
-			return x;
-		}
 
-		public void setX(int x) {
-			this.x = x;
-		}
-
-		public int getY() {
-			return y;
-		}
-
-		public void setY(int y) {
-			this.y = y;
-		}
-		
-		public void viser() {
-			
-		}
 		
 		public boolean ennemiAPortée(Ennemi e) {
 			if (e != null && e.getCaseCourante() != null) {
 				if (((Math.abs(case_position.getX() - e.getCaseCourante().getX())) <= portee) && ((Math.abs(case_position.getY() - e.getCaseCourante().getY()) <= portee)))  {
-					System.out.println("ennemi " + Math.abs(case_position.getX()));
+					//System.out.println("ennemi " + Math.abs(case_position.getX()));
 
 					return true;
 				}	
@@ -129,22 +107,55 @@ public abstract class Tour extends AffichageSprite implements Runnable{
 					for(int i = 0; i < Vague.nb_ennemis; ++i) {
 						
 						while(Vague.collec_ennemi[i] != null && Vague.collec_ennemi[i].isBouge() && ennemiAPortée(Vague.collec_ennemi[i])) {
+
+							//dessinerProjectile(Vague.collec_ennemi[i].getRealX(), Vague.collec_ennemi[i].getRealY());			
+							int x = Vague.collec_ennemi[i].getRealX();
+							int y = Vague.collec_ennemi[i].getRealY();
+							Thread tire = new Thread(new Runnable() {
+								
+								@Override
+								public void run() {
+									displayLaser = true;
+									laser = new Laser(case_position.getX()+Constantes.tailleCase/2, case_position.getY() +Constantes.tailleCase/2, 
+														   x, y);
+									Carte.getCarte().repaint();
+									try {
+										Thread.sleep(100);
+									} catch (InterruptedException e) {
+										// TODO Auto-generated catch block
+										e.printStackTrace();
+									}
+									displayLaser = false;
+									Carte.getCarte().repaint();									
+								}
+							});
+							tire.start();
 							Vague.collec_ennemi[i].setPointsDeVie(Vague.collec_ennemi[i].getPointsDeVie()-degats);
-							
 							try {
-								Thread.sleep(this.vitesse*10);
-							}
-							catch (InterruptedException e1) {
+								Thread.sleep(this.vitesse);
+							} catch (InterruptedException e) {
 								// TODO Auto-generated catch block
-								e1.printStackTrace();
-							}				
+								e.printStackTrace();
+							}
+							tire.interrupt();
 						}
-						//i++;
+	
 					} 					
 				} catch (NullPointerException e) {
 					System.err.println("ennemis deja tué");
 				}
 			}
 
+		}
+		
+		private void dessinerProjectile(int x, int y) {
+
+			
+		}
+
+		public void dessinerLaser(Graphics2D g2) {
+			if (this.displayLaser) {
+				g2.draw(this.laser.getLine());							
+			}
 		}
 }

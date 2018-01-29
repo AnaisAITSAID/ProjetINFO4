@@ -85,7 +85,7 @@ public class Jeu extends JFrame{
 		this.setVisible(true);
 		infoTour.setBackground(Color.BLUE);
 		infoJoueur.setBackground(Color.green);
-			}
+	}
 	
 	
 	//classe interne pour la position de la souris

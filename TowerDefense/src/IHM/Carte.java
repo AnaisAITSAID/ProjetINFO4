@@ -3,6 +3,7 @@ package IHM;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Graphics;
+import java.awt.Graphics2D;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.util.ArrayList;
@@ -27,8 +28,6 @@ import utils.Constantes.Type_tour;
 
 public class Carte extends JPanel implements Runnable{
 
-
-
 	private Case carte [][];
 	private Chemin chemin;
 	private Vague la_vague;
@@ -37,7 +36,8 @@ public class Carte extends JPanel implements Runnable{
 	private Type_tour typeTourAjoutee;
 	//private Tour tour_infos;
 	public static int largeur;
-	public static int hauteur; 
+	public static int hauteur;
+	private static  Carte instanceCarte; 
 	private InfosTour i_t;
 	
 
@@ -53,7 +53,7 @@ public class Carte extends JPanel implements Runnable{
 		Thread thread = new Thread(this);
 		thread.start();
 		this.addMouseListener(new SelectCase());
-		
+		instanceCarte = this;
 	}
 	/* Cete fonction permet de charger dans le chemin les bonnes cases. Elle prend 
 	 * en paramètre la case à tester ainsi que son orientation (pour ne pas 
@@ -123,18 +123,19 @@ public class Carte extends JPanel implements Runnable{
 	 */
 	@Override 
 	public void paintComponent(Graphics g) {
-		
+		super.paintComponent(g);
+		Graphics2D g2 = (Graphics2D) g;
 		largeur=getWidth();
 		hauteur=getHeight();
 		
-		g.setColor(new Color(100,100,100));
-		g.fillRect(0, 0, largeur, hauteur);
-		g.setColor(new Color(0,0,0));
+		g2.setColor(new Color(100,100,100));
+		g2.fillRect(0, 0, largeur, hauteur);
+		g2.setColor(new Color(0,0,0));
 		
 		//on dessine les cases une par une
 		for (int i = 0; i < Constantes.taille; ++i) {
 			for (int j = 0; j < Constantes.taille; ++j) {
-				carte[j][i].dessiner(g);
+				carte[j][i].dessiner(g2);
 			}			
 		}
 		
@@ -142,17 +143,19 @@ public class Carte extends JPanel implements Runnable{
 		for(int i = 0; i < Vague.nb_ennemis; ++i) {
 			Ennemi ennemi = Vague.collec_ennemi[i];
 			if (ennemi != null && ennemi.isBouge() && !ennemi.estArrive()) {
-				ennemi.dessiner(g);
+				ennemi.dessiner(g2);
 			}
 
 		}
 		
 		for (Tour tour : this.tours_joueur) {
-			tour.dessiner(g);
+			tour.dessiner(g2);
+			tour.dessinerLaser(g2);
 		}
 		//on dessine le château
-		chateau.dessiner(g);
-
+		chateau.dessiner(g2);
+		
+		
 		
 	}
 	public void setTypeTourAjoutee(Type_tour typeTourAjoutee) {
@@ -219,7 +222,7 @@ public class Carte extends JPanel implements Runnable{
 					
 					if (Vague.collec_ennemi[i].estArrive() && Vague.collec_ennemi[i].isBouge()) {
 						this.chateau.setVieChateau(Vague.collec_ennemi[i].attaquer());
-						System.out.println("Points de vie : " + this.chateau.getVieChateau());
+						//System.out.println("Points de vie : " + this.chateau.getVieChateau());
 					} 
 					if (Vague.collec_ennemi[i].isBouge()) {
 						Vague.collec_ennemi[i].deplacer();
@@ -244,5 +247,9 @@ public class Carte extends JPanel implements Runnable{
 	public void setI_t(InfosTour i_t) {
 		this.i_t = i_t;
 		this.addMouseListener(i_t.new SelectTour());
+	}
+	
+	public static Carte getCarte() {
+		return instanceCarte;
 	}
 }

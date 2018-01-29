@@ -2,6 +2,7 @@ package IHM;
 
 import java.awt.Color;
 import java.awt.Graphics;
+import java.awt.Graphics2D;
 import java.awt.Rectangle;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
@@ -48,9 +49,10 @@ public class Achats extends JPanel{
 	@Override 
 	public void paintComponent(Graphics g) {
 		super.paintComponent(g);
+		Graphics2D g2 = (Graphics2D) g;
 		setBackground(Color.ORANGE); 
 		for(BoutonsProduits bouton : this.boutons_produits) {
-			bouton.dessiner(g);
+			bouton.dessiner(g2);
 		}
 	}
 	

@@ -47,7 +47,7 @@ public class InfosTour extends JPanel{
 
 		@Override
 		public void mouseClicked(MouseEvent evenement) {
-			System.out.println("lapin11");
+		/*	System.out.println("lapin11");
 			for (int i = 0; i < Constantes.taille; ++i) {
 				for (int j = 0; j < Constantes.taille; ++j) {
 					System.out.println("lapin1");
@@ -58,7 +58,7 @@ public class InfosTour extends JPanel{
 				}
 			}
 			repaint();
-		}
+		*/}
 	}
 	
 }
