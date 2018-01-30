@@ -17,10 +17,10 @@ import utils.Constantes.Type;
 public class InfosTour extends JPanel{
 	
 	private Tour tourInfo;
-	private Carte carte;
 	
-	public InfosTour(Carte carte) {
-		this.carte = carte;
+	
+	public InfosTour() {
+	
 		this.tourInfo = null;
 		
 	}

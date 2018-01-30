@@ -10,6 +10,7 @@ import java.awt.event.MouseEvent;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 
+import Element.CaseJouable;
 import Element.Chateau;
 import utils.Constantes;
 import utils.Constantes.Type_tour;
@@ -51,7 +52,7 @@ public class Jeu extends JFrame{
 	public void interfaceUtilisateur () {
 		
 		JPanel jp  = new JPanel();
-		infoTour = new InfosTour(this.carte);
+		infoTour = new InfosTour();
 		carte.addMouseListener(new SelectTour());
 		infoJoueur = new InfosJoueur(this.joueur);
 		
@@ -111,13 +112,13 @@ public class Jeu extends JFrame{
 			for (int i = 0; i < Constantes.taille; ++i) {
 				for (int j = 0; j < Constantes.taille; ++j) {
 					System.out.println("lapin1");
-					if(carte.getCarte(j, i).contain(evenement.getX(), evenement.getY()) && carte.getCarte(j, i).getType() == Constantes.Type.CaseJouable && (((Constantes.Type.CaseJouable)(carte.getCarte(j, i))).getTour())!=null) {
-						infoTour.setTourInfo();
+					if(carte.getCarte(j, i).contain(evenement.getX(), evenement.getY()) && carte.getCarte(j, i).getType() == Constantes.Type.CaseJouable && (((CaseJouable)(carte.getCarte(j, i))).getTour())!=null) {
+						infoTour.setTourInfo(((CaseJouable)(carte.getCarte(j, i))).getTour());
 						System.out.println("lapin2");
 					}
 				}
 			}
-			repaint();
+			infoTour.repaint();
 		}
 	}
 	public static void main(String [] args){

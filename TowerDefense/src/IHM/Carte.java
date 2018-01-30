@@ -38,7 +38,7 @@ public class Carte extends JPanel implements Runnable{
 	public static int largeur;
 	public static int hauteur;
 	private static  Carte instanceCarte; 
-	private InfosTour i_t;
+	//private InfosTour i_t;
 	
 
 	/**
