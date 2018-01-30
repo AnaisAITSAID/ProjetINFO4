@@ -217,6 +217,7 @@ public class Carte extends JPanel implements Runnable{
 				for (int i = 0; i < Vague.nb_ennemis; ++i) {
 					if (chateau.gameOver()) break;
 					if(!Vague.collec_ennemi[i].isBouge()){
+						chateau.setArgent(chateau.getArgent()+Vague.collec_ennemi[i].getMonnaiesGenere());
 						la_vague.supprimerEnnemi(Vague.collec_ennemi[i]);						
 					}
 					

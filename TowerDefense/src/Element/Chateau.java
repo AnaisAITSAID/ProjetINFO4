@@ -9,6 +9,9 @@ public class Chateau extends AffichageSprite {
 	private int vieChateau;		//correspond aux points de vie du joueur
 	private int argent;
 	
+	
+
+
 	/**
 	 * Constructeur de la classe château
 	 */
@@ -59,4 +62,9 @@ public class Chateau extends AffichageSprite {
 	public int getArgent() {
 		return argent;
 	}
+	
+	public void setArgent(int argent) {
+		this.argent = argent;
+	}
+
 }

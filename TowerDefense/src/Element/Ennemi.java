@@ -9,6 +9,7 @@ public class Ennemi extends AffichageSprite {
 	private int pointsDeVie;
 	private int monnaiesGenere;	//pièces que le joueur gagne lorsque l'ennemi est tué
 
+
 	private int caseCourante;	
 
 	private boolean bouge; // un ennemi ne bouge plus si il est mort ou si il est arrivé 
@@ -149,4 +150,9 @@ public class Ennemi extends AffichageSprite {
 			return Chemin.getPos(this.caseCourante);
 		return null;
 	}
+	
+	public int getMonnaiesGenere() {
+		return monnaiesGenere;
+	}
+
 }
