@@ -4,15 +4,14 @@ import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
-import java.awt.Point;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 
-import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 
 import Element.Chateau;
+import utils.Constantes;
 import utils.Constantes.Type_tour;
 
 
@@ -24,7 +23,8 @@ public class Jeu extends JFrame{
 	private Achats zone_achats;
 	private Carte carte;
 	private Chateau joueur; 
-	
+	private InfosTour infoTour;
+	private InfosJoueur infoJoueur;
 	
 	public Jeu () {
 		
@@ -51,10 +51,11 @@ public class Jeu extends JFrame{
 	public void interfaceUtilisateur () {
 		
 		JPanel jp  = new JPanel();
-		InfosTour infoTour = new InfosTour(this.carte);
-		InfosJoueur infoJoueur = new InfosJoueur(this.joueur);
+		infoTour = new InfosTour(this.carte);
+		carte.addMouseListener(new SelectTour());
+		infoJoueur = new InfosJoueur(this.joueur);
 		
-		carte.setI_t(infoTour);
+		//carte.setI_t(infoTour);
 
 		jp.setLayout(new GridBagLayout());
 		GridBagConstraints gbc = new GridBagConstraints();
@@ -102,6 +103,23 @@ public class Jeu extends JFrame{
 		}
 	}
 	
+	public class SelectTour extends MouseAdapter{
+
+		@Override
+		public void mouseClicked(MouseEvent evenement) {
+			System.out.println("lapin11");
+			for (int i = 0; i < Constantes.taille; ++i) {
+				for (int j = 0; j < Constantes.taille; ++j) {
+					System.out.println("lapin1");
+					if(carte.getCarte(j, i).contain(evenement.getX(), evenement.getY()) && carte.getCarte(j, i).getType() == Constantes.Type.CaseJouable && (((Constantes.Type.CaseJouable)(carte.getCarte(j, i))).getTour())!=null) {
+						infoTour.setTourInfo();
+						System.out.println("lapin2");
+					}
+				}
+			}
+			repaint();
+		}
+	}
 	public static void main(String [] args){
 		 Jeu jeu = new Jeu ();
 		 jeu.interfaceUtilisateur();

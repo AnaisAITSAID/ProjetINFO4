@@ -21,7 +21,7 @@ import Element.Tour;
 import Element.TourForte;
 import Element.TourRapide;
 import Element.Vague;
-import IHM.InfosTour.SelectTour;
+//import IHM.InfosTour.SelectTour;
 import utils.Constantes;
 import utils.Constantes.Type;
 import utils.Constantes.Type_tour;
@@ -244,10 +244,9 @@ public class Carte extends JPanel implements Runnable{
 	}
 	
 	
-	public void setI_t(InfosTour i_t) {
+	/*public void setI_t(InfosTour i_t) {
 		this.i_t = i_t;
-		this.addMouseListener(i_t.new SelectTour());
-	}
+	}*/
 	
 	public static Carte getCarte() {
 		return instanceCarte;
