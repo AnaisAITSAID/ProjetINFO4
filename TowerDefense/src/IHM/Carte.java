@@ -188,6 +188,8 @@ public class Carte extends JPanel implements Runnable{
 		if (type == Type_tour.TourForte ) {
 			Tour nouvelle_tour = new TourForte(case_position);			
 			this.tours_joueur.add(nouvelle_tour);
+			((CaseJouable)case_position).setTour(nouvelle_tour);
+			
 			Thread t = new Thread(this.tours_joueur.get(this.tours_joueur.size()-1));
 			t.start();
 		} else if(type == Type_tour.TourRapide) {

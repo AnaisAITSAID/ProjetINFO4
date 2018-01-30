@@ -43,6 +43,7 @@ public class Jeu extends JFrame{
 		
 		zone_achats = new Achats();
 		zone_achats.addMouseListener(new Souris_position());
+		carte.addMouseListener(new SelectTour());
 		
 		joueur=new Chateau();
 	}
@@ -53,7 +54,6 @@ public class Jeu extends JFrame{
 		
 		JPanel jp  = new JPanel();
 		infoTour = new InfosTour();
-		carte.addMouseListener(new SelectTour());
 		infoJoueur = new InfosJoueur(this.joueur);
 		
 		//carte.setI_t(infoTour);
@@ -108,10 +108,10 @@ public class Jeu extends JFrame{
 
 		@Override
 		public void mouseClicked(MouseEvent evenement) {
-			System.out.println("lapin11");
+			//System.out.println("lapin11");
 			for (int i = 0; i < Constantes.taille; ++i) {
 				for (int j = 0; j < Constantes.taille; ++j) {
-					System.out.println("lapin1");
+				//	System.out.println("lapin1");
 					if(carte.getCarte(j, i).contain(evenement.getX(), evenement.getY()) && carte.getCarte(j, i).getType() == Constantes.Type.CaseJouable && (((CaseJouable)(carte.getCarte(j, i))).getTour())!=null) {
 						infoTour.setTourInfo(((CaseJouable)(carte.getCarte(j, i))).getTour());
 						System.out.println("lapin2");
