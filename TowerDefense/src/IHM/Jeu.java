@@ -46,6 +46,7 @@ public class Jeu extends JFrame{
 		carte.addMouseListener(new SelectTour());
 		
 		joueur=new Chateau();
+		carte.setChateau(joueur);
 	}
 	
 	/* cr�ation de l'interface utilisateur */
@@ -55,7 +56,7 @@ public class Jeu extends JFrame{
 		JPanel jp  = new JPanel();
 		infoTour = new InfosTour();
 		infoJoueur = new InfosJoueur(this.joueur);
-		
+		carte.setI_j(infoJoueur);
 		//carte.setI_t(infoTour);
 
 		jp.setLayout(new GridBagLayout());

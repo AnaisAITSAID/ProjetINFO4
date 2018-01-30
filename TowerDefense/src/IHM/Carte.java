@@ -38,16 +38,17 @@ public class Carte extends JPanel implements Runnable{
 	public static int largeur;
 	public static int hauteur;
 	private static  Carte instanceCarte; 
-	//private InfosTour i_t;
+	private InfosJoueur i_j;
 	
 
+	
 	/**
 	 * Constructeur de la classe carte
 	 */
 	public Carte () {
 		this.chemin = new Chemin();
 		this.la_vague = new Vague();
-		this.chateau = new Chateau();
+		//this.chateau = new Chateau();
 		this.chargeCarte();
 		this.tours_joueur = new ArrayList<Tour>();
 		Thread thread = new Thread(this);
@@ -220,11 +221,13 @@ public class Carte extends JPanel implements Runnable{
 					if (chateau.gameOver()) break;
 					if(!Vague.collec_ennemi[i].isBouge()){
 						chateau.setArgent(chateau.getArgent()+Vague.collec_ennemi[i].getMonnaiesGenere());
+						i_j.repaint();
 						la_vague.supprimerEnnemi(Vague.collec_ennemi[i]);						
 					}
 					
 					if (Vague.collec_ennemi[i].estArrive() && Vague.collec_ennemi[i].isBouge()) {
 						this.chateau.setVieChateau(Vague.collec_ennemi[i].attaquer());
+						i_j.repaint();
 						//System.out.println("Points de vie : " + this.chateau.getVieChateau());
 					} 
 					if (Vague.collec_ennemi[i].isBouge()) {
@@ -242,11 +245,16 @@ public class Carte extends JPanel implements Runnable{
 		System.out.println("GameOver");
 	}
 	
+	public void setChateau(Chateau chateau) {
+		this.chateau = chateau;
+	}
 	public Case getCarte(int i, int j) {
 		return carte[i][j];
 	}
 	
-	
+	public void setI_j(InfosJoueur i_j) {
+		this.i_j = i_j;
+	}
 	/*public void setI_t(InfosTour i_t) {
 		this.i_t = i_t;
 	}*/
