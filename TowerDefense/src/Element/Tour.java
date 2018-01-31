@@ -9,7 +9,7 @@ import IHM.Carte;
 import utils.Constantes;
 import utils.Constantes.Type_tour;
 
-public abstract class Tour extends AffichageSprite implements Runnable{
+public abstract class Tour extends AffichageSprite {
 		private Type_tour type_tour;
 		private Case case_position;
 
@@ -28,7 +28,11 @@ public abstract class Tour extends AffichageSprite implements Runnable{
 			this.vitesse=vitesse;
 			this.niveau=niveau;
 		}
-
+		
+		public boolean peutTirer(int tempsEcoule){
+			if (tempsEcoule % this.vitesse == 0) return true;
+			else return false;
+		}
 
 		public int getXcaseposition() {
 			return case_position.getX();
@@ -98,8 +102,7 @@ public abstract class Tour extends AffichageSprite implements Runnable{
 			return false;		
 		}
 		
-		@Override
-		public void run() {
+		public void tirer() {
 			while (true) {
 				//int i=0;
 				//System.out.println("enneis visé " + Vague.nb_ennemis);
@@ -131,26 +134,15 @@ public abstract class Tour extends AffichageSprite implements Runnable{
 							});
 							tire.start();
 							Vague.collec_ennemi[i].setPointsDeVie(Vague.collec_ennemi[i].getPointsDeVie()-degats);
-							try {
-								Thread.sleep(this.vitesse);
-							} catch (InterruptedException e) {
-								// TODO Auto-generated catch block
-								e.printStackTrace();
-							}
-							tire.interrupt();
+
 						}
-	
+
 					} 					
 				} catch (NullPointerException e) {
 					System.err.println("ennemis deja tué");
 				}
 			}
 
-		}
-		
-		private void dessinerProjectile(int x, int y) {
-
-			
 		}
 
 		public void dessinerLaser(Graphics2D g2) {

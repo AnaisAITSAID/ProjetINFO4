@@ -16,6 +16,7 @@ import Element.CaseChemin;
 import Element.CaseJouable;
 import Element.Chateau;
 import Element.Chemin;
+import Element.Chrono;
 import Element.Ennemi;
 import Element.Tour;
 import Element.TourForte;
@@ -32,7 +33,7 @@ public class Carte extends JPanel implements Runnable{
 	private Chemin chemin;
 	private Vague la_vague;
 	private Chateau chateau;
-	private ArrayList<Tour> tours_joueur;
+	private volatile ArrayList<Tour> tours_joueur;
 	private Type_tour typeTourAjoutee;
 	//private Tour tour_infos;
 	public static int largeur;
@@ -191,8 +192,8 @@ public class Carte extends JPanel implements Runnable{
 			this.tours_joueur.add(nouvelle_tour);
 			((CaseJouable)case_position).setTour(nouvelle_tour);
 			
-			Thread t = new Thread(this.tours_joueur.get(this.tours_joueur.size()-1));
-			t.start();
+		//	Thread t = new Thread(this.tours_joueur.get(this.tours_joueur.size()-1));
+		//	t.start();
 		} else if(type == Type_tour.TourRapide) {
 			this.tours_joueur.add(new TourRapide(case_position));			
 		}
@@ -213,6 +214,8 @@ public class Carte extends JPanel implements Runnable{
 	 * Si le joueur n'a plus de points de vie, la partie est terminée.
 	 */
 	public void run() {
+		Thread tourThread = new Thread (new TourHandler());
+		tourThread.start();
 		la_vague.lancer_Vague();
 		while (!chateau.gameOver()) {
 			if (!la_vague.ennemisMorts()) {
@@ -233,7 +236,6 @@ public class Carte extends JPanel implements Runnable{
 					if (Vague.collec_ennemi[i].isBouge()) {
 						Vague.collec_ennemi[i].deplacer();
 					} 
-
 					repaint();
 				}
 				
@@ -245,6 +247,38 @@ public class Carte extends JPanel implements Runnable{
 		System.out.println("GameOver");
 	}
 	
+	
+	private class TourHandler implements Runnable{
+
+		@Override
+		public void run() {
+			Chrono tempsEcoule = new Chrono();
+			int tempsTotal = 1;
+			while (true){
+				tempsEcoule.Go_Chrono();
+				System.out.print("test " + tours_joueur.size());
+
+				for (Tour tour : tours_joueur) {
+
+					if (tour.peutTirer(tempsTotal)){
+						tour.tirer();
+					}
+				}
+				System.out.println();
+				try {
+					Thread.sleep(1000);
+				} catch (InterruptedException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}	
+				
+				tempsTotal += (int)tempsEcoule.Stop_Chrono()/1000;
+				//tempsEcoule.stop();
+			}
+			
+		}
+		
+	}
 	public void setChateau(Chateau chateau) {
 		this.chateau = chateau;
 	}
