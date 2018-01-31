@@ -46,7 +46,6 @@ public class Jeu extends JFrame{
 		carte.addMouseListener(new SelectTour());
 		
 		joueur=new Chateau();
-		carte.setChateau(joueur);
 	}
 	
 	/* cr�ation de l'interface utilisateur */
@@ -88,6 +87,8 @@ public class Jeu extends JFrame{
 		this.setVisible(true);
 		infoTour.setBackground(Color.BLUE);
 		infoJoueur.setBackground(Color.green);
+		
+		carte.setChateau(joueur);
 	}
 	
 	

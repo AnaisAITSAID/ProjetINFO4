@@ -8,7 +8,7 @@ import utils.Constantes.Type_tour;
 public class TourForte extends Tour{
 
 	public TourForte(Case case_position) {
-		super(case_position, Type_tour.TourForte, 2*Constantes.tailleCase, 2, 1, 100);
+		super(case_position, Type_tour.TourForte, 2*Constantes.tailleCase, 2, 1, 25);
 	}
 
 

@@ -52,8 +52,7 @@ public class Carte extends JPanel implements Runnable{
 		//this.chateau = new Chateau();
 		this.chargeCarte();
 		this.tours_joueur = new ArrayList<Tour>();
-		Thread thread = new Thread(this);
-		thread.start();
+		
 		this.addMouseListener(new SelectCase());
 		instanceCarte = this;
 	}
@@ -256,8 +255,6 @@ public class Carte extends JPanel implements Runnable{
 			int tempsTotal = 1;
 			while (true){
 				tempsEcoule.Go_Chrono();
-				System.out.print("test " + tours_joueur.size());
-
 				for (Tour tour : tours_joueur) {
 
 					if (tour.peutTirer(tempsTotal)){
@@ -273,7 +270,6 @@ public class Carte extends JPanel implements Runnable{
 				}	
 				
 				tempsTotal += (int)tempsEcoule.Stop_Chrono()/1000;
-				//tempsEcoule.stop();
 			}
 			
 		}
@@ -281,6 +277,8 @@ public class Carte extends JPanel implements Runnable{
 	}
 	public void setChateau(Chateau chateau) {
 		this.chateau = chateau;
+		Thread thread = new Thread(this);
+		thread.start();
 	}
 	public Case getCarte(int i, int j) {
 		return carte[i][j];
@@ -288,11 +286,7 @@ public class Carte extends JPanel implements Runnable{
 	
 	public void setI_j(InfosJoueur i_j) {
 		this.i_j = i_j;
-	}
-	/*public void setI_t(InfosTour i_t) {
-		this.i_t = i_t;
-	}*/
-	
+	}	
 	public static Carte getCarte() {
 		return instanceCarte;
 	}

@@ -11,7 +11,7 @@ public class Vague {
 	 * Constructeur de la classe vague
 	 */
 	public Vague() {
-		num_vague = num_vague + 1;
+		
 		pts_vie = pts_vie + 10;
 		
 	}
@@ -42,12 +42,13 @@ public class Vague {
 	 */
 	public void lancer_Vague() {
 		this.nb_ennemis = 4;
+		num_vague = num_vague + 1;
 		collec_ennemi = new Ennemi [this.nb_ennemis];
 		int caseCourante = 0; 
 		
 		for(int i=0 ; i < nb_ennemis; i++) {
-			System.out.println("e : " + i);
-			Ennemi e= new Ennemi(pts_vie,argent_donne, caseCourante);
+		//	System.out.println("e : " + i);
+			Ennemi e= new Ennemi(pts_vie*num_vague,argent_donne + num_vague, caseCourante);
 			collec_ennemi[i] = e;
 			--caseCourante;
 		}

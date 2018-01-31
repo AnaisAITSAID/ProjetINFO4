@@ -95,7 +95,6 @@ public abstract class Tour extends AffichageSprite {
 			if (e != null && e.getCaseCourante() != null) {
 				if (((Math.abs(case_position.getX() - e.getCaseCourante().getX())) <= portee) && ((Math.abs(case_position.getY() - e.getCaseCourante().getY()) <= portee)))  {
 					//System.out.println("ennemi " + Math.abs(case_position.getX()));
-
 					return true;
 				}	
 			}
@@ -103,45 +102,50 @@ public abstract class Tour extends AffichageSprite {
 		}
 		
 		public void tirer() {
-			while (true) {
-				//int i=0;
-				//System.out.println("enneis visé " + Vague.nb_ennemis);
-				try {
-					for(int i = 0; i < Vague.nb_ennemis; ++i) {
+			//int i=0;
+			//System.out.println("enneis visé " + Vague.nb_ennemis);
+			boolean aTire = false;
+			try {
+				for(int i = 0; i < Vague.nb_ennemis && !aTire ; ++i) {
+					
+					if(Vague.collec_ennemi[i] != null && Vague.collec_ennemi[i].isBouge() && ennemiAPortée(Vague.collec_ennemi[i])) {
+
+						int x = Vague.collec_ennemi[i].getRealX();
+						int y = Vague.collec_ennemi[i].getRealY();
 						
-						while(Vague.collec_ennemi[i] != null && Vague.collec_ennemi[i].isBouge() && ennemiAPortée(Vague.collec_ennemi[i])) {
+						System.out.println("Tire : " + Vague.collec_ennemi[i]);
 
-							//dessinerProjectile(Vague.collec_ennemi[i].getRealX(), Vague.collec_ennemi[i].getRealY());			
-							int x = Vague.collec_ennemi[i].getRealX();
-							int y = Vague.collec_ennemi[i].getRealY();
-							Thread tire = new Thread(new Runnable() {
-								
-								@Override
-								public void run() {
-									displayLaser = true;
-									laser = new Laser(case_position.getX()+Constantes.tailleCase/2, case_position.getY() +Constantes.tailleCase/2, 
-														   x, y);
-									Carte.getCarte().repaint();
-									try {
-										Thread.sleep(100);
-									} catch (InterruptedException e) {
-										// TODO Auto-generated catch block
-										e.printStackTrace();
-									}
-									displayLaser = false;
-									Carte.getCarte().repaint();									
+
+						
+						Thread tire = new Thread(new Runnable() {
+							
+							@Override
+							public void run() {
+								displayLaser = true;
+								laser = new Laser(case_position.getX()+Constantes.tailleCase/2, case_position.getY() +Constantes.tailleCase/2, 
+													   x, y);
+								Carte.getCarte().repaint();
+								try {
+									Thread.sleep(100);
+								} catch (InterruptedException e) {
+									// TODO Auto-generated catch block
+									e.printStackTrace();
 								}
-							});
-							tire.start();
-							Vague.collec_ennemi[i].setPointsDeVie(Vague.collec_ennemi[i].getPointsDeVie()-degats);
+								displayLaser = false;
+								Carte.getCarte().repaint();									
+							}
+						});
+						tire.start();
+						Vague.collec_ennemi[i].setPointsDeVie(Vague.collec_ennemi[i].getPointsDeVie()-degats);
+						
+						aTire = true;
+					}
 
-						}
-
-					} 					
-				} catch (NullPointerException e) {
-					System.err.println("ennemis deja tué");
-				}
+				} 					
+			} catch (NullPointerException e) {
+				System.err.println("ennemis deja tué");
 			}
+		
 
 		}
 
