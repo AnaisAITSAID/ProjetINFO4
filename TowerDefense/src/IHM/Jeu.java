@@ -4,6 +4,8 @@ import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 
@@ -27,6 +29,29 @@ public class Jeu extends JFrame{
 	private InfosTour infoTour;
 	private InfosJoueur infoJoueur;
 	
+	public class AmeliorationPossible implements ActionListener{
+
+		@Override
+		public void actionPerformed(ActionEvent arg0) {
+			int prix = infoTour.getTourInfo().getNiveau();
+			if(joueur.getArgent()>=prix) {
+				joueur.setArgent(joueur.getArgent()-prix);
+				if(infoTour.getTourInfo().getType_tour()==Type_tour.TourForte) {
+					infoTour.getTourInfo().setDegats(infoTour.getTourInfo().getDegats()+10*infoTour.getTourInfo().getNiveau());
+					infoTour.getTourInfo().setNiveau(infoTour.getTourInfo().getNiveau()+1);
+				}else {
+					infoTour.getTourInfo().setVitesse(infoTour.getTourInfo().getVitesse()+10*infoTour.getTourInfo().getNiveau());
+					infoTour.getTourInfo().setNiveau(infoTour.getTourInfo().getNiveau()+1);
+				}
+				infoTour.repaint();
+				infoJoueur.repaint();
+			}else {
+				System.out.println("vous n'avez pas assez d'argent pour l'amélioration");
+			}
+			
+		}
+		
+	}
 	public Jeu () {
 		
 		this.setTitle("Tower Defense");
@@ -48,12 +73,13 @@ public class Jeu extends JFrame{
 		joueur=new Chateau();
 	}
 	
+	
 	/* crï¿½ation de l'interface utilisateur */
 	/* pour commencer on se contentera d'ajouter la carte */
 	public void interfaceUtilisateur () {
 		
 		JPanel jp  = new JPanel();
-		infoTour = new InfosTour();
+		infoTour = new InfosTour(this);
 		infoJoueur = new InfosJoueur(this.joueur);
 		carte.setI_j(infoJoueur);
 		//carte.setI_t(infoTour);
