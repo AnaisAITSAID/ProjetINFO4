@@ -1,11 +1,9 @@
 package IHM;
 
 import java.awt.Color;
+
 import java.awt.Graphics;
 import java.awt.Graphics2D;
-import java.awt.Rectangle;
-import java.awt.event.MouseAdapter;
-import java.awt.event.MouseEvent;
 
 import javax.swing.JPanel;
 
@@ -41,9 +39,8 @@ public class Achats extends JPanel{
 
 	public void charger_achats() {
 		for(int i=0; i<nb_produits;i++) {
-			boutons_produits[i]=new BoutonsProduits(((Constantes.tailleCase *5)) - ((nb_produits*(taille_bouton+espace))/2) + ((taille_bouton+espace)*i),10);
+			boutons_produits[i] = new BoutonsProduits(((Constantes.tailleCase *5)) - ((nb_produits*(taille_bouton+espace))/2) + ((taille_bouton+espace)*i), 10, Type_tour.values()[i]);
 		}
-			 
 	}
 	
 	@Override 

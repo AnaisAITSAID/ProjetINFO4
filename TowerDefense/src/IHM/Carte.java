@@ -194,7 +194,9 @@ public class Carte extends JPanel implements Runnable{
 		//	Thread t = new Thread(this.tours_joueur.get(this.tours_joueur.size()-1));
 		//	t.start();
 		} else if(type == Type_tour.TourRapide) {
-			this.tours_joueur.add(new TourRapide(case_position));			
+			Tour nouvelle_tour = new TourRapide(case_position);	
+			this.tours_joueur.add(nouvelle_tour);
+			((CaseJouable)case_position).setTour(nouvelle_tour);
 		}
 	}
 	

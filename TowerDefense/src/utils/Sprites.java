@@ -13,6 +13,8 @@ public class Sprites {
 	private Image spriteEnnemi;
 	private Image spriteTourForte;
 	private Image spriteTourForteAchat;
+	private Image spriteTourRapide;
+	private Image spriteTourRapideAchat;
 
 	private static Sprites sprite = null;
 	
@@ -22,18 +24,32 @@ public class Sprites {
 		this.chargeSpriteChateau();
 		this.chargeSpriteEnnemi();
 		this.chargespriteTourForte();
-		this.chargespriteTourAchat();
-
+		this.chargespriteTourForteAchat();
+		this.chargespriteTourRapide();
+		this.chargespriteTourRapideAchat();
+		
 	}
 
-	private void chargespriteTourAchat() {
+	private void chargespriteTourForteAchat() {
 		try {
 			this.spriteTourForteAchat = ImageIO.read(new File("image/tour1.png"));
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
 	}
-
+	private void chargespriteTourRapideAchat() {
+		try {
+			this.spriteTourRapideAchat = ImageIO.read(new File("image/tour2.png"));
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+	}private void chargespriteTourRapide() {
+		try {
+			this.spriteTourRapide = ImageIO.read(new File("image/tour2.png"));
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+	}
 	public static Sprites getInstance() {
 		sprite = new Sprites(); 
 		return sprite;
@@ -129,5 +145,13 @@ public class Sprites {
 	
 	public Image getspriteTourForteAchat() {
 		return this.spriteTourForteAchat;
+	}
+	
+	public Image getspriteTourRapideAchat() {
+		return this.spriteTourRapideAchat;
+	}
+	
+	public Image getspriteTourRapide() {
+		return this.spriteTourRapide;
 	}
 }
