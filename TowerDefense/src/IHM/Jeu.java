@@ -40,7 +40,7 @@ public class Jeu extends JFrame{
 					infoTour.getTourInfo().setDegats(infoTour.getTourInfo().getDegats()+10*infoTour.getTourInfo().getNiveau());
 					infoTour.getTourInfo().setNiveau(infoTour.getTourInfo().getNiveau()+1);
 				}else {
-					infoTour.getTourInfo().setVitesse(infoTour.getTourInfo().getVitesse()+10*infoTour.getTourInfo().getNiveau());
+					infoTour.getTourInfo().setVitesse(infoTour.getTourInfo().getVitesse()+infoTour.getTourInfo().getNiveau());
 					infoTour.getTourInfo().setNiveau(infoTour.getTourInfo().getNiveau()+1);
 				}
 				infoTour.repaint();
@@ -111,8 +111,8 @@ public class Jeu extends JFrame{
 		
 		this.add(jp);
 		this.setVisible(true);
-		infoTour.setBackground(Color.BLUE);
-		infoJoueur.setBackground(Color.green);
+//		infoTour.setBackground(Color.BLUE);
+//		infoJoueur.setBackground(Color.green);
 		
 		carte.setChateau(joueur);
 	}

@@ -2,10 +2,11 @@ package Element;
 
 public class Vague {
 	public static int num_vague = 0;
-	public static int nb_ennemis = 4;  
-	private int pts_vie = 100;
+	public int nb_ennemis = 6;  
+
+	private int pts_vie = 30;
 	private int argent_donne = pts_vie;
-	public static volatile Ennemi collec_ennemi [];
+	public Ennemi collec_ennemi [];
 
 	/**
 	 * Constructeur de la classe vague
@@ -41,7 +42,7 @@ public class Vague {
 	 * Tous les ennemis sont créés un à un. 
 	 */
 	public void lancer_Vague() {
-		this.nb_ennemis = 4;
+		this.nb_ennemis = 6;
 		num_vague = num_vague + 1;
 		collec_ennemi = new Ennemi [this.nb_ennemis];
 		int caseCourante = 0; 
@@ -88,5 +89,8 @@ public class Vague {
 		}
 
 	}
-	
+	public int getNb_ennemis() {
+		return nb_ennemis;
+	}
+
 }

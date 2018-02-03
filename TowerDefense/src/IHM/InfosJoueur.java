@@ -1,11 +1,9 @@
 package IHM;
 
+import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
-import java.util.Observable;
-import java.util.Observer;
 
-import javax.swing.JLabel;
 import javax.swing.JPanel;
 
 import Element.Chateau;
@@ -23,9 +21,10 @@ public class InfosJoueur extends JPanel{
 		public void paintComponent(Graphics g) {
 			super.paintComponent(g);
 			Graphics2D g2 = (Graphics2D) g;
-			g.drawString("Points de vie :" + this.joueur.getVieChateau(), 120, 20);
-			g.drawString("Argent du joueur :" + this.joueur.getArgent(), 120, 40);
-			g.drawString("Numéro vague :" + Vague.num_vague, 120, 60);
+			g2.setFont(new Font("default", Font.BOLD, 16));
+			g2.drawString("Points de vie :" + this.joueur.getVieChateau(), 120, 20);
+			g2.drawString("Argent du joueur :" + this.joueur.getArgent(), 120, 45);
+			g2.drawString("Numéro vague :" + Vague.num_vague, 120, 70);
 		}
 
 }

@@ -19,6 +19,7 @@ public abstract class Tour extends AffichageSprite {
 		private int niveau;
 		private boolean displayLaser = false;
 		private Laser laser;
+		private float attente; 
 		
 		public Tour(Case case_position, Type_tour type_tour, int portee, int vitesse, int niveau, int degats) {
 			this.case_position=case_position;
@@ -27,10 +28,12 @@ public abstract class Tour extends AffichageSprite {
 			this.degats=degats;
 			this.vitesse=vitesse;
 			this.niveau=niveau;
+			this.attente = 3/this.vitesse;
 		}
 		
 		public boolean peutTirer(int tempsEcoule){
-			if (tempsEcoule % this.vitesse == 0) return true;
+			System.out.println("temps ecoule : " + tempsEcoule + " attente : " + this.attente + " Resultat : " +  tempsEcoule % this.attente);
+			if (tempsEcoule % this.attente == 0) return true;
 			else return false;
 		}
 
@@ -80,6 +83,7 @@ public abstract class Tour extends AffichageSprite {
 
 		public void setVitesse(int vitesse) {
 			this.vitesse = vitesse;
+			this.attente = 3/this.vitesse;
 		}
 
 		public int getNiveau() {
@@ -101,21 +105,17 @@ public abstract class Tour extends AffichageSprite {
 			return false;		
 		}
 		
-		public void tirer() {
+		public void tirer(Vague vague) {
 			//int i=0;
 			//System.out.println("enneis visé " + Vague.nb_ennemis);
 			boolean aTire = false;
 			try {
-				for(int i = 0; i < Vague.nb_ennemis && !aTire ; ++i) {
+				for(int i = 0; i < vague.getNb_ennemis() && !aTire ; ++i) {
 					
-					if(Vague.collec_ennemi[i] != null && Vague.collec_ennemi[i].isBouge() && ennemiAPortée(Vague.collec_ennemi[i])) {
+					if(vague.getEnnemi(i) != null && vague.getEnnemi(i).isBouge() && ennemiAPortée(vague.getEnnemi(i))) {
 
-						int x = Vague.collec_ennemi[i].getRealX();
-						int y = Vague.collec_ennemi[i].getRealY();
-						
-						System.out.println("Tire : " + Vague.collec_ennemi[i]);
-
-
+						int x = vague.getEnnemi(i).getRealX();
+						int y = vague.getEnnemi(i).getRealY();
 						
 						Thread tire = new Thread(new Runnable() {
 							
@@ -136,7 +136,7 @@ public abstract class Tour extends AffichageSprite {
 							}
 						});
 						tire.start();
-						Vague.collec_ennemi[i].setPointsDeVie(Vague.collec_ennemi[i].getPointsDeVie()-degats);
+						vague.getEnnemi(i).setPointsDeVie(vague.getEnnemi(i).getPointsDeVie()-degats);
 						
 						aTire = true;
 					}

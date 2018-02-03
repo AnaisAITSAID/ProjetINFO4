@@ -129,8 +129,8 @@ public class Carte extends JPanel implements Runnable{
 		largeur=getWidth();
 		hauteur=getHeight();
 		
-		g2.setColor(new Color(100,100,100));
-		g2.fillRect(0, 0, largeur, hauteur);
+		//g2.setColor(new Color(100,100,100));
+		//g2.fillRect(0, 0, largeur, hauteur);
 		g2.setColor(new Color(0,0,0));
 		
 		//on dessine les cases une par une
@@ -141,8 +141,8 @@ public class Carte extends JPanel implements Runnable{
 		}
 		
 		//on dessine chaque ennemi de la vague
-		for(int i = 0; i < Vague.nb_ennemis; ++i) {
-			Ennemi ennemi = Vague.collec_ennemi[i];
+		for(int i = 0; i < la_vague.getNb_ennemis(); ++i) {
+			Ennemi ennemi = la_vague.getEnnemi(i);
 			if (ennemi != null && ennemi.isBouge() && !ennemi.estArrive()) {
 				ennemi.dessiner(g2);
 			}
@@ -173,6 +173,7 @@ public class Carte extends JPanel implements Runnable{
 					if (carte[i][j].contain(evenement.getX(), evenement.getY()) && carte[i][j].getType() == Type.CaseJouable) {
 						if(((CaseJouable)carte[i][j]).getTour()==null) {
 							ajouterTour(typeTourAjoutee, carte[i][j]);
+							typeTourAjoutee = null;
 						}
 						
 					}
@@ -221,28 +222,38 @@ public class Carte extends JPanel implements Runnable{
 		while (!chateau.gameOver()) {
 			if (!la_vague.ennemisMorts()) {
 				
-				for (int i = 0; i < Vague.nb_ennemis; ++i) {
+				for (int i = 0; i < la_vague.getNb_ennemis(); ++i) {
 					if (chateau.gameOver()) break;
-					if(!Vague.collec_ennemi[i].isBouge()){
-						chateau.setArgent(chateau.getArgent()+Vague.collec_ennemi[i].getMonnaiesGenere());
+					if(!la_vague.getEnnemi(i).isBouge()){
+						chateau.setArgent(chateau.getArgent()+la_vague.getEnnemi(i).getMonnaiesGenere());
 						i_j.repaint();
-						la_vague.supprimerEnnemi(Vague.collec_ennemi[i]);						
+						la_vague.supprimerEnnemi(la_vague.getEnnemi(i));						
 					}
 					
-					if (Vague.collec_ennemi[i].estArrive() && Vague.collec_ennemi[i].isBouge()) {
-						this.chateau.setVieChateau(Vague.collec_ennemi[i].attaquer());
+					if (la_vague.getEnnemi(i).estArrive() && la_vague.getEnnemi(i).isBouge()) {
+						this.chateau.setVieChateau(la_vague.getEnnemi(i).attaquer());
 						i_j.repaint();
 						//System.out.println("Points de vie : " + this.chateau.getVieChateau());
 					} 
-					if (Vague.collec_ennemi[i].isBouge()) {
-						Vague.collec_ennemi[i].deplacer();
+					try {
+						Thread.sleep(200);
+					} catch (InterruptedException e) {
+						e.printStackTrace();												
+					}
+					if (la_vague.getEnnemi(i).isBouge()) {
+						la_vague.getEnnemi(i).deplacer();
 					} 
 					repaint();
 				}
 				
 			} else {
+				try {
+					Thread.sleep(3000);
+				} catch (InterruptedException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
 				la_vague.lancer_Vague();
-				
 			}
 		}
 		System.out.println("GameOver");
@@ -260,10 +271,10 @@ public class Carte extends JPanel implements Runnable{
 				for (Tour tour : tours_joueur) {
 
 					if (tour.peutTirer(tempsTotal)){
-						tour.tirer();
+						tour.tirer(la_vague);
 					}
 				}
-				System.out.println();
+	
 				try {
 					Thread.sleep(1000);
 				} catch (InterruptedException e) {

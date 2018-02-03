@@ -47,7 +47,7 @@ public class Achats extends JPanel{
 	public void paintComponent(Graphics g) {
 		super.paintComponent(g);
 		Graphics2D g2 = (Graphics2D) g;
-		setBackground(Color.ORANGE); 
+		//setBackground(Color.ORANGE); 
 		for(BoutonsProduits bouton : this.boutons_produits) {
 			bouton.dessiner(g2);
 		}

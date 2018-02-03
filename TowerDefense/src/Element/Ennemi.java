@@ -56,17 +56,12 @@ public class Ennemi extends AffichageSprite {
 
 
 	public void deplacer () {
-		try {
-			Thread.sleep(200);
-			this.frame += vitesse;
-			if (this.frame >= 40) {
-				++this.caseCourante;
-				this.frame = 0;
-			}
-
-		} catch (InterruptedException e) {
-			e.printStackTrace();												
+		this.frame += vitesse;
+		if (this.frame >= 40) {
+			++this.caseCourante;
+			this.frame = 0;
 		}
+
 	}
 	
 	@Override
