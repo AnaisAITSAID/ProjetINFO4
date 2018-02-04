@@ -191,16 +191,27 @@ public class Carte extends JPanel implements Runnable{
 	}*/
 	public void ajouterTour (Type_tour type, Case case_position) {
 		if (type == Type_tour.TourForte ) {
-			Tour nouvelle_tour = new TourForte(case_position);			
-			this.tours_joueur.add(nouvelle_tour);
-			((CaseJouable)case_position).setTour(nouvelle_tour);
-			
+			Tour nouvelle_tour = new TourForte(case_position);
+			if(chateau.getArgent()>=nouvelle_tour.getPrix()) {
+				this.tours_joueur.add(nouvelle_tour);
+				((CaseJouable)case_position).setTour(nouvelle_tour);
+				chateau.setArgent(chateau.getArgent()-nouvelle_tour.getPrix());
+				i_j.repaint();
+			}else {
+				System.out.println("vous ne possédez pas l'argent nécessaire pour acheter la tour");
+			}
 		//	Thread t = new Thread(this.tours_joueur.get(this.tours_joueur.size()-1));
 		//	t.start();
 		} else if(type == Type_tour.TourRapide) {
 			Tour nouvelle_tour = new TourRapide(case_position);	
-			this.tours_joueur.add(nouvelle_tour);
-			((CaseJouable)case_position).setTour(nouvelle_tour);
+			if(chateau.getArgent()>=nouvelle_tour.getPrix()) {
+				this.tours_joueur.add(nouvelle_tour);
+				((CaseJouable)case_position).setTour(nouvelle_tour);
+				chateau.setArgent(chateau.getArgent()-nouvelle_tour.getPrix());
+				i_j.repaint();
+			}else {
+				System.out.println("vous ne possédez pas l'argent nécessaire pour acheter la tour");
+			}
 		}
 	}
 	
