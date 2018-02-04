@@ -1,5 +1,6 @@
 package IHM;
 
+import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
@@ -8,6 +9,7 @@ import javax.swing.JPanel;
 
 import Element.Chateau;
 import Element.Vague;
+import utils.Constantes;
 
 public class InfosJoueur extends JPanel{
 		private Chateau joueur;
@@ -26,5 +28,8 @@ public class InfosJoueur extends JPanel{
 			g2.drawString("Argent du joueur :" + this.joueur.getArgent(), 120, 45);
 			g2.drawString("Numéro vague :" + Vague.num_vague, 120, 70);
 		}
-
+		@Override
+		public Dimension getPreferredSize() {
+			return new Dimension(300, 120);
+		}
 }

@@ -22,6 +22,7 @@ import Element.Tour;
 import Element.TourForte;
 import Element.TourRapide;
 import Element.Vague;
+import Exception.ExceptionFenetre;
 //import IHM.InfosTour.SelectTour;
 import utils.Constantes;
 import utils.Constantes.Type;
@@ -175,7 +176,11 @@ public class Carte extends JPanel implements Runnable{
 				for (int j = 0; j < Constantes.taille; ++j) {
 					if (carte[i][j].contain(evenement.getX(), evenement.getY()) && carte[i][j].getType() == Type.CaseJouable) {
 						if(((CaseJouable)carte[i][j]).getTour()==null) {
-							ajouterTour(typeTourAjoutee, carte[i][j]);
+							try {
+								ajouterTour(typeTourAjoutee, carte[i][j]);
+							} catch (ExceptionFenetre e) {
+								e.printStackTrace();
+							}
 							typeTourAjoutee = null;
 						}
 						
@@ -189,29 +194,21 @@ public class Carte extends JPanel implements Runnable{
 	/*public Tour getTour_infos() {
 		return tour_infos;
 	}*/
-	public void ajouterTour (Type_tour type, Case case_position) {
+	public void ajouterTour (Type_tour type, Case case_position) throws ExceptionFenetre {
+		Tour nouvelle_tour = null;
 		if (type == Type_tour.TourForte ) {
-			Tour nouvelle_tour = new TourForte(case_position);
-			if(chateau.getArgent()>=nouvelle_tour.getPrix()) {
-				this.tours_joueur.add(nouvelle_tour);
-				((CaseJouable)case_position).setTour(nouvelle_tour);
-				chateau.setArgent(chateau.getArgent()-nouvelle_tour.getPrix());
-				i_j.repaint();
-			}else {
-				System.out.println("vous ne possédez pas l'argent nécessaire pour acheter la tour");
-			}
-		//	Thread t = new Thread(this.tours_joueur.get(this.tours_joueur.size()-1));
-		//	t.start();
+			nouvelle_tour = new TourForte(case_position);
+
 		} else if(type == Type_tour.TourRapide) {
-			Tour nouvelle_tour = new TourRapide(case_position);	
-			if(chateau.getArgent()>=nouvelle_tour.getPrix()) {
-				this.tours_joueur.add(nouvelle_tour);
-				((CaseJouable)case_position).setTour(nouvelle_tour);
-				chateau.setArgent(chateau.getArgent()-nouvelle_tour.getPrix());
-				i_j.repaint();
-			}else {
-				System.out.println("vous ne possédez pas l'argent nécessaire pour acheter la tour");
-			}
+			nouvelle_tour = new TourRapide(case_position);	
+		}
+		if(chateau.getArgent()>=nouvelle_tour.getPrix()) {
+			this.tours_joueur.add(nouvelle_tour);
+			((CaseJouable)case_position).setTour(nouvelle_tour);
+			chateau.setArgent(chateau.getArgent()-nouvelle_tour.getPrix());
+			i_j.repaint();
+		}else {
+			throw new ExceptionFenetre("vous ne possédez pas l'argent nécessaire pour acheter la tour");
 		}
 	}
 	
@@ -249,11 +246,14 @@ public class Carte extends JPanel implements Runnable{
 						i_j.repaint();
 						//System.out.println("Points de vie : " + this.chateau.getVieChateau());
 					} 
-					try {
-						Thread.sleep(200);
-					} catch (InterruptedException e) {
-						e.printStackTrace();												
+					for(int j = 0; j < 7 - la_vague.nb_ennemis; ++j) {
+						try {
+							Thread.sleep(200);
+						} catch (InterruptedException e) {
+							e.printStackTrace();												
+						}	
 					}
+					
 					if (la_vague.getEnnemi(i).isBouge()) {
 						la_vague.getEnnemi(i).deplacer();
 					} 

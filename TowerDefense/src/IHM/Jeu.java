@@ -1,9 +1,12 @@
 package IHM;
 
+import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Dimension;
+import java.awt.FlowLayout;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
+import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
@@ -57,11 +60,11 @@ public class Jeu extends JFrame{
 		this.setTitle("Tower Defense");
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
-		Dimension dimension = java.awt.Toolkit.getDefaultToolkit().getScreenSize();
+	/*	Dimension dimension = java.awt.Toolkit.getDefaultToolkit().getScreenSize();
 		largeur= (int)dimension.getWidth();
 		hauteur= (int)dimension.getHeight();
 		setSize(largeur, hauteur);
-		
+*/		
 		this.setResizable(false);
 		
 		carte = new Carte();
@@ -79,13 +82,24 @@ public class Jeu extends JFrame{
 	public void interfaceUtilisateur () {
 		
 		JPanel jp  = new JPanel();
+		JPanel jp2  = new JPanel();
+
 		infoTour = new InfosTour(this);
 		infoJoueur = new InfosJoueur(this.joueur);
 		carte.setI_j(infoJoueur);
-		//carte.setI_t(infoTour);
+		this.add(carte);
+//		this.setLayout();
+		jp.setLayout(new FlowLayout());
+		jp.add(carte, FlowLayout.LEFT);
+		jp.add(infoTour);
 
-		jp.setLayout(new GridBagLayout());
-		GridBagConstraints gbc = new GridBagConstraints();
+		jp2.setLayout(new FlowLayout());
+		jp2.add(zone_achats, FlowLayout.LEFT);
+		jp2.add(infoJoueur);
+		this.add(jp);
+
+		this.add(jp2,BorderLayout.SOUTH);
+		/*GridBagConstraints gbc = new GridBagConstraints();
 		gbc.weightx = 1;
 		gbc.weighty = 1;
 		 
@@ -94,7 +108,7 @@ public class Jeu extends JFrame{
 		gbc.gridheight = 2;
 		gbc.gridy = 0;
 		gbc.fill = GridBagConstraints.BOTH;
-		jp.add(carte, gbc);
+		
 		
 		gbc.gridx = 2;
 		jp.add(infoTour, gbc);
@@ -109,11 +123,13 @@ public class Jeu extends JFrame{
 		gbc.gridx = 2;
 		jp.add(infoJoueur, gbc);
 		
-		this.add(jp);
+		this.add(jp);*/
+		this.pack();
+	
 		this.setVisible(true);
 //		infoTour.setBackground(Color.BLUE);
 //		infoJoueur.setBackground(Color.green);
-		
+
 		carte.setChateau(joueur);
 	}
 	

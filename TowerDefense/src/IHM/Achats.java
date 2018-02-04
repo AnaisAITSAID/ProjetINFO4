@@ -1,7 +1,7 @@
 package IHM;
 
 import java.awt.Color;
-
+import java.awt.Dimension;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 
@@ -19,7 +19,6 @@ public class Achats extends JPanel{
 	private static int espace=2;
 	private BoutonsProduits[] boutons_produits=new BoutonsProduits[nb_produits];
 	private Type_tour tour_achetee;
-	private Color couleur=Color.BLACK;
 	
 	
 	public Achats() {
@@ -39,7 +38,7 @@ public class Achats extends JPanel{
 
 	public void charger_achats() {
 		for(int i=0; i<nb_produits;i++) {
-			boutons_produits[i] = new BoutonsProduits(((Constantes.tailleCase *5)) - ((nb_produits*(taille_bouton+espace))/2) + ((taille_bouton+espace)*i), 10, Type_tour.values()[i]);
+			boutons_produits[i] = new BoutonsProduits(taille_bouton*i+espace, 10, Type_tour.values()[i]);
 		}
 	}
 	
@@ -53,6 +52,9 @@ public class Achats extends JPanel{
 		}
 	}
 	
-
+	@Override
+	public Dimension getPreferredSize() {
+		return new Dimension(Constantes.tailleCase*nb_produits+espace, Constantes.tailleCase);
+	}
 	
 }
