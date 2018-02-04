@@ -132,30 +132,33 @@ public class Carte extends JPanel implements Runnable{
 		//g2.setColor(new Color(100,100,100));
 		//g2.fillRect(0, 0, largeur, hauteur);
 		g2.setColor(new Color(0,0,0));
-		
-		//on dessine les cases une par une
-		for (int i = 0; i < Constantes.taille; ++i) {
-			for (int j = 0; j < Constantes.taille; ++j) {
-				carte[j][i].dessiner(g2);
-			}			
-		}
-		
-		//on dessine chaque ennemi de la vague
-		for(int i = 0; i < la_vague.getNb_ennemis(); ++i) {
-			Ennemi ennemi = la_vague.getEnnemi(i);
-			if (ennemi != null && ennemi.isBouge() && !ennemi.estArrive()) {
-				ennemi.dessiner(g2);
+		try {
+			//on dessine les cases une par une
+			for (int i = 0; i < Constantes.taille; ++i) {
+				for (int j = 0; j < Constantes.taille; ++j) {
+					carte[j][i].dessiner(g2);
+				}			
 			}
+			
+			//on dessine chaque ennemi de la vague
+			for(int i = 0; i < la_vague.getNb_ennemis(); ++i) {
+				Ennemi ennemi = la_vague.getEnnemi(i);
+				if (ennemi != null && ennemi.isBouge() && !ennemi.estArrive()) {
+					ennemi.dessiner(g2);
+				}
 
-		}
-		
-		for (Tour tour : this.tours_joueur) {
-			tour.dessiner(g2);
-			tour.dessinerLaser(g2);
-		}
-		//on dessine le château
-		chateau.dessiner(g2);
-		
+			}
+			
+			for (Tour tour : this.tours_joueur) {
+				tour.dessiner(g2);
+				tour.dessinerLaser(g2);
+			}
+			//on dessine le château
+			chateau.dessiner(g2);
+			
+		} catch (Exception e) {
+			repaint();
+		}	
 		
 		
 	}
