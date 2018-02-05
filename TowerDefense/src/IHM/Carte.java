@@ -6,6 +6,8 @@ import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.awt.event.MouseMotionAdapter;
+import java.awt.geom.Ellipse2D;
 import java.util.ArrayList;
 
 import javax.swing.JPanel;
@@ -41,7 +43,7 @@ public class Carte extends JPanel implements Runnable{
 	public static int hauteur;
 	private static  Carte instanceCarte; 
 	private InfosJoueur i_j;
-	
+	private Ellipse2D portee = null; 
 
 	
 	/**
@@ -55,6 +57,7 @@ public class Carte extends JPanel implements Runnable{
 		this.tours_joueur = new ArrayList<Tour>();
 		
 		this.addMouseListener(new SelectCase());
+		this.addMouseMotionListener(new DessinerPortee());
 		instanceCarte = this;
 	}
 	/* Cete fonction permet de charger dans le chemin les bonnes cases. Elle prend 
@@ -157,6 +160,8 @@ public class Carte extends JPanel implements Runnable{
 			//on dessine le château
 			chateau.dessiner(g2);
 			
+			g2.setColor(Color.ORANGE);
+			g2.draw(this.portee);
 		} catch (Exception e) {
 			repaint();
 		}	
@@ -190,7 +195,33 @@ public class Carte extends JPanel implements Runnable{
 			repaint();
 		}
 	}
-	
+
+	//classe interne pour la position de la souris
+	private class DessinerPortee extends MouseMotionAdapter{
+
+		@Override
+		public void mouseMoved(MouseEvent evenement) {
+			boolean trouver = false;
+			for (int i = 0; i < Constantes.taille; ++i) {
+				for (int j = 0; j < Constantes.taille; ++j) {
+					if (carte[i][j].contain(evenement.getX(), evenement.getY()) && carte[i][j].getType() == Type.CaseJouable) {
+						Tour tour = ((CaseJouable)carte[i][j]).getTour();
+						if(tour!=null) {
+							trouver = true;
+							System.out.println("Pos " + tour.getXcaseposition());
+							portee = new Ellipse2D.Double(tour.getXcaseposition() -tour.getPortee(), tour.getYcaseposition()-tour.getPortee(), 
+																					 tour.getPortee()*2+(Constantes.tailleCase), tour.getPortee()*2+(Constantes.tailleCase));
+						}
+						
+					}
+				}
+			}
+			if (trouver)
+				repaint();
+			else 
+				portee = null;
+		}
+	}
 	/*public Tour getTour_infos() {
 		return tour_infos;
 	}*/

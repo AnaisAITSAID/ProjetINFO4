@@ -40,7 +40,7 @@ public class InfosTour extends JPanel{
 		Dimension dimension = java.awt.Toolkit.getDefaultToolkit().getScreenSize();
 		int largeur= (int)dimension.getWidth();
 		int hauteur= (int)dimension.getHeight();
-		return new Dimension(largeur-Constantes.taille*Constantes.tailleCase, Constantes.taille*Constantes.tailleCase);
+		return new Dimension(300, Constantes.taille*Constantes.tailleCase);
 	}
 	public void paintComponent(Graphics g) {
 		super.paintComponent(g);
