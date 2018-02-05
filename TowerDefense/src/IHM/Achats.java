@@ -5,7 +5,9 @@ import java.awt.Dimension;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 
+import javax.swing.BorderFactory;
 import javax.swing.JPanel;
+import javax.swing.border.Border;
 
 import Element.BoutonsProduits;
 import utils.Constantes;
@@ -16,13 +18,19 @@ public class Achats extends JPanel{
 
 	private static int nb_produits =2;
 	private static int taille_bouton=60;
-	private static int espace=2;
+	private static int espace=15;
 	private BoutonsProduits[] boutons_produits=new BoutonsProduits[nb_produits];
 	private Type_tour tour_achetee;
 	
 	
 	public Achats() {
 		charger_achats();		
+		Border loweredbevel = BorderFactory.createLoweredBevelBorder();
+
+		Border border=  BorderFactory.createTitledBorder(
+                loweredbevel, "Achat");
+		this.setBorder(border);
+	//	this.setBackground(new Color(223, 204, 200));
 	}
 	
 	public void setTour_achetee(Type_tour tour_achetee) {
@@ -38,7 +46,7 @@ public class Achats extends JPanel{
 
 	public void charger_achats() {
 		for(int i=0; i<nb_produits;i++) {
-			boutons_produits[i] = new BoutonsProduits(taille_bouton*i+espace, 10, Type_tour.values()[i]);
+			boutons_produits[i] = new BoutonsProduits(taille_bouton*i+espace, 25, Type_tour.values()[i]);
 		}
 	}
 	
@@ -54,7 +62,7 @@ public class Achats extends JPanel{
 	
 	@Override
 	public Dimension getPreferredSize() {
-		return new Dimension(Constantes.tailleCase*nb_produits+espace, Constantes.tailleCase);
+		return new Dimension(Constantes.tailleCase*nb_produits+espace+50, 110);
 	}
 	
 }

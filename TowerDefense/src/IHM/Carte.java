@@ -189,6 +189,13 @@ public class Carte extends JPanel implements Runnable{
 							typeTourAjoutee = null;
 						}
 						
+					} else if (carte[i][j].contain(evenement.getX(), evenement.getY()) && carte[i][j].getType() == Type.CaseChemin){
+						try {
+							throw new ExceptionFenetre("Vous ne pouvez pas poser de tour sur le chemin²");
+						} catch (ExceptionFenetre e) {
+							// TODO Auto-generated catch block
+							e.printStackTrace();
+						}
 					}
 				}
 			}
@@ -227,6 +234,9 @@ public class Carte extends JPanel implements Runnable{
 	}*/
 	public void ajouterTour (Type_tour type, Case case_position) throws ExceptionFenetre {
 		Tour nouvelle_tour = null;
+		if (type == null){
+			throw new ExceptionFenetre("Vous n'avez pas selectionnez de tour");
+		}
 		if (type == Type_tour.TourForte ) {
 			nouvelle_tour = new TourForte(case_position);
 
@@ -279,7 +289,7 @@ public class Carte extends JPanel implements Runnable{
 					} 
 					for(int j = 0; j < 7 - la_vague.nb_ennemis; ++j) {
 						try {
-							Thread.sleep(200);
+							Thread.sleep(100);
 						} catch (InterruptedException e) {
 							e.printStackTrace();												
 						}	

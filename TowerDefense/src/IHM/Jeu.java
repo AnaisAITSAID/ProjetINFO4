@@ -43,7 +43,7 @@ public class Jeu extends JFrame{
 					infoTour.getTourInfo().setDegats(infoTour.getTourInfo().getDegats()+10*infoTour.getTourInfo().getNiveau());
 					infoTour.getTourInfo().setNiveau(infoTour.getTourInfo().getNiveau()+1);
 				}else {
-					infoTour.getTourInfo().setVitesse(infoTour.getTourInfo().getVitesse()+infoTour.getTourInfo().getNiveau());
+					infoTour.getTourInfo().setDegats(infoTour.getTourInfo().getDegats()+6*infoTour.getTourInfo().getNiveau());
 					infoTour.getTourInfo().setNiveau(infoTour.getTourInfo().getNiveau()+1);
 				}
 				infoTour.repaint();
@@ -60,11 +60,7 @@ public class Jeu extends JFrame{
 		this.setTitle("Tower Defense");
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
-	/*	Dimension dimension = java.awt.Toolkit.getDefaultToolkit().getScreenSize();
-		largeur= (int)dimension.getWidth();
-		hauteur= (int)dimension.getHeight();
-		setSize(largeur, hauteur);
-*/		
+	
 		this.setResizable(false);
 		
 		carte = new Carte();
@@ -88,7 +84,7 @@ public class Jeu extends JFrame{
 		infoJoueur = new InfosJoueur(this.joueur);
 		carte.setI_j(infoJoueur);
 		this.add(carte);
-//		this.setLayout();
+
 		jp.setLayout(new FlowLayout());
 		jp.add(carte, FlowLayout.LEFT);
 		jp.add(infoTour);
@@ -99,36 +95,11 @@ public class Jeu extends JFrame{
 		this.add(jp);
 
 		this.add(jp2,BorderLayout.SOUTH);
-		/*GridBagConstraints gbc = new GridBagConstraints();
-		gbc.weightx = 1;
-		gbc.weighty = 1;
-		 
-		gbc.gridx = 0;
-		gbc.gridwidth = 2;
-		gbc.gridheight = 2;
-		gbc.gridy = 0;
-		gbc.fill = GridBagConstraints.BOTH;
-		
-		
-		gbc.gridx = 2;
-		jp.add(infoTour, gbc);
-		
-		gbc.gridx = 0;
-		gbc.gridwidth = 1;
-		gbc.gridheight = 1;
-		gbc.gridy = 2;
-		jp.add( zone_achats, gbc);
-		
-		gbc.gridy = 2;
-		gbc.gridx = 2;
-		jp.add(infoJoueur, gbc);
-		
-		this.add(jp);*/
+
 		this.pack();
 	
 		this.setVisible(true);
-//		infoTour.setBackground(Color.BLUE);
-//		infoJoueur.setBackground(Color.green);
+
 
 		carte.setChateau(joueur);
 	}

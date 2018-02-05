@@ -7,8 +7,10 @@ import java.awt.FontMetrics;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 
+import javax.swing.BorderFactory;
 import javax.swing.JButton;
 import javax.swing.JPanel;
+import javax.swing.border.Border;
 
 import Element.Tour;
 import IHM.Jeu.AmeliorationPossible;
@@ -23,6 +25,12 @@ public class InfosTour extends JPanel{
 	public InfosTour(Jeu j) {
 		this.j = j;
 		this.tourInfo = null;
+		Border loweredbevel = BorderFactory.createLoweredBevelBorder();
+
+		Border border=  BorderFactory.createTitledBorder(
+                loweredbevel, "Information tour");
+		this.setBorder(border);
+		//this.setBackground(new Color(223, 204, 200));
 	}
 
 	
@@ -37,9 +45,6 @@ public class InfosTour extends JPanel{
 
 	@Override
 	public Dimension getPreferredSize() {
-		Dimension dimension = java.awt.Toolkit.getDefaultToolkit().getScreenSize();
-		int largeur= (int)dimension.getWidth();
-		int hauteur= (int)dimension.getHeight();
 		return new Dimension(300, Constantes.taille*Constantes.tailleCase);
 	}
 	public void paintComponent(Graphics g) {
@@ -55,40 +60,33 @@ public class InfosTour extends JPanel{
 			g2.drawString("Vitesse:"+tourInfo.getVitesse(),50, 90);
 			
 			g2.drawString("Dégâts:"+tourInfo.getDegats(),50, 120);
+
+			FontMetrics fm=g2.getFontMetrics();
+			String s="Dégâts:"+tourInfo.getDegats();
+			int width=fm.stringWidth(s);
+			g2.setPaint(new Color (125, 183, 79));
+
 			if(tourInfo.getType_tour()==Type_tour.TourForte) {
-				FontMetrics fm=g2.getFontMetrics();
-				String s="Dégâts:"+tourInfo.getDegats();
-				int width=fm.stringWidth(s);
-				g2.setPaint(Color.green);
 				g2.drawString("(+"+tourInfo.getNiveau()*10+")", 50+width+10, 120);
-				amelioration = new JButton("Amélioration");
-				
+
+			} else if(tourInfo.getType_tour()==Type_tour.TourRapide) {
+				g2.drawString("(+"+tourInfo.getNiveau()*6+")", 50+width+10, 120);				
+			}
+			
+			if (tourInfo.getNiveau() < 3) {
 				AmeliorationPossible am;
+				amelioration = new JButton("Amélioration");
 				am = j.new AmeliorationPossible();
 				amelioration.addActionListener(am);
 				this.setLayout(null);
-				amelioration.setBounds(100, 500, 150, 50);
-				amelioration.setBackground(Color.GREEN);
-				this.add(amelioration );
-
+				amelioration.setBounds(75, 300, 150, 50);
+				amelioration.setBackground(new Color (125, 183, 79));
+				this.add(amelioration );				
 			}
-			if(tourInfo.getType_tour()==Type_tour.TourRapide) {
-				FontMetrics fm=g2.getFontMetrics();
-				String s="Vitesse:"+tourInfo.getVitesse();
-				int width=fm.stringWidth(s);
-				g2.setPaint(Color.GREEN);
-				g2.drawString("(+"+tourInfo.getNiveau()+")", 50+width+10, 90);
-				amelioration = new JButton("Amélioration");
-				
-				AmeliorationPossible am;
-				am = j.new AmeliorationPossible();
-				amelioration.addActionListener(am);
-				this.setLayout(null);
-				amelioration.setBounds(100, 500, 150, 50);
-				amelioration.setBackground(Color.GREEN);
-				this.add(amelioration );
 
-			}
+			
+
+
 		}
 	}
 	
