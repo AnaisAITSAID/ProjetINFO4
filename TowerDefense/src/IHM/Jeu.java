@@ -1,7 +1,9 @@
 package IHM;
 
 import java.awt.BorderLayout;
+import java.awt.Dimension;
 import java.awt.FlowLayout;
+import java.awt.Frame;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
@@ -27,7 +29,16 @@ public class Jeu extends JFrame{
 	private Chateau joueur; 
 	private InfosTour infoTour;
 	private InfosJoueur infoJoueur;
-	
+	private Menu m;
+	public class Jouer implements ActionListener{
+		
+		@Override
+		public void actionPerformed(ActionEvent arg0) {
+			// TODO Auto-generated method stub
+			interfaceUtilisateur();
+		}
+		
+	}
 	public class AmeliorationPossible implements ActionListener{
 
 		@Override
@@ -59,9 +70,20 @@ public class Jeu extends JFrame{
 		this.setTitle("Tower Defense");
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
-	
+		this.setSize(600,600);
 		this.setResizable(false);
+		m = new Menu(this);
+		this.add(m);
+		this.setVisible(true);
 		
+	}
+	
+	
+	/* cr�ation de l'interface utilisateur */
+	/* pour commencer on se contentera d'ajouter la carte */
+	public void interfaceUtilisateur () {
+		
+		//instances des panneaux
 		carte = new Carte();
 		
 		zone_achats = new Achats();
@@ -69,12 +91,6 @@ public class Jeu extends JFrame{
 		carte.addMouseListener(new SelectTour());
 		
 		joueur=new Chateau();
-	}
-	
-	
-	/* cr�ation de l'interface utilisateur */
-	/* pour commencer on se contentera d'ajouter la carte */
-	public void interfaceUtilisateur () {
 		
 		JPanel jp  = new JPanel();
 		JPanel jp2  = new JPanel();
@@ -134,7 +150,7 @@ public class Jeu extends JFrame{
 	}
 	public static void main(String [] args){
 		 Jeu jeu = new Jeu ();
-		 jeu.interfaceUtilisateur();
+		// jeu.interfaceUtilisateur();
 
 	}
 }
