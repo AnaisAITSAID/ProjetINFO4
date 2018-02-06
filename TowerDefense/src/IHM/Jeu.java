@@ -1,12 +1,7 @@
 package IHM;
 
 import java.awt.BorderLayout;
-import java.awt.Color;
-import java.awt.Dimension;
 import java.awt.FlowLayout;
-import java.awt.GridBagConstraints;
-import java.awt.GridBagLayout;
-import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
@@ -17,6 +12,7 @@ import javax.swing.JPanel;
 
 import Element.CaseJouable;
 import Element.Chateau;
+import Exception.ExceptionFenetre;
 import utils.Constantes;
 import utils.Constantes.Type_tour;
 
@@ -36,20 +32,23 @@ public class Jeu extends JFrame{
 
 		@Override
 		public void actionPerformed(ActionEvent arg0) {
-			int prix = infoTour.getTourInfo().getNiveau();
-			if(joueur.getArgent()>=prix) {
-				joueur.setArgent(joueur.getArgent()-prix);
-				if(infoTour.getTourInfo().getType_tour()==Type_tour.TourForte) {
-					infoTour.getTourInfo().setDegats(infoTour.getTourInfo().getDegats()+10*infoTour.getTourInfo().getNiveau());
-					
-				}else {
-					infoTour.getTourInfo().setDegats(infoTour.getTourInfo().getDegats()+6*infoTour.getTourInfo().getNiveau());	
-				}
+			int prix = infoTour.getTourInfo().getPrix();
+			if(joueur.getArgent()>=prix && infoTour.getTourInfo() != null) {
+				infoTour.getTourInfo().setPrix();
+				
+				joueur.setArgent(joueur.getArgent()-prix);	
+				infoTour.getTourInfo().setDegats();	
+				
 				infoTour.getTourInfo().setNiveau();
 				infoTour.repaint();
 				infoJoueur.repaint();
 			}else {
-				System.out.println("vous n'avez pas assez d'argent pour l'amélioration");
+				try {
+					throw new ExceptionFenetre("Vous n'avez pas assez d'argent pour améliorer la tour");
+				} catch (ExceptionFenetre e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
 			}
 			
 		}
@@ -88,7 +87,6 @@ public class Jeu extends JFrame{
 		jp.setLayout(new FlowLayout());
 		jp.add(carte, FlowLayout.LEFT);
 		jp.add(infoTour);
-
 		jp2.setLayout(new FlowLayout());
 		jp2.add(zone_achats, FlowLayout.LEFT);
 		jp2.add(infoJoueur);
@@ -123,16 +121,14 @@ public class Jeu extends JFrame{
 
 		@Override
 		public void mouseClicked(MouseEvent evenement) {
-			//System.out.println("lapin11");
 			for (int i = 0; i < Constantes.taille; ++i) {
 				for (int j = 0; j < Constantes.taille; ++j) {
-				//	System.out.println("lapin1");
 					if(carte.getCarte(j, i).contain(evenement.getX(), evenement.getY()) && carte.getCarte(j, i).getType() == Constantes.Type.CaseJouable && (((CaseJouable)(carte.getCarte(j, i))).getTour())!=null) {
 						infoTour.setTourInfo(((CaseJouable)(carte.getCarte(j, i))).getTour());
-						System.out.println("lapin2");
 					}
 				}
 			}
+		
 			infoTour.repaint();
 		}
 	}

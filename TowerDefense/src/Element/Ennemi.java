@@ -24,10 +24,10 @@ public class Ennemi extends AffichageSprite {
 	 * @param monnaiesGenere
 	 * @param caseCourante
 	 */
-	public Ennemi(int pointsDeVie, int monnaiesGenere, int caseCourante) {
+	public Ennemi(double pointsDeVie, double monnaiesGenere, int caseCourante) {
 		super();
-		this.pointsDeVie = pointsDeVie;
-		this.monnaiesGenere = monnaiesGenere;
+		this.pointsDeVie = (int)pointsDeVie;
+		this.monnaiesGenere = (int)monnaiesGenere;
 		this.caseCourante = caseCourante;
 		this.bouge = true;
 		this.vitesse = 20;
@@ -35,6 +35,7 @@ public class Ennemi extends AffichageSprite {
 		this.realX = 0;
 		this.realY = 0;
 	}
+
 
 	/**
 	 * Fonction représentant l'attaque d'un ennemi

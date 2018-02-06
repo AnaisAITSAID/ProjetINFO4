@@ -66,16 +66,11 @@ public class InfosTour extends JPanel{
 			int width=fm.stringWidth(s);
 			g2.setPaint(new Color (125, 183, 79));
 
-			if(tourInfo.getType_tour()==Type_tour.TourForte) {
-				g2.drawString("(+"+tourInfo.getNiveau()*10+")", 50+width+10, 120);
-
-			} else if(tourInfo.getType_tour()==Type_tour.TourRapide) {
-				g2.drawString("(+"+tourInfo.getNiveau()*6+")", 50+width+10, 120);				
-			}
 			
-			System.out.println("test lvl " + tourInfo.getNiveau());
 			if (tourInfo.getNiveau() < 3) {
+				g2.drawString("(+"+tourInfo.calculDegat()+")", 50+width+10, 120);				
 				this.setLayout(null);
+				amelioration.setText("Amélioration : " + tourInfo.getPrix());
 				amelioration.setBounds(75, 200, 150, 50);
 				amelioration.setBackground(new Color (125, 183, 79));
 				this.add(amelioration);			

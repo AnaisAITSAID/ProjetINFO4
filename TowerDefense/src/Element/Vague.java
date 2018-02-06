@@ -5,15 +5,13 @@ public class Vague {
 	public int nb_ennemis = 6;  
 
 	private int pts_vie = 30;
-	private int argent_donne = pts_vie;
+	private int argent_donne = 10;
 	public Ennemi collec_ennemi [];
 
 	/**
 	 * Constructeur de la classe vague
 	 */
 	public Vague() {
-		
-		pts_vie = pts_vie + 10;
 		
 	}
 	
@@ -48,11 +46,11 @@ public class Vague {
 		int caseCourante = 0; 
 		
 		for(int i=0 ; i < nb_ennemis; i++) {
-		//	System.out.println("e : " + i);
-			Ennemi e= new Ennemi(pts_vie*num_vague,argent_donne + num_vague, caseCourante);
+			Ennemi e= new Ennemi(pts_vie + Math.pow(3, num_vague), argent_donne + Math.pow(3, num_vague)/3, caseCourante);
 			collec_ennemi[i] = e;
 			--caseCourante;
 		}
+		pts_vie += 30;
 	}
 	
 	/**

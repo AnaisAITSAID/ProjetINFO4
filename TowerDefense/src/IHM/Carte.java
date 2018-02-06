@@ -38,9 +38,6 @@ public class Carte extends JPanel implements Runnable{
 	private Chateau chateau;
 	private volatile ArrayList<Tour> tours_joueur;
 	private Type_tour typeTourAjoutee;
-	//private Tour tour_infos;
-	public static int largeur;
-	public static int hauteur;
 	private static  Carte instanceCarte; 
 	private InfosJoueur i_j;
 	private Ellipse2D portee = null; 
@@ -130,11 +127,6 @@ public class Carte extends JPanel implements Runnable{
 	public void paintComponent(Graphics g) {
 		super.paintComponent(g);
 		Graphics2D g2 = (Graphics2D) g;
-		largeur=getWidth();
-		hauteur=getHeight();
-		
-		//g2.setColor(new Color(100,100,100));
-		//g2.fillRect(0, 0, largeur, hauteur);
 		g2.setColor(new Color(0,0,0));
 		try {
 			//on dessine les cases une par une
@@ -191,7 +183,7 @@ public class Carte extends JPanel implements Runnable{
 						
 					} else if (carte[i][j].contain(evenement.getX(), evenement.getY()) && carte[i][j].getType() == Type.CaseChemin){
 						try {
-							throw new ExceptionFenetre("Vous ne pouvez pas poser de tour sur le chemin²");
+							throw new ExceptionFenetre("Vous ne pouvez pas poser de tour sur le chemin");
 						} catch (ExceptionFenetre e) {
 							// TODO Auto-generated catch block
 							e.printStackTrace();
@@ -246,6 +238,8 @@ public class Carte extends JPanel implements Runnable{
 			this.tours_joueur.add(nouvelle_tour);
 			((CaseJouable)case_position).setTour(nouvelle_tour);
 			chateau.setArgent(chateau.getArgent()-nouvelle_tour.getPrix());
+			nouvelle_tour.setPrix();
+
 			i_j.repaint();
 		}else {
 			throw new ExceptionFenetre("vous ne possédez pas l'argent nécessaire pour acheter la tour");
@@ -272,7 +266,7 @@ public class Carte extends JPanel implements Runnable{
 		la_vague.lancer_Vague();
 		while (!chateau.gameOver()) {
 			if (!la_vague.ennemisMorts()) {
-				
+				i_j.repaint();
 				for (int i = 0; i < la_vague.getNb_ennemis(); ++i) {
 					if (chateau.gameOver()) break;
 					if(!la_vague.getEnnemi(i).isBouge()){
@@ -301,6 +295,7 @@ public class Carte extends JPanel implements Runnable{
 				}
 				
 			} else {
+				
 				try {
 					Thread.sleep(3000);
 				} catch (InterruptedException e) {

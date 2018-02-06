@@ -8,7 +8,7 @@ import utils.Constantes.Type_tour;
 public class TourForte extends Tour{
 
 	public TourForte(Case case_position) {
-		super(case_position, Type_tour.TourForte, 2*Constantes.tailleCase, 1, 1, 50,100);
+		super(case_position, Type_tour.TourForte, 2*Constantes.tailleCase, 2, 1, 35,100);
 	}
 
 
@@ -17,6 +17,20 @@ public class TourForte extends Tour{
 	@Override
 	public void dessiner(Graphics2D g) {
 		g.drawImage(sprite.getspriteTourForte(),getXcaseposition() + Constantes.tailleCase/4, getYcaseposition() + Constantes.tailleCase/4,null);
+	}
+
+
+
+	@Override
+	public void setDegats() {
+		degats += Math.pow(5, getNiveau()+2); 
+	}
+
+
+
+	@Override
+	public int calculDegat() {
+		return 	(int) (degats + Math.pow(5, getNiveau()+2)); 
 	}
 	
 
