@@ -11,9 +11,12 @@ import javax.swing.border.Border;
 
 import Element.Chateau;
 import Element.Vague;
+import utils.Constantes;
+import utils.Sprites;
 
 public class InfosJoueur extends JPanel{
 		private Chateau joueur;
+		Sprites sprite = Sprites.getInstance();
 	/**
 	 * Affiche numéro de vague, points de vie du joueur, argent du joueur
 	 */
@@ -31,12 +34,22 @@ public class InfosJoueur extends JPanel{
 			super.paintComponent(g);
 			Graphics2D g2 = (Graphics2D) g;
 			g2.setFont(new Font("default", Font.BOLD, 16));
-			g2.drawString("Points de vie :" + this.joueur.getVieChateau(), 10, 35);
+//			g2.drawString("Points de vie :" + this.joueur.getVieChateau(), 10, 35);
+			g2.drawString("Points de vie : ", 10, 35);
+			int cpt = 0;
+			for (int i = 0; i <= this.joueur.getVieChateau(); ++i) {
+				g.drawImage(sprite.getSpriteLife(), 130+i*16, 22,null);
+				cpt = i;
+			}
+			while (cpt < 10) {
+				g.drawImage(sprite.getSpriteNoLife(), 130+cpt*16, 22,null);
+				++cpt;
+			}
 			g2.drawString("Argent du joueur :" + this.joueur.getArgent(), 10, 60);
 			g2.drawString("Numéro vague :" + Vague.num_vague, 10, 85);
 		}
 		@Override
 		public Dimension getPreferredSize() {
-			return new Dimension(300, 110);
+			return new Dimension(450, 110);
 		}
 }

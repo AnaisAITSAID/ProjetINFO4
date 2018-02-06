@@ -1,9 +1,13 @@
 package Element;
 
+import java.applet.Applet;
+import java.applet.AudioClip;
 import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.geom.Line2D;
+import java.net.MalformedURLException;
+import java.net.URL;
 
 import IHM.Carte;
 import utils.Constantes;
@@ -137,6 +141,17 @@ public abstract class Tour extends AffichageSprite {
 								displayLaser = true;
 								laser = new Laser(case_position.getX()+Constantes.tailleCase/2, case_position.getY() +Constantes.tailleCase/2, 
 													   x, y);
+								URL u1;
+								AudioClip s1;
+								try {
+									u1 = new URL("file:son/fire.wav");
+									s1 = Applet.newAudioClip(u1);
+									s1.play();
+								} catch (MalformedURLException e1) {
+									// TODO Auto-generated catch block
+									e1.printStackTrace();
+								}
+
 								Carte.getCarte().repaint();
 								try {
 									Thread.sleep(100);

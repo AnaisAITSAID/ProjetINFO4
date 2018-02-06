@@ -1,5 +1,6 @@
 package IHM;
 
+import java.applet.AudioClip;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Graphics;
@@ -8,14 +9,18 @@ import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseMotionAdapter;
 import java.awt.geom.Ellipse2D;
+import java.io.IOException;
+import java.net.MalformedURLException;
+import java.net.URL;
 import java.util.ArrayList;
 
+import javax.sound.sampled.AudioInputStream;
+import javax.sound.sampled.AudioSystem;
+import javax.sound.sampled.Clip;
+import javax.sound.sampled.LineUnavailableException;
+import javax.sound.sampled.UnsupportedAudioFileException;
 import javax.swing.JPanel;
 
-//import IHM.InfosTour.SelectTour;
-import utils.Constantes;
-import utils.Constantes.Type;
-import utils.Constantes.Type_tour;
 import Element.CarteFichier;
 import Element.Case;
 import Element.CaseChemin;
@@ -29,6 +34,10 @@ import Element.TourForte;
 import Element.TourRapide;
 import Element.Vague;
 import Exception.ExceptionFenetre;
+//import IHM.InfosTour.SelectTour;
+import utils.Constantes;
+import utils.Constantes.Type;
+import utils.Constantes.Type_tour;
 
 public class Carte extends JPanel implements Runnable{
 
@@ -49,7 +58,6 @@ public class Carte extends JPanel implements Runnable{
 	public Carte () {
 		this.chemin = new Chemin();
 		this.la_vague = new Vague();
-		//this.chateau = new Chateau();
 		this.chargeCarte();
 		this.tours_joueur = new ArrayList<Tour>();
 		
@@ -264,7 +272,31 @@ public class Carte extends JPanel implements Runnable{
 		Thread tourThread = new Thread (new TourHandler());
 		tourThread.start();
 		la_vague.lancer_Vague();
+		URL u1;
+		AudioClip s1;
+		try {
+			u1 = new URL("file:son/battle.wav");
+			AudioInputStream audioInputStream = AudioSystem.getAudioInputStream(u1);
+	        Clip clip = AudioSystem.getClip();
+	        clip.open(audioInputStream);
+	        clip.loop(Clip.LOOP_CONTINUOUSLY);
+		} catch (MalformedURLException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		} catch (UnsupportedAudioFileException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (LineUnavailableException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+
 		while (!chateau.gameOver()) {
+			
+			
 			if (!la_vague.ennemisMorts()) {
 				i_j.repaint();
 				for (int i = 0; i < la_vague.getNb_ennemis(); ++i) {

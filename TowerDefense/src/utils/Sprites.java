@@ -15,6 +15,8 @@ public class Sprites {
 	private Image spriteTourForteAchat;
 	private Image spriteTourRapide;
 	private Image spriteTourRapideAchat;
+	private Image spriteLife;
+	private Image spriteNoLife;
 
 	private static Sprites sprite = null;
 	
@@ -27,12 +29,29 @@ public class Sprites {
 		this.chargespriteTourForteAchat();
 		this.chargespriteTourRapide();
 		this.chargespriteTourRapideAchat();
+		this.chargespriteLife();
+		this.chargespriteNoLife();
 		
 	}
 
 	private void chargespriteTourForteAchat() {
 		try {
 			this.spriteTourForteAchat = ImageIO.read(new File("image/tour1.png"));
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+	}
+	
+	private void chargespriteLife() {
+		try {
+			this.spriteLife = ImageIO.read(new File("image/life.png"));
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+	}
+	private void chargespriteNoLife() {
+		try {
+			this.spriteNoLife = ImageIO.read(new File("image/nolife.png"));
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
@@ -154,4 +173,12 @@ public class Sprites {
 	public Image getspriteTourRapide() {
 		return this.spriteTourRapide;
 	}
+	
+	public Image getSpriteLife() {
+		return this.spriteLife;
+	}
+	public Image getSpriteNoLife() {
+		return this.spriteNoLife;
+	}
+	
 }
