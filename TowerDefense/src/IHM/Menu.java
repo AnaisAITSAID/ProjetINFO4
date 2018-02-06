@@ -23,6 +23,7 @@ public class Menu extends JPanel{
 	
 	public Menu(Jeu j) {
 		this.j = j;
+		
 		try {
 			fond = ImageIO.read(new File("image/fond.png"));
 			titre = ImageIO.read(new File("image/TOWERDEFENSE.png"));

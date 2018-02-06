@@ -17,6 +17,7 @@ import java.util.ArrayList;
 import javax.sound.sampled.AudioInputStream;
 import javax.sound.sampled.AudioSystem;
 import javax.sound.sampled.Clip;
+import javax.sound.sampled.FloatControl;
 import javax.sound.sampled.LineUnavailableException;
 import javax.sound.sampled.UnsupportedAudioFileException;
 import javax.swing.JPanel;
@@ -273,13 +274,16 @@ public class Carte extends JPanel implements Runnable{
 		tourThread.start();
 		la_vague.lancer_Vague();
 		URL u1;
-		AudioClip s1;
+
 		try {
 			u1 = new URL("file:son/battle.wav");
 			AudioInputStream audioInputStream = AudioSystem.getAudioInputStream(u1);
-	        Clip clip = AudioSystem.getClip();
-	        clip.open(audioInputStream);
-	        clip.loop(Clip.LOOP_CONTINUOUSLY);
+	        Clip clip1 = AudioSystem.getClip();
+	        clip1.open(audioInputStream);
+			FloatControl gainControl2 = 
+				    (FloatControl) clip1.getControl(FloatControl.Type.MASTER_GAIN);
+				gainControl2.setValue(-10.0f); 
+	        clip1.loop(Clip.LOOP_CONTINUOUSLY);
 		} catch (MalformedURLException e1) {
 			// TODO Auto-generated catch block
 			e1.printStackTrace();
@@ -293,10 +297,37 @@ public class Carte extends JPanel implements Runnable{
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-
+		boolean lance = false;
 		while (!chateau.gameOver()) {
 			
-			
+			if (chateau.getVieChateau() == 2 && !lance) {
+				lance = true;
+				try {
+					
+					u1 = new URL("file:son/heartsound.wav");
+					AudioInputStream audioInputStream = AudioSystem.getAudioInputStream(u1);
+			        Clip clip2 = AudioSystem.getClip();
+			        clip2.open(audioInputStream);
+			        FloatControl gainControl = 
+						    (FloatControl) clip2.getControl(FloatControl.Type.MASTER_GAIN);
+						gainControl.setValue(6.0f); 
+
+			        clip2.loop(Clip.LOOP_CONTINUOUSLY);
+				} catch (MalformedURLException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				} catch (UnsupportedAudioFileException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				} catch (IOException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				} catch (LineUnavailableException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+				
+			}
 			if (!la_vague.ennemisMorts()) {
 				i_j.repaint();
 				for (int i = 0; i < la_vague.getNb_ennemis(); ++i) {
