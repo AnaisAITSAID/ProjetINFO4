@@ -12,6 +12,10 @@ import java.util.ArrayList;
 
 import javax.swing.JPanel;
 
+//import IHM.InfosTour.SelectTour;
+import utils.Constantes;
+import utils.Constantes.Type;
+import utils.Constantes.Type_tour;
 import Element.CarteFichier;
 import Element.Case;
 import Element.CaseChemin;
@@ -25,10 +29,6 @@ import Element.TourForte;
 import Element.TourRapide;
 import Element.Vague;
 import Exception.ExceptionFenetre;
-//import IHM.InfosTour.SelectTour;
-import utils.Constantes;
-import utils.Constantes.Type;
-import utils.Constantes.Type_tour;
 
 public class Carte extends JPanel implements Runnable{
 
@@ -215,7 +215,6 @@ public class Carte extends JPanel implements Runnable{
 						Tour tour = ((CaseJouable)carte[i][j]).getTour();
 						if(tour!=null) {
 							trouver = true;
-							System.out.println("Pos " + tour.getXcaseposition());
 							portee = new Ellipse2D.Double(tour.getXcaseposition() -tour.getPortee(), tour.getYcaseposition()-tour.getPortee(), 
 																					 tour.getPortee()*2+(Constantes.tailleCase), tour.getPortee()*2+(Constantes.tailleCase));
 						}

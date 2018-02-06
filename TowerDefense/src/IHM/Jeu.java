@@ -41,11 +41,11 @@ public class Jeu extends JFrame{
 				joueur.setArgent(joueur.getArgent()-prix);
 				if(infoTour.getTourInfo().getType_tour()==Type_tour.TourForte) {
 					infoTour.getTourInfo().setDegats(infoTour.getTourInfo().getDegats()+10*infoTour.getTourInfo().getNiveau());
-					infoTour.getTourInfo().setNiveau(infoTour.getTourInfo().getNiveau()+1);
+					
 				}else {
-					infoTour.getTourInfo().setDegats(infoTour.getTourInfo().getDegats()+6*infoTour.getTourInfo().getNiveau());
-					infoTour.getTourInfo().setNiveau(infoTour.getTourInfo().getNiveau()+1);
+					infoTour.getTourInfo().setDegats(infoTour.getTourInfo().getDegats()+6*infoTour.getTourInfo().getNiveau());	
 				}
+				infoTour.getTourInfo().setNiveau();
 				infoTour.repaint();
 				infoJoueur.repaint();
 			}else {

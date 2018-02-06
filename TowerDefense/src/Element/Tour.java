@@ -42,7 +42,7 @@ public abstract class Tour extends AffichageSprite {
 		}
 
 		public boolean peutTirer(int tempsEcoule){
-			System.out.println("temps ecoule : " + tempsEcoule + " attente : " + this.attente + " Resultat : " +  tempsEcoule % this.attente);
+			//System.out.println("temps ecoule : " + tempsEcoule + " attente : " + this.attente + " Resultat : " +  tempsEcoule % this.attente);
 			if (tempsEcoule % this.attente == 0) return true;
 			else return false;
 		}
@@ -100,8 +100,9 @@ public abstract class Tour extends AffichageSprite {
 			return niveau;
 		}
 
-		public void setNiveau(int niveau) {
-			this.niveau = niveau;
+		public void setNiveau() {
+			++this.niveau;
+			System.out.println("lvl : " + this.niveau);
 		}
 
 		

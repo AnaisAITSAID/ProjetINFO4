@@ -30,7 +30,11 @@ public class InfosTour extends JPanel{
 		Border border=  BorderFactory.createTitledBorder(
                 loweredbevel, "Information tour");
 		this.setBorder(border);
-		//this.setBackground(new Color(223, 204, 200));
+		amelioration = new JButton("Amélioration");
+		AmeliorationPossible am;
+		am = j.new AmeliorationPossible();
+		amelioration.addActionListener(am);
+
 	}
 
 	
@@ -53,12 +57,8 @@ public class InfosTour extends JPanel{
 		if(tourInfo!=null) {
 			g2.setFont(new Font("default", Font.BOLD, 16));
 			g2.drawString("Type:"+tourInfo.getType_tour(),50, 30);
-			
 			g2.drawString("Niveau:"+tourInfo.getNiveau(),50, 60);
-			
-			
 			g2.drawString("Vitesse:"+tourInfo.getVitesse(),50, 90);
-			
 			g2.drawString("Dégâts:"+tourInfo.getDegats(),50, 120);
 
 			FontMetrics fm=g2.getFontMetrics();
@@ -73,23 +73,16 @@ public class InfosTour extends JPanel{
 				g2.drawString("(+"+tourInfo.getNiveau()*6+")", 50+width+10, 120);				
 			}
 			
+			System.out.println("test lvl " + tourInfo.getNiveau());
 			if (tourInfo.getNiveau() < 3) {
-				AmeliorationPossible am;
-				amelioration = new JButton("Amélioration");
-				am = j.new AmeliorationPossible();
-				amelioration.addActionListener(am);
 				this.setLayout(null);
-				amelioration.setBounds(75, 300, 150, 50);
+				amelioration.setBounds(75, 200, 150, 50);
 				amelioration.setBackground(new Color (125, 183, 79));
-				this.add(amelioration );				
+				this.add(amelioration);			
+			} 
+			if(tourInfo.getNiveau() == 3){
+				this.remove(amelioration);
 			}
-
-			
-
-
 		}
 	}
-	
-
-	
 }
