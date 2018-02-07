@@ -20,13 +20,23 @@ public class TourRapide extends Tour{
 	
 	@Override
 	public void setDegats() {
-		degats += Math.pow(3, getNiveau()+2); 
+		if (getNiveau() == 1) {
+			degats += 75;
+		} else {
+			degats += 230;
+		}
 	}
+
 
 
 	@Override
 	public int calculDegat() {
-		return (int) (degats + Math.pow(4, getNiveau()+2)); 
+		if (getNiveau() == 1) {
+			return  75;
+		} else {
+			return  230;
+		}
 	}
+	
 	
 }

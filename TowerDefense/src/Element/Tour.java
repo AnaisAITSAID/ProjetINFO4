@@ -42,11 +42,7 @@ public abstract class Tour extends AffichageSprite {
 		}
 
 		public void setPrix() {
-			if (this.niveau == 1) {
-				this.prix = (this.niveau + 1) * this.degats + (this.niveau + 1) * this.prix;
-			} else if (this.niveau == 2) {
-				this.prix = (this.niveau + 1) * this.degats + (this.niveau + 1) * this.prix;				
-			}
+			this.prix += 5*this.prix;
 		}
 
 		public boolean peutTirer(int tempsEcoule){

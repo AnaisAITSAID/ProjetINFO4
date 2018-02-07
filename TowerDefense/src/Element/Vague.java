@@ -7,7 +7,7 @@ public class Vague {
 	private int pts_vie = 33;
 	private int argent_donne = 10;
 	public Ennemi collec_ennemi [];
-
+	private int coef = 10;
 	
 	public int getPointDeVie(){
 		return pts_vie;
@@ -30,7 +30,11 @@ public class Vague {
 			}
 		}
 		if (nb_ennemis == 0) collec_ennemi = null; // le garbage libere la ressource
-		if (stop) pts_vie += 30 + Math.pow(3, num_vague);
+		if (num_vague % 3 == 0) this.coef *= 2;
+		if (stop) {
+			pts_vie += 30 + this.coef*num_vague;
+			argent_donne = 30 * num_vague;
+		}
 
 		return stop;
 	}
@@ -46,7 +50,7 @@ public class Vague {
 		int caseCourante = 0; 
 		
 		for(int i=0 ; i < nb_ennemis; i++) {
-			Ennemi e= new Ennemi(pts_vie, argent_donne + Math.pow(3, num_vague)/3, caseCourante);
+			Ennemi e= new Ennemi(pts_vie, argent_donne, caseCourante);
 			collec_ennemi[i] = e;
 			--caseCourante;
 		}

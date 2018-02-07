@@ -8,7 +8,7 @@ import utils.Constantes.Type_tour;
 public class TourForte extends Tour{
 
 	public TourForte(Case case_position) {
-		super(case_position, Type_tour.TourForte, 2*Constantes.tailleCase, 2, 1, 35,100);
+		super(case_position, Type_tour.TourForte, 2*Constantes.tailleCase, 1, 1, 100,100);
 	}
 
 
@@ -23,14 +23,22 @@ public class TourForte extends Tour{
 
 	@Override
 	public void setDegats() {
-		degats += Math.pow(5, getNiveau()+2); 
+		if (getNiveau() == 1) {
+			degats += 300;
+		} else {
+			degats += 1200;
+		}
 	}
 
 
 
 	@Override
 	public int calculDegat() {
-		return 	(int) (degats + Math.pow(5, getNiveau()+2)); 
+		if (getNiveau() == 1) {
+			return  300;
+		} else {
+			return  1200;
+		}
 	}
 	
 
