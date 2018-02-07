@@ -1,6 +1,5 @@
 package IHM;
 
-import java.applet.AudioClip;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Graphics;
@@ -9,6 +8,7 @@ import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseMotionAdapter;
 import java.awt.geom.Ellipse2D;
+import java.awt.geom.Rectangle2D;
 import java.io.IOException;
 import java.net.MalformedURLException;
 import java.net.URL;
@@ -22,6 +22,10 @@ import javax.sound.sampled.LineUnavailableException;
 import javax.sound.sampled.UnsupportedAudioFileException;
 import javax.swing.JPanel;
 
+//import IHM.InfosTour.SelectTour;
+import utils.Constantes;
+import utils.Constantes.Type;
+import utils.Constantes.Type_tour;
 import Element.CarteFichier;
 import Element.Case;
 import Element.CaseChemin;
@@ -35,10 +39,6 @@ import Element.TourForte;
 import Element.TourRapide;
 import Element.Vague;
 import Exception.ExceptionFenetre;
-//import IHM.InfosTour.SelectTour;
-import utils.Constantes;
-import utils.Constantes.Type;
-import utils.Constantes.Type_tour;
 
 public class Carte extends JPanel implements Runnable{
 
@@ -148,16 +148,30 @@ public class Carte extends JPanel implements Runnable{
 			//on dessine chaque ennemi de la vague
 			for(int i = 0; i < la_vague.getNb_ennemis(); ++i) {
 				Ennemi ennemi = la_vague.getEnnemi(i);
+				int widhtVie = 30;
+				int heightVie = 4;
 				if (ennemi != null && ennemi.isBouge() && !ennemi.estArrive()) {
+					Rectangle2D vie = new Rectangle2D.Double
+								(ennemi.getRealX() - 20, ennemi.getRealY() - 30,  widhtVie,  heightVie );
+					g2.setColor(Color.GREEN);
+					g2.fill(vie);
+					float pourcentageVie = (float) ennemi.getPointsDeVie()/la_vague.getPointDeVie();
+					vie = new Rectangle2D.Double
+							(ennemi.getRealX() - 20 + widhtVie*pourcentageVie, ennemi.getRealY() - 30,  widhtVie*(1-pourcentageVie),  heightVie );
+					g2.setColor(Color.RED);
+					g2.fill(vie);
 					ennemi.dessiner(g2);
 				}
 
 			}
+			g2.setColor(Color.BLACK);
 			
 			for (Tour tour : this.tours_joueur) {
 				tour.dessiner(g2);
 				tour.dessinerLaser(g2);
 			}
+
+
 			//on dessine le château
 			chateau.dessiner(g2);
 			
@@ -343,13 +357,12 @@ public class Carte extends JPanel implements Runnable{
 						i_j.repaint();
 						//System.out.println("Points de vie : " + this.chateau.getVieChateau());
 					} 
-					for(int j = 0; j < 7 - la_vague.nb_ennemis; ++j) {
-						try {
-							Thread.sleep(100);
-						} catch (InterruptedException e) {
-							e.printStackTrace();												
-						}	
-					}
+
+					try {
+						Thread.sleep(600/(la_vague.nb_ennemis));
+					} catch (InterruptedException e) {
+						e.printStackTrace();												
+					}	
 					
 					if (la_vague.getEnnemi(i).isBouge()) {
 						la_vague.getEnnemi(i).deplacer();

@@ -37,11 +37,12 @@ public class InfosJoueur extends JPanel{
 //			g2.drawString("Points de vie :" + this.joueur.getVieChateau(), 10, 35);
 			g2.drawString("Points de vie : ", 10, 35);
 			int cpt = 0;
-			for (int i = 0; i <= this.joueur.getVieChateau(); ++i) {
+			for (int i = 0; i < this.joueur.getVieChateau(); ++i) {
 				g.drawImage(sprite.getSpriteLife(), 130+i*16, 22,null);
 				cpt = i;
 			}
-			while (cpt < 10) {
+			++cpt;
+			while (cpt <= 9) {
 				g.drawImage(sprite.getSpriteNoLife(), 130+cpt*16, 22,null);
 				++cpt;
 			}
