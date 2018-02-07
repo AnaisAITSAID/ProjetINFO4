@@ -44,6 +44,7 @@ public class Jeu extends JFrame{
 		@Override
 		public void actionPerformed(ActionEvent arg0) {
 			clip.stop();
+			remove(m);
 			interfaceUtilisateur();
 		}
 		
