@@ -1,16 +1,25 @@
 package Element;
 
 public class Vague {
-	public static int num_vague = 0;
-	public int nb_ennemis = 6;  
+	public static int num_vague;
+	public int nb_ennemis;  
 
-	private int pts_vie = 33;
-	private int argent_donne = 10;
+	private int pts_vie;
+	private int argent_donne;
 	public Ennemi collec_ennemi [];
-	private int coef = 10;
+	private int coef;
 	
+	public Vague () {
+		num_vague = 0;
+		nb_ennemis = 6;  
+
+		pts_vie = 33;
+		argent_donne = 10;
+		coef = 10;
+	}
 	public int getPointDeVie(){
 		return pts_vie;
+		
 	}
 	
 	/**
@@ -30,7 +39,7 @@ public class Vague {
 			}
 		}
 		if (nb_ennemis == 0) collec_ennemi = null; // le garbage libere la ressource
-		if (num_vague % 3 == 0) this.coef *= 2;
+		if (num_vague %5 == 0) this.coef *= 5;
 		if (stop) {
 			pts_vie += 30 + this.coef*num_vague;
 			argent_donne = 30 * num_vague;

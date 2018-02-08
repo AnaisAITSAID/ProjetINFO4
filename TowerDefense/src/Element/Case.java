@@ -28,6 +28,13 @@ public abstract class Case extends AffichageSprite {
 		return y;
 	}
 	
+	public void setX(int x) {
+		this.x = x;
+	}
+	public void setY(int y) {
+		this.y = y;
+	}
+
 	public boolean contain(int x, int y) {
 		if (x <= this.x + Constantes.tailleCase && x >= this.x &&
 		    	y <= this.y + Constantes.tailleCase && y >= this.y)

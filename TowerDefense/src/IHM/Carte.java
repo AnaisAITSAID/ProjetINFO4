@@ -51,8 +51,9 @@ public class Carte extends JPanel implements Runnable{
 	private static  Carte instanceCarte; 
 	private InfosJoueur i_j;
 	private Ellipse2D portee = null; 
-
-	
+    protected volatile boolean running = true;
+    private Clip clip1;
+    private Clip clip2;
 	/**
 	 * Constructeur de la classe carte
 	 */
@@ -292,7 +293,7 @@ public class Carte extends JPanel implements Runnable{
 		try {
 			u1 = new URL("file:son/battle.wav");
 			AudioInputStream audioInputStream = AudioSystem.getAudioInputStream(u1);
-	        Clip clip1 = AudioSystem.getClip();
+	        clip1 = AudioSystem.getClip();
 	        clip1.open(audioInputStream);
 			FloatControl gainControl2 = 
 				    (FloatControl) clip1.getControl(FloatControl.Type.MASTER_GAIN);
@@ -312,7 +313,7 @@ public class Carte extends JPanel implements Runnable{
 			e.printStackTrace();
 		}
 		boolean lance = false;
-		while (!chateau.gameOver()) {
+		while (!chateau.gameOver() && running) {
 			
 			if (chateau.getVieChateau() == 2 && !lance) {
 				lance = true;
@@ -320,7 +321,7 @@ public class Carte extends JPanel implements Runnable{
 					
 					u1 = new URL("file:son/heartsound.wav");
 					AudioInputStream audioInputStream = AudioSystem.getAudioInputStream(u1);
-			        Clip clip2 = AudioSystem.getClip();
+			        clip2 = AudioSystem.getClip();
 			        clip2.open(audioInputStream);
 			        FloatControl gainControl = 
 						    (FloatControl) clip2.getControl(FloatControl.Type.MASTER_GAIN);
@@ -381,17 +382,32 @@ public class Carte extends JPanel implements Runnable{
 				la_vague.lancer_Vague();
 			}
 		}
-		System.out.println("GameOver");
+		if (running) {
+			System.out.println("GameOver");
+			try {
+				tourThread.join();
+			} catch (InterruptedException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			running = false;
+			
+		}
 	}
 	
-	
+	public void stopGame () {
+		clip1.stop();
+		if (clip2 != null)
+			clip2.stop();
+		this.running = false;
+	}
 	private class TourHandler implements Runnable{
 
 		@Override
 		public void run() {
 			Chrono tempsEcoule = new Chrono();
 			int tempsTotal = 1;
-			while (true){
+			while (running){
 				tempsEcoule.Go_Chrono();
 				for (Tour tour : tours_joueur) {
 

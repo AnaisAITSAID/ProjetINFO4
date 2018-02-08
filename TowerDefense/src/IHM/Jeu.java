@@ -16,6 +16,7 @@ import javax.sound.sampled.AudioSystem;
 import javax.sound.sampled.Clip;
 import javax.sound.sampled.LineUnavailableException;
 import javax.sound.sampled.UnsupportedAudioFileException;
+import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 
@@ -28,8 +29,6 @@ import utils.Constantes.Type_tour;
 
 public class Jeu extends JFrame{
 	/* cr�ation d'une fen�tre */
-	private URL u1;
-	private AudioClip s1;	
 	private Clip clip;
 	public static int largeur;
 	public static int hauteur;
@@ -45,7 +44,6 @@ public class Jeu extends JFrame{
 		
 		@Override
 		public void actionPerformed(ActionEvent arg0) {
-			clip.stop();
 			remove(m);
 			interfaceUtilisateur();
 		}
@@ -80,10 +78,10 @@ public class Jeu extends JFrame{
 			// TODO Auto-generated method stub
 			remove(a);
 			retourMenu();
-			setVisible(true);
 		}
 		
 	}
+	
 	public class AmeliorationPossible implements ActionListener{
 
 		@Override
@@ -120,27 +118,6 @@ public class Jeu extends JFrame{
 		m = new Menu(this);
 		this.add(m);
 
-		
-		try {
-			u1 = new URL("file:son/intro.wav");
-			AudioInputStream audioInputStream = AudioSystem.getAudioInputStream(u1);
-	        clip = AudioSystem.getClip();
-	        clip.open(audioInputStream);
-	        clip.start();
-		} catch (MalformedURLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} catch (UnsupportedAudioFileException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} catch (LineUnavailableException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-
 		this.setVisible(true);
 		
 	}
@@ -173,9 +150,12 @@ public class Jeu extends JFrame{
 		
 		JPanel jp  = new JPanel();
 		JPanel jp2  = new JPanel();
-
+		JButton menuButton = new JButton("Menu");
+		
 		infoTour = new InfosTour(this);
 		infoJoueur = new InfosJoueur(this.joueur);
+		
+		
 		carte.setI_j(infoJoueur);
 		this.add(carte);
 
@@ -185,16 +165,28 @@ public class Jeu extends JFrame{
 		jp2.setLayout(new FlowLayout());
 		jp2.add(zone_achats, FlowLayout.LEFT);
 		jp2.add(infoJoueur);
+		jp2.add(menuButton);
+
 		this.add(jp);
 
 		this.add(jp2,BorderLayout.SOUTH);
-
+		
 		this.pack();
 	
 		this.setVisible(true);
 
 
 		carte.setChateau(joueur);
+		menuButton.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				carte.stopGame();
+				remove(jp);
+				remove (jp2);
+				retourMenu();
+			}
+		});
 	}
 	
 	

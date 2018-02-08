@@ -14,7 +14,7 @@ public class TourRapide extends Tour{
 	
 	@Override
 	public void dessiner(Graphics2D g) {
-		g.drawImage(sprite.getspriteTourRapide(), getXcaseposition() + Constantes.tailleCase/4, getYcaseposition() + Constantes.tailleCase/4,null);
+		g.drawImage(sprite.getspriteTourRapide(), getXcaseposition() + Constantes.tailleCase/4, getYcaseposition()- 15 + Constantes.tailleCase/4,null);
 		
 	}
 	

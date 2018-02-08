@@ -46,7 +46,7 @@ public class Achats extends JPanel{
 
 	public void charger_achats() {
 		for(int i=0; i<nb_produits;i++) {
-			boutons_produits[i] = new BoutonsProduits(taille_bouton*i+espace, 25, Type_tour.values()[i]);
+			boutons_produits[i] = new BoutonsProduits(taille_bouton*i+espace+75*i, 25, Type_tour.values()[i]);
 		}
 	}
 	
@@ -62,7 +62,7 @@ public class Achats extends JPanel{
 	
 	@Override
 	public Dimension getPreferredSize() {
-		return new Dimension(Constantes.tailleCase*nb_produits+espace+50, 110);
+		return new Dimension(Constantes.tailleCase*nb_produits+espace+200, 110);
 	}
 	
 }

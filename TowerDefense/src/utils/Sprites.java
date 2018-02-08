@@ -36,7 +36,7 @@ public class Sprites {
 
 	private void chargespriteTourForteAchat() {
 		try {
-			this.spriteTourForteAchat = ImageIO.read(new File("image/tour1.png"));
+			this.spriteTourForteAchat = ImageIO.read(new File("image/tourAchatForte.png"));
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
@@ -58,7 +58,7 @@ public class Sprites {
 	}
 	private void chargespriteTourRapideAchat() {
 		try {
-			this.spriteTourRapideAchat = ImageIO.read(new File("image/tour2.png"));
+			this.spriteTourRapideAchat = ImageIO.read(new File("image/tourAchatRapide.png"));
 		} catch (IOException e) {
 			e.printStackTrace();
 		}

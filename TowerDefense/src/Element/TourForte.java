@@ -16,7 +16,7 @@ public class TourForte extends Tour{
 	/* place l'image au centre de la case */
 	@Override
 	public void dessiner(Graphics2D g) {
-		g.drawImage(sprite.getspriteTourForte(),getXcaseposition() + Constantes.tailleCase/4, getYcaseposition() + Constantes.tailleCase/4,null);
+		g.drawImage(sprite.getspriteTourForte(),getXcaseposition() -5 + Constantes.tailleCase/4, getYcaseposition() - 10 + Constantes.tailleCase/4,null);
 	}
 
 
