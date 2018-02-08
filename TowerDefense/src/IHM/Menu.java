@@ -25,7 +25,7 @@ public class Menu extends JPanel{
 		this.j = j;
 		
 		try {
-			fond = ImageIO.read(new File("image/fond.png"));
+			fond = ImageIO.read(new File("image/fond.jpg"));
 			titre = ImageIO.read(new File("image/TOWERDEFENSE.png"));
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
@@ -50,6 +50,6 @@ public class Menu extends JPanel{
 		super.paintComponent(g);
 		Graphics2D g2 = (Graphics2D)g;
 		g2.drawImage(fond, 0, 0, j.getWidth(), j.getHeight(),null);
-        g2.drawImage(titre,	j.getWidth()-560, j.getHeight()-650, 500, 500, null);
+        g2.drawImage(titre,	j.getWidth()-660, j.getHeight()-800, 600, 600, null);
 	}
 }
