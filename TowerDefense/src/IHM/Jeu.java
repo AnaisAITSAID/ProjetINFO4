@@ -39,6 +39,8 @@ public class Jeu extends JFrame{
 	private InfosTour infoTour;
 	private InfosJoueur infoJoueur;
 	private Menu m;
+	private Aide a;
+	
 	public class Jouer implements ActionListener{
 		
 		@Override
@@ -46,6 +48,39 @@ public class Jeu extends JFrame{
 			clip.stop();
 			remove(m);
 			interfaceUtilisateur();
+		}
+		
+	}
+	
+	public class Regles implements ActionListener{
+		
+		@Override
+		public void actionPerformed(ActionEvent arg0) {
+			remove(m);
+			afficherAide();
+		}
+		
+	}
+	
+	public class JouerAide implements ActionListener{
+
+		@Override
+		public void actionPerformed(ActionEvent arg0) {
+			// TODO Auto-generated method stub
+			remove(a);
+			interfaceUtilisateur();
+		}
+		
+	}
+	
+	public class Retour implements ActionListener{
+
+		@Override
+		public void actionPerformed(ActionEvent e) {
+			// TODO Auto-generated method stub
+			remove(a);
+			retourMenu();
+			setVisible(true);
 		}
 		
 	}
@@ -110,6 +145,18 @@ public class Jeu extends JFrame{
 		
 	}
 	
+	public void afficherAide() {
+		a = new Aide(this);
+		this.add(a);
+		
+		this.setVisible(true);
+	}
+	
+	public void retourMenu() {
+		m = new Menu(this);
+		this.add(m);
+		this.setVisible(true);
+	}
 	
 	/* cr�ation de l'interface utilisateur */
 	/* pour commencer on se contentera d'ajouter la carte */

@@ -7,11 +7,11 @@ import java.io.File;
 import java.io.IOException;
 
 import javax.imageio.ImageIO;
-import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JPanel;
 
 import IHM.Jeu.Jouer;
+import IHM.Jeu.Regles;
 
 public class Menu extends JPanel{
 
@@ -36,6 +36,9 @@ public class Menu extends JPanel{
 		Jouer jo;
 		jo = j.new Jouer();
 		jouer.addActionListener(jo);
+		Regles ad;
+		ad = j.new Regles();
+		regles.addActionListener(ad);
 		this.setLayout(null);
 		jouer.setBounds(j.getWidth()/2-170, j.getHeight()-90,150,50);
 		regles.setBounds(j.getWidth()/2+40, j.getHeight()-90,150,50);
