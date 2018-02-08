@@ -5,6 +5,8 @@ import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.Image;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.io.File;
 import java.io.IOException;
 
@@ -12,18 +14,13 @@ import javax.imageio.ImageIO;
 import javax.swing.JButton;
 import javax.swing.JPanel;
 
-import IHM.Jeu.JouerAide;
-import IHM.Jeu.Retour;
-
 public class Aide extends JPanel{
 	
 	private JButton retour;
 	private JButton jouerAide;
 	private Image fond;
-	private Jeu j;
 	
-	public Aide(Jeu j) {
-		this.j=j;
+	public Aide() {
 		try {
 			fond = ImageIO.read(new File("image/fondaide.jpg"));
 		} catch (IOException e) {
@@ -34,23 +31,46 @@ public class Aide extends JPanel{
 		jouerAide = new JButton("Jouer");
 		
 		JouerAide ja;
-		ja = j.new JouerAide();
+		ja = new JouerAide();
 		jouerAide.addActionListener(ja);
 		
 		Retour r;
-		r = j.new Retour();
+		r = new Retour();
 		retour.addActionListener(r);
-		jouerAide.setBounds(j.getWidth()/2-170, j.getHeight()-90,150,50);
-		retour.setBounds(j.getWidth()/2+40, j.getHeight()-90,150,50);
+		jouerAide.setBounds(Jeu.getInstance().getWidth()/2-170, Jeu.getInstance().getHeight()-90,150,50);
+		retour.setBounds(Jeu.getInstance().getWidth()/2+40, Jeu.getInstance().getHeight()-90,150,50);
 		this.setLayout(null);
 		this.add(retour);
 		this.add(jouerAide);
 	}
 	
+	
+	private class Retour implements ActionListener{
+
+		@Override
+		public void actionPerformed(ActionEvent e) {
+			// TODO Auto-generated method stub
+			Jeu.getInstance().remove(Jeu.getInstance().getA());
+			Jeu.getInstance().lanceMenu();
+		}
+		
+	}
+	
+	private class JouerAide implements ActionListener{
+
+		@Override
+		public void actionPerformed(ActionEvent arg0) {
+			// TODO Auto-generated method stub
+			Jeu.getInstance().remove(Jeu.getInstance().getA());
+			Jeu.getInstance().interfaceUtilisateur();
+		}
+		
+	}
+
 	public void paintComponent(Graphics g) {
 		super.paintComponent(g);
 		Graphics2D g2 = (Graphics2D)g;
-		g2.drawImage(fond, 0, 0, j.getWidth(), j.getHeight(),null);
+		g2.drawImage(fond, 0, 0, Jeu.getInstance().getWidth(), Jeu.getInstance().getHeight(),null);
 		
 		
 		g2.setFont(new Font("default", Font.BOLD, 16));

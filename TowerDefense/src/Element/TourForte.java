@@ -6,9 +6,9 @@ import utils.Constantes;
 import utils.Constantes.Type_tour;
 
 public class TourForte extends Tour{
-
+	private int coef = 2;
 	public TourForte(Case case_position) {
-		super(case_position, Type_tour.TourForte, 2*Constantes.tailleCase, 1, 1, 100,100);
+		super(case_position, Type_tour.TourForte, 3*Constantes.tailleCase, 1, 1, 100,100);
 	}
 
 
@@ -23,23 +23,20 @@ public class TourForte extends Tour{
 
 	@Override
 	public void setDegats() {
-		if (getNiveau() == 1) {
-			degats += 300;
-		} else {
-			degats += 1200;
-		}
+		if (getNiveau() %4 == 0) this.coef *= 4;
+		degats += 30 + this.coef*getNiveau();
 	}
 
 
 
 	@Override
 	public int calculDegat() {
-		if (getNiveau() == 1) {
-			return  300;
-		} else {
-			return  1200;
-		}
+		return degats +30 + this.coef*getNiveau();
 	}
+
+
+
+	
 	
 
 }

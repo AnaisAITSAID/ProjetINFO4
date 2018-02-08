@@ -6,6 +6,8 @@ import java.awt.Font;
 import java.awt.FontMetrics;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 import javax.swing.BorderFactory;
 import javax.swing.JButton;
@@ -13,17 +15,17 @@ import javax.swing.JPanel;
 import javax.swing.border.Border;
 
 import Element.Tour;
-import IHM.Jeu.AmeliorationPossible;
+import Exception.ExceptionFenetre;
 import utils.Constantes;
-import utils.Constantes.Type_tour;
 
 public class InfosTour extends JPanel{
 	
 	private Tour tourInfo;
 	private JButton amelioration; 
 	private Jeu j;
-	public InfosTour(Jeu j) {
-		this.j = j;
+	
+	public InfosTour() {
+		this.j = Jeu.getInstance();
 		this.tourInfo = null;
 		Border loweredbevel = BorderFactory.createLoweredBevelBorder();
 
@@ -32,11 +34,36 @@ public class InfosTour extends JPanel{
 		this.setBorder(border);
 		amelioration = new JButton("Amélioration");
 		AmeliorationPossible am;
-		am = j.new AmeliorationPossible();
+		am = new AmeliorationPossible();
 		amelioration.addActionListener(am);
 
 	}
+	private class AmeliorationPossible implements ActionListener{
 
+		@Override
+		public void actionPerformed(ActionEvent arg0) {
+			int prix = tourInfo.getPrix();
+			if(j.getJoueur().getArgent()>=prix && tourInfo != null) {
+				tourInfo.setPrix();
+				
+				j.getJoueur().setArgent(j.getJoueur().getArgent()-prix);	
+				tourInfo.setDegats();	
+				
+				tourInfo.setNiveau();
+				repaint();
+				j.getInfoJoueur().repaint();
+			}else {
+				try {
+					throw new ExceptionFenetre("Vous n'avez pas assez d'argent pour améliorer la tour");
+				} catch (ExceptionFenetre e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+			}
+			
+		}
+		
+	}
 	
 	public void setTourInfo(Tour tour) {
 		this.tourInfo = tour;
@@ -67,17 +94,13 @@ public class InfosTour extends JPanel{
 			g2.setPaint(new Color (125, 183, 79));
 
 			
-			if (tourInfo.getNiveau() < 3) {
-				g2.drawString("(+"+tourInfo.calculDegat()+")", 50+width+10, 120);				
-				this.setLayout(null);
-				amelioration.setText("Amélioration : " + tourInfo.getPrix());
-				amelioration.setBounds(75, 200, 150, 50);
-				amelioration.setBackground(new Color (125, 183, 79));
-				this.add(amelioration);			
-			} 
-			if(tourInfo.getNiveau() == 3){
-				this.remove(amelioration);
-			}
+			g2.drawString("(+"+tourInfo.calculDegat()+")", 50+width+10, 120);				
+			this.setLayout(null);
+			amelioration.setText("Amélioration : " + tourInfo.getPrix());
+			amelioration.setBounds(75, 200, 150, 50);
+			amelioration.setBackground(new Color (125, 183, 79));
+			this.add(amelioration);			
+			
 		}
 	}
 }

@@ -1,22 +1,12 @@
 package IHM;
 
-import java.applet.AudioClip;
 import java.awt.BorderLayout;
-import java.awt.Dimension;
 import java.awt.FlowLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
-import java.io.IOException;
-import java.net.MalformedURLException;
-import java.net.URL;
 
-import javax.sound.sampled.AudioInputStream;
-import javax.sound.sampled.AudioSystem;
-import javax.sound.sampled.Clip;
-import javax.sound.sampled.LineUnavailableException;
-import javax.sound.sampled.UnsupportedAudioFileException;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
@@ -29,8 +19,6 @@ import utils.Constantes.Type_tour;
 
 
 public class Jeu extends JFrame{
-	/* crï¿½ation d'une fenï¿½tre */
-	private Clip clip;
 	public static int largeur;
 	public static int hauteur;
 	private Achats zone_achats;
@@ -40,6 +28,31 @@ public class Jeu extends JFrame{
 	private InfosJoueur infoJoueur;
 	private Menu m;
 	private Aide a;
+	private static Jeu jeu; 
+	private GameOver gameOver;
+	JPanel jp;
+	JPanel jp2;
+
+	public static Jeu getInstance() {
+		if (jeu == null) {
+			jeu  = new Jeu(); 			
+		}
+		return jeu;
+	}
+	private Jeu () {
+		
+		this.setTitle("Tower Defense");
+		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		this.setSize(700, 700);
+		this.setResizable(false);
+	}
+
+	
+	public void lanceMenu() {
+		m = new Menu();
+		this.add(m);
+		this.setVisible(true);
+	}
 	
 	public class Jouer implements ActionListener{
 		
@@ -51,92 +64,43 @@ public class Jeu extends JFrame{
 		
 	}
 	
-	public class Regles implements ActionListener{
-		
-		@Override
-		public void actionPerformed(ActionEvent arg0) {
-			remove(m);
-			afficherAide();
-		}
-		
+	public Achats getZone_achats() {
+		return zone_achats;
 	}
+	public Carte getCarte() {
+		return carte;
+	}
+	public Chateau getJoueur() {
+		return joueur;
+	}
+	public InfosTour getInfoTour() {
+		return infoTour;
+	}
+	public InfosJoueur getInfoJoueur() {
+		return infoJoueur;
+	}
+	public Menu getM() {
+		return m;
+	}
+	public Aide getA() {
+		return a;
+	}
+	public static Jeu getJeu() {
+		return jeu;
+	}
+
+
+
 	
-	public class JouerAide implements ActionListener{
-
-		@Override
-		public void actionPerformed(ActionEvent arg0) {
-			// TODO Auto-generated method stub
-			remove(a);
-			interfaceUtilisateur();
-		}
-		
-	}
 	
-	public class Retour implements ActionListener{
-
-		@Override
-		public void actionPerformed(ActionEvent e) {
-			// TODO Auto-generated method stub
-			remove(a);
-			retourMenu();
-		}
-		
-	}
-	
-	public class AmeliorationPossible implements ActionListener{
-
-		@Override
-		public void actionPerformed(ActionEvent arg0) {
-			int prix = infoTour.getTourInfo().getPrix();
-			if(joueur.getArgent()>=prix && infoTour.getTourInfo() != null) {
-				infoTour.getTourInfo().setPrix();
-				
-				joueur.setArgent(joueur.getArgent()-prix);	
-				infoTour.getTourInfo().setDegats();	
-				
-				infoTour.getTourInfo().setNiveau();
-				infoTour.repaint();
-				infoJoueur.repaint();
-			}else {
-				try {
-					throw new ExceptionFenetre("Vous n'avez pas assez d'argent pour améliorer la tour");
-				} catch (ExceptionFenetre e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				}
-			}
-			
-		}
-		
-	}
-	public Jeu () {
-		
-		this.setTitle("Tower Defense");
-		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		/*Dimension dimension = java.awt.Toolkit.getDefaultToolkit().getScreenSize();
-		int height = (int)dimension.getHeight();
-		int width  = (int)dimension.getWidth();*/
-		this.setSize(700,700);
-		this.setResizable(false);
-		m = new Menu(this);
-		this.add(m);
-
-		this.setVisible(true);
-		
-	}
 	
 	public void afficherAide() {
-		a = new Aide(this);
+		a = new Aide();
 		this.add(a);
 		
 		this.setVisible(true);
 	}
 	
-	public void retourMenu() {
-		m = new Menu(this);
-		this.add(m);
-		this.setVisible(true);
-	}
 	
 	/* crï¿½ation de l'interface utilisateur */
 	/* pour commencer on se contentera d'ajouter la carte */
@@ -146,16 +110,14 @@ public class Jeu extends JFrame{
 		carte = new Carte();
 		
 		zone_achats = new Achats();
-		zone_achats.addMouseListener(new Souris_position());
-		carte.addMouseListener(new SelectTour());
+		
 		
 		joueur=new Chateau();
 		
-		JPanel jp  = new JPanel();
-		JPanel jp2  = new JPanel();
 		JButton menuButton = new JButton("Menu");
-		
-		infoTour = new InfosTour(this);
+		jp = new JPanel();
+		jp2  = new JPanel();
+		infoTour = new InfosTour();
 		infoJoueur = new InfosJoueur(this.joueur);
 		
 		
@@ -187,44 +149,26 @@ public class Jeu extends JFrame{
 				carte.stopGame();
 				remove(jp);
 				remove (jp2);
-				retourMenu();
+				lanceMenu();
 			}
 		});
 	}
 	
-	
-	//classe interne pour la position de la souris
-	private class Souris_position extends MouseAdapter{
-
-		@Override
-		public void mouseClicked(MouseEvent evenement) {
-			
-			if(zone_achats.getBoutons_produits()[0].contain(evenement.getX(), evenement.getY())) {
-				carte.setTypeTourAjoutee(Type_tour.TourForte);
-			}else if(zone_achats.getBoutons_produits()[1].contain(evenement.getX(), evenement.getY())){
-				carte.setTypeTourAjoutee(Type_tour.TourRapide);
-			}
-		}
-	}
-	
-	public class SelectTour extends MouseAdapter{
-
-		@Override
-		public void mouseClicked(MouseEvent evenement) {
-			for (int i = 0; i < Constantes.taille; ++i) {
-				for (int j = 0; j < Constantes.taille; ++j) {
-					if(carte.getCarte(j, i).contain(evenement.getX(), evenement.getY()) && carte.getCarte(j, i).getType() == Constantes.Type.CaseJouable && (((CaseJouable)(carte.getCarte(j, i))).getTour())!=null) {
-						infoTour.setTourInfo(((CaseJouable)(carte.getCarte(j, i))).getTour());
-					}
-				}
-			}
+	public void lanceGameOver() {
+		carte.stopGame();
+		remove(jp);
+		remove (jp2);
+		this.gameOver = new GameOver();
+		this.add(this.gameOver);
 		
-			infoTour.repaint();
-		}
+		this.setVisible(true);
 	}
-	public static void main(String [] args){
-		 Jeu jeu = new Jeu ();
-		// jeu.interfaceUtilisateur();
+	public GameOver getGameOver() {
+		return this.gameOver;
+	}
 
+	public static void main(String [] args){
+		 Jeu jeu = Jeu.getInstance();
+		 jeu.lanceMenu();
 	}
 }

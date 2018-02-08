@@ -70,7 +70,7 @@ public class Sprites {
 		}
 	}
 	public static Sprites getInstance() {
-		sprite = new Sprites(); 
+		if (sprite == null) sprite = new Sprites(); 
 		return sprite;
 	}
 	/**

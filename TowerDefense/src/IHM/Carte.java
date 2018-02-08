@@ -48,7 +48,6 @@ public class Carte extends JPanel implements Runnable{
 	private Chateau chateau;
 	private volatile ArrayList<Tour> tours_joueur;
 	private Type_tour typeTourAjoutee;
-	private static  Carte instanceCarte; 
 	private InfosJoueur i_j;
 	private Ellipse2D portee = null; 
     protected volatile boolean running = true;
@@ -62,10 +61,9 @@ public class Carte extends JPanel implements Runnable{
 		this.la_vague = new Vague();
 		this.chargeCarte();
 		this.tours_joueur = new ArrayList<Tour>();
-		
+		this.addMouseListener(new SelectTour());
 		this.addMouseListener(new SelectCase());
 		this.addMouseMotionListener(new DessinerPortee());
-		instanceCarte = this;
 	}
 	/* Cete fonction permet de charger dans le chemin les bonnes cases. Elle prend 
 	 * en paramètre la case à tester ainsi que son orientation (pour ne pas 
@@ -176,7 +174,7 @@ public class Carte extends JPanel implements Runnable{
 			//on dessine le château
 			chateau.dessiner(g2);
 			
-			g2.setColor(Color.ORANGE);
+			g2.setColor(Color.RED);
 			g2.draw(this.portee);
 		} catch (Exception e) {
 			repaint();
@@ -188,6 +186,67 @@ public class Carte extends JPanel implements Runnable{
 		this.typeTourAjoutee = typeTourAjoutee;
 	}
 	
+
+	/*public Tour getTour_infos() {
+		return tour_infos;
+	}*/
+	public void ajouterTour (Type_tour type, Case case_position) throws ExceptionFenetre {
+		Tour nouvelle_tour = null;
+		if (type == null){
+			throw new ExceptionFenetre("Vous n'avez pas selectionnez de tour");
+		}
+		if (type == Type_tour.TourForte ) {
+			nouvelle_tour = new TourForte(case_position);
+
+		} else if(type == Type_tour.TourRapide) {
+			nouvelle_tour = new TourRapide(case_position);	
+		}
+		if(chateau.getArgent()>=nouvelle_tour.getPrix()) {
+			this.tours_joueur.add(nouvelle_tour);
+			((CaseJouable)case_position).setTour(nouvelle_tour);
+			chateau.setArgent(chateau.getArgent()-nouvelle_tour.getPrix());
+			nouvelle_tour.setPrix();
+
+			i_j.repaint();
+		}else {
+			throw new ExceptionFenetre("vous ne possédez pas l'argent nécessaire pour acheter la tour");
+		}
+	}
+	
+	@Override
+	public Dimension getPreferredSize() {
+		return new Dimension(Constantes.taille*Constantes.tailleCase, Constantes.taille*Constantes.tailleCase);
+	}
+
+	
+	
+	
+	
+	public void stopGame () {
+		clip1.stop();
+		if (clip2 != null)
+			clip2.stop();
+		this.running = false;
+	}
+	
+	public void setChateau(Chateau chateau) {
+		this.chateau = chateau;
+		Thread thread = new Thread(this);
+		thread.start();
+	}
+	public Case getCarte(int i, int j) {
+		return carte[i][j];
+	}
+	
+	public void setI_j(InfosJoueur i_j) {
+		this.i_j = i_j;
+	}	
+	
+	
+	
+
+	
+	/*********************Listener **********************************/
 	//classe interne pour la position de la souris
 	private class SelectCase extends MouseAdapter{
 
@@ -244,38 +303,22 @@ public class Carte extends JPanel implements Runnable{
 				portee = null;
 		}
 	}
-	/*public Tour getTour_infos() {
-		return tour_infos;
-	}*/
-	public void ajouterTour (Type_tour type, Case case_position) throws ExceptionFenetre {
-		Tour nouvelle_tour = null;
-		if (type == null){
-			throw new ExceptionFenetre("Vous n'avez pas selectionnez de tour");
-		}
-		if (type == Type_tour.TourForte ) {
-			nouvelle_tour = new TourForte(case_position);
+	
+	private class SelectTour extends MouseAdapter{
 
-		} else if(type == Type_tour.TourRapide) {
-			nouvelle_tour = new TourRapide(case_position);	
-		}
-		if(chateau.getArgent()>=nouvelle_tour.getPrix()) {
-			this.tours_joueur.add(nouvelle_tour);
-			((CaseJouable)case_position).setTour(nouvelle_tour);
-			chateau.setArgent(chateau.getArgent()-nouvelle_tour.getPrix());
-			nouvelle_tour.setPrix();
-
-			i_j.repaint();
-		}else {
-			throw new ExceptionFenetre("vous ne possédez pas l'argent nécessaire pour acheter la tour");
+		@Override
+		public void mouseClicked(MouseEvent evenement) {
+			for (int i = 0; i < Constantes.taille; ++i) {
+				for (int j = 0; j < Constantes.taille; ++j) {
+					if(getCarte(j, i).contain(evenement.getX(), evenement.getY()) && getCarte(j, i).getType() == Constantes.Type.CaseJouable && (((CaseJouable)(getCarte(j, i))).getTour())!=null) {
+						Jeu.getInstance().getInfoTour().setTourInfo(((CaseJouable)(getCarte(j, i))).getTour());
+					}
+				}
+			}
+			Jeu.getInstance().getInfoTour().repaint();
 		}
 	}
-	
-	@Override
-	public Dimension getPreferredSize() {
-		return new Dimension(Constantes.taille*Constantes.tailleCase, Constantes.taille*Constantes.tailleCase);
-	}
-
-	
+	/***************Thread*****************************/
 	
 	@Override
 	/**
@@ -384,23 +427,18 @@ public class Carte extends JPanel implements Runnable{
 		}
 		if (running) {
 			System.out.println("GameOver");
+			running = false;
+
 			try {
 				tourThread.join();
 			} catch (InterruptedException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
-			running = false;
-			
+			Jeu.getInstance().lanceGameOver();
 		}
 	}
 	
-	public void stopGame () {
-		clip1.stop();
-		if (clip2 != null)
-			clip2.stop();
-		this.running = false;
-	}
 	private class TourHandler implements Runnable{
 
 		@Override
@@ -428,20 +466,5 @@ public class Carte extends JPanel implements Runnable{
 			
 		}
 		
-	}
-	public void setChateau(Chateau chateau) {
-		this.chateau = chateau;
-		Thread thread = new Thread(this);
-		thread.start();
-	}
-	public Case getCarte(int i, int j) {
-		return carte[i][j];
-	}
-	
-	public void setI_j(InfosJoueur i_j) {
-		this.i_j = i_j;
-	}	
-	public static Carte getCarte() {
-		return instanceCarte;
 	}
 }

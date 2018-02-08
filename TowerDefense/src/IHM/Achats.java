@@ -4,6 +4,8 @@ import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 
 import javax.swing.BorderFactory;
 import javax.swing.JPanel;
@@ -26,11 +28,11 @@ public class Achats extends JPanel{
 	public Achats() {
 		charger_achats();		
 		Border loweredbevel = BorderFactory.createLoweredBevelBorder();
-
+		
 		Border border=  BorderFactory.createTitledBorder(
                 loweredbevel, "Achat");
 		this.setBorder(border);
-	//	this.setBackground(new Color(223, 204, 200));
+		this.addMouseListener(new Souris_position());
 	}
 	
 	public void setTour_achetee(Type_tour tour_achetee) {
@@ -59,6 +61,21 @@ public class Achats extends JPanel{
 			bouton.dessiner(g2);
 		}
 	}
+	
+	//classe interne pour la position de la souris
+	private class Souris_position extends MouseAdapter{
+
+		@Override
+		public void mouseClicked(MouseEvent evenement) {
+			
+			if(getBoutons_produits()[0].contain(evenement.getX(), evenement.getY())) {
+				Jeu.getInstance().getCarte().setTypeTourAjoutee(Type_tour.TourForte);
+			}else if(getBoutons_produits()[1].contain(evenement.getX(), evenement.getY())){
+				Jeu.getInstance().getCarte().setTypeTourAjoutee(Type_tour.TourRapide);
+			}
+		}
+	}
+	
 	
 	@Override
 	public Dimension getPreferredSize() {

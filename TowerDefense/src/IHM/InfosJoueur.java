@@ -41,7 +41,7 @@ public class InfosJoueur extends JPanel{
 				g.drawImage(sprite.getSpriteLife(), 130+i*16, 22,null);
 				cpt = i;
 			}
-			++cpt;
+			if (cpt > 0) ++cpt;
 			while (cpt <= 9) {
 				g.drawImage(sprite.getSpriteNoLife(), 130+cpt*16, 22,null);
 				++cpt;

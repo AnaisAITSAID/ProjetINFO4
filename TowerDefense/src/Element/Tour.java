@@ -2,14 +2,12 @@ package Element;
 
 import java.applet.Applet;
 import java.applet.AudioClip;
-import java.awt.Color;
-import java.awt.Graphics;
 import java.awt.Graphics2D;
-import java.awt.geom.Line2D;
 import java.net.MalformedURLException;
 import java.net.URL;
 
 import IHM.Carte;
+import IHM.Jeu;
 import utils.Constantes;
 import utils.Constantes.Type_tour;
 
@@ -42,7 +40,7 @@ public abstract class Tour extends AffichageSprite {
 		}
 
 		public void setPrix() {
-			this.prix += 5*this.prix;
+			this.prix += this.degats * vitesse;
 		}
 
 		public boolean peutTirer(int tempsEcoule){
@@ -104,7 +102,6 @@ public abstract class Tour extends AffichageSprite {
 
 		public void setNiveau() {
 			++this.niveau;
-			System.out.println("lvl : " + this.niveau);
 		}
 
 		
@@ -147,8 +144,8 @@ public abstract class Tour extends AffichageSprite {
 									// TODO Auto-generated catch block
 									e1.printStackTrace();
 								}
-
-								Carte.getCarte().repaint();
+								
+								Jeu.getInstance().getCarte().repaint();
 								try {
 									Thread.sleep(100);
 								} catch (InterruptedException e) {
@@ -156,7 +153,7 @@ public abstract class Tour extends AffichageSprite {
 									e.printStackTrace();
 								}
 								displayLaser = false;
-								Carte.getCarte().repaint();									
+								Jeu.getInstance().getCarte().repaint();									
 							}
 						});
 						tire.start();
