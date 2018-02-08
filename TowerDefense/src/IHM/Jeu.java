@@ -2,6 +2,7 @@ package IHM;
 
 import java.applet.AudioClip;
 import java.awt.BorderLayout;
+import java.awt.Dimension;
 import java.awt.FlowLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -112,8 +113,10 @@ public class Jeu extends JFrame{
 		
 		this.setTitle("Tower Defense");
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-
-		this.setSize(600,600);
+		/*Dimension dimension = java.awt.Toolkit.getDefaultToolkit().getScreenSize();
+		int height = (int)dimension.getHeight();
+		int width  = (int)dimension.getWidth();*/
+		this.setSize(700,700);
 		this.setResizable(false);
 		m = new Menu(this);
 		this.add(m);
