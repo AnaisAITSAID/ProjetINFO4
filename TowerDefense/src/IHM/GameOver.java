@@ -1,5 +1,6 @@
 package IHM;
 
+import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.Image;
@@ -31,7 +32,8 @@ public class GameOver extends JPanel{
 		this.revanche = new JButton("Revanche");
 		
 		this.revanche.addActionListener(new Revanche());
-		
+		this.menu.setBackground(new Color(242, 255, 154));
+		this.revanche.setBackground(new Color(242, 255, 154));
 		Retour r;
 		r = new Retour();
 		this.menu.addActionListener(r);

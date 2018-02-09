@@ -29,7 +29,8 @@ public class Aide extends JPanel{
 		}
 		retour = new JButton("Retour");
 		jouerAide = new JButton("Jouer");
-		
+		retour.setBackground(new Color(242, 255, 154));
+		jouerAide.setBackground(new Color(242, 255, 154));
 		JouerAide ja;
 		ja = new JouerAide();
 		jouerAide.addActionListener(ja);

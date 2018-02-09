@@ -1,6 +1,8 @@
 package IHM;
 
 import java.awt.BorderLayout;
+import java.awt.Color;
+import java.awt.Dimension;
 import java.awt.FlowLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -19,8 +21,6 @@ import utils.Constantes.Type_tour;
 
 
 public class Jeu extends JFrame{
-	public static int largeur;
-	public static int hauteur;
 	private Achats zone_achats;
 	private Carte carte;
 	private Chateau joueur; 
@@ -51,6 +51,7 @@ public class Jeu extends JFrame{
 	public void lanceMenu() {
 		m = new Menu();
 		this.add(m);
+		pack();
 		this.setVisible(true);
 	}
 	
@@ -115,6 +116,7 @@ public class Jeu extends JFrame{
 		joueur=new Chateau();
 		
 		JButton menuButton = new JButton("Menu");
+		menuButton.setPreferredSize(new Dimension(130, 100));
 		jp = new JPanel();
 		jp2  = new JPanel();
 		infoTour = new InfosTour();
@@ -140,7 +142,7 @@ public class Jeu extends JFrame{
 	
 		this.setVisible(true);
 
-
+		menuButton.setBackground(new Color(242, 255, 154));
 		carte.setChateau(joueur);
 		menuButton.addActionListener(new ActionListener() {
 			

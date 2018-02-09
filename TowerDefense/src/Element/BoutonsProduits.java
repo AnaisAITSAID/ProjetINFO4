@@ -67,8 +67,8 @@ public class BoutonsProduits extends AffichageSprite{
 	}
 	
 	public boolean contain(int x, int y) {
-		if (x <= this.x + Constantes.tailleCase && x >= this.x &&
-		    	y <= this.y + Constantes.tailleCase && y >= this.y)
+		if (x <= this.x + Constantes.tailleCase + 25 && x >= this.x - 25 &&
+		    	y <= this.y + Constantes.tailleCase + 25 && y >= this.y - 25)
 		    	return true;
 		    return false;
 	}

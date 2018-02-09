@@ -1,5 +1,7 @@
 package IHM;
 
+import java.awt.Color;
+import java.awt.Dimension;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.Image;
@@ -13,6 +15,7 @@ import javax.swing.JButton;
 import javax.swing.JPanel;
 
 import IHM.Jeu.Jouer;
+import utils.Constantes;
 
 public class Menu extends JPanel{
 
@@ -41,8 +44,10 @@ public class Menu extends JPanel{
 		ad = new Regles();
 		regles.addActionListener(ad);
 		this.setLayout(null);
-		jouer.setBounds(j.getWidth()/2-170, j.getHeight()-90,150,50);
-		regles.setBounds(j.getWidth()/2+40, j.getHeight()-90,150,50);
+		jouer.setBounds(700/2-170, 700-90,150,50);
+		regles.setBounds(700/2+40, 700-90,150,50);
+		regles.setBackground(new Color(242, 255, 154));
+		jouer.setBackground(new Color(242, 255, 154));
 		this.add(jouer);
 		this.add(regles);
 	}
@@ -58,7 +63,11 @@ public class Menu extends JPanel{
 		}
 		
 	}
-	
+	@Override
+	public Dimension getPreferredSize() {
+		return new Dimension(700, 700);
+	}
+
 	public void paintComponent(Graphics g) {
 		super.paintComponent(g);
 		Graphics2D g2 = (Graphics2D)g;

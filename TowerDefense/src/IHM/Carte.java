@@ -174,7 +174,7 @@ public class Carte extends JPanel implements Runnable{
 			//on dessine le château
 			chateau.dessiner(g2);
 			
-			g2.setColor(Color.RED);
+			g2.setColor(Color.ORANGE);
 			g2.draw(this.portee);
 		} catch (Exception e) {
 			repaint();
