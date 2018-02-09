@@ -16,11 +16,13 @@ public class GameOver extends JPanel{
 	private JButton menu;
 	private JButton revanche;
 	private Image fond;
+	private Image gameover;
 	
 	public GameOver() {
 		
 		try {
 			fond = ImageIO.read(new File("image/chateau3.jpg"));
+			gameover = ImageIO.read(new File("image/GAMEOVER.png"));
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -67,5 +69,6 @@ public class GameOver extends JPanel{
 		super.paintComponent(g);
 		Graphics2D g2 = (Graphics2D)g;
 		g2.drawImage(fond, 0, 0, Jeu.getInstance().getWidth(), Jeu.getInstance().getHeight(),null);
+		g2.drawImage(gameover, Jeu.getInstance().getWidth()-750, Jeu.getInstance().getHeight()-800, 600,600, null);
 	}
 }
