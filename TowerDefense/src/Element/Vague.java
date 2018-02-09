@@ -39,9 +39,8 @@ public class Vague {
 			}
 		}
 		if (nb_ennemis == 0) collec_ennemi = null; // le garbage libere la ressource
-		if (num_vague %5 == 0) this.coef *= 5;
 		if (stop) {
-			pts_vie += 30 + this.coef*num_vague;
+			pts_vie += 70 + this.coef*num_vague;
 			argent_donne = 30 * num_vague;
 		}
 
@@ -57,6 +56,8 @@ public class Vague {
 		num_vague = num_vague + 1;
 		collec_ennemi = new Ennemi [this.nb_ennemis];
 		int caseCourante = 0; 
+		if (num_vague %3 == 0) this.coef = this.coef * 5;
+		System.out.println(this.coef);
 		
 		for(int i=0 ; i < nb_ennemis; i++) {
 			Ennemi e= new Ennemi(pts_vie, argent_donne, caseCourante);

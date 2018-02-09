@@ -1,12 +1,9 @@
 package Element;
 
-import java.applet.Applet;
 import java.applet.AudioClip;
 import java.awt.Graphics2D;
-import java.net.MalformedURLException;
 import java.net.URL;
 
-import IHM.Carte;
 import IHM.Jeu;
 import utils.Constantes;
 import utils.Constantes.Type_tour;
@@ -23,6 +20,7 @@ public abstract class Tour extends AffichageSprite {
 		private Laser laser;
 		private float attente; 
 		private int prix;
+		private int coef = 2;
 		
 		public Tour(Case case_position, Type_tour type_tour, int portee, int vitesse, int niveau, int degats, int prix) {
 			this.case_position=case_position;
@@ -77,7 +75,14 @@ public abstract class Tour extends AffichageSprite {
 			return degats;
 		}
 
-		public abstract void setDegats();
+		public void setDegats() {
+			if (getNiveau() %4 == 0) this.coef *= 4;
+			degats = (degats + (70 + (this.coef*getNiveau())));
+		}
+		
+		public int calculDegat() {
+			return (70 + (this.coef*getNiveau()));
+		}
 
 		public int getPortee() {
 			return portee;
@@ -136,7 +141,7 @@ public abstract class Tour extends AffichageSprite {
 													   x, y);
 								URL u1;
 								AudioClip s1;
-								try {
+							/*	try {
 									u1 = new URL("file:son/fire.wav");
 									s1 = Applet.newAudioClip(u1);
 									s1.play();
@@ -144,7 +149,7 @@ public abstract class Tour extends AffichageSprite {
 									// TODO Auto-generated catch block
 									e1.printStackTrace();
 								}
-								
+								*/
 								Jeu.getInstance().getCarte().repaint();
 								try {
 									Thread.sleep(100);
@@ -176,5 +181,5 @@ public abstract class Tour extends AffichageSprite {
 			}
 		}
 		
-		public abstract int calculDegat();
+		
 }

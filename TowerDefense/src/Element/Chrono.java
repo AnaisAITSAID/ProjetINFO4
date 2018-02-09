@@ -1,7 +1,7 @@
 package Element;
 
 public class Chrono {
-	static long chrono = 0 ;
+	long chrono = 0 ;
 
 	public void Go_Chrono() {
 		chrono = java.lang.System.currentTimeMillis() ;
