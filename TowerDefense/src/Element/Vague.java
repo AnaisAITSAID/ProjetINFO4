@@ -15,7 +15,7 @@ public class Vague {
 
 		pts_vie = 33;
 		argent_donne = 10;
-		coef = 10;
+		coef = 25;
 	}
 	public int getPointDeVie(){
 		return pts_vie;
@@ -41,7 +41,7 @@ public class Vague {
 		if (nb_ennemis == 0) collec_ennemi = null; // le garbage libere la ressource
 		if (stop) {
 			pts_vie += 70 + this.coef*num_vague;
-			argent_donne = 30 * num_vague;
+			argent_donne = 20 * num_vague;
 		}
 
 		return stop;
@@ -56,7 +56,7 @@ public class Vague {
 		num_vague = num_vague + 1;
 		collec_ennemi = new Ennemi [this.nb_ennemis];
 		int caseCourante = 0; 
-		if (num_vague %3 == 0) this.coef = this.coef * 5;
+	//	if (num_vague %3 == 0) this.coef = this.coef * 5;
 		System.out.println(this.coef);
 		
 		for(int i=0 ; i < nb_ennemis; i++) {

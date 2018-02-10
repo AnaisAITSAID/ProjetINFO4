@@ -19,8 +19,8 @@ public abstract class Tour extends AffichageSprite {
 		private boolean displayLaser = false;
 		private Laser laser;
 		private float attente; 
-		private int prix;
-		private int coef = 2;
+		protected int prix;
+
 		
 		public Tour(Case case_position, Type_tour type_tour, int portee, int vitesse, int niveau, int degats, int prix) {
 			this.case_position=case_position;
@@ -37,9 +37,7 @@ public abstract class Tour extends AffichageSprite {
 			return prix;
 		}
 
-		public void setPrix() {
-			this.prix += this.degats * vitesse;
-		}
+		public abstract void setPrix();
 
 		public boolean peutTirer(int tempsEcoule){
 			//System.out.println("temps ecoule : " + tempsEcoule + " attente : " + this.attente + " Resultat : " +  tempsEcoule % this.attente);
@@ -75,14 +73,9 @@ public abstract class Tour extends AffichageSprite {
 			return degats;
 		}
 
-		public void setDegats() {
-			if (getNiveau() %4 == 0) this.coef *= 4;
-			degats = (degats + (70 + (this.coef*getNiveau())));
-		}
+		public abstract void setDegats();
 		
-		public int calculDegat() {
-			return (70 + (this.coef*getNiveau()));
-		}
+		public abstract int calculDegat();
 
 		public int getPortee() {
 			return portee;

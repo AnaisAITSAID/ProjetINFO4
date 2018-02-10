@@ -53,6 +53,7 @@ public class Carte extends JPanel implements Runnable{
     protected volatile boolean running = true;
     private Clip clip1;
     private Clip clip2;
+    private Tour tourPortee = null;
 	/**
 	 * Constructeur de la classe carte
 	 */
@@ -176,6 +177,7 @@ public class Carte extends JPanel implements Runnable{
 			
 			g2.setColor(Color.ORANGE);
 			g2.draw(this.portee);
+			this.tourPortee.dessiner(g2);;
 		} catch (Exception e) {
 			repaint();
 		}	
@@ -202,6 +204,7 @@ public class Carte extends JPanel implements Runnable{
 			nouvelle_tour = new TourRapide(case_position);	
 		}
 		if(chateau.getArgent()>=nouvelle_tour.getPrix()) {
+			this.tourPortee = null;
 			this.tours_joueur.add(nouvelle_tour);
 			((CaseJouable)case_position).setTour(nouvelle_tour);
 			chateau.setArgent(chateau.getArgent()-nouvelle_tour.getPrix());
@@ -290,7 +293,21 @@ public class Carte extends JPanel implements Runnable{
 							portee = new Ellipse2D.Double(tour.getXcaseposition() -tour.getPortee(), tour.getYcaseposition()-tour.getPortee(), 
 																					 tour.getPortee()*2+(Constantes.tailleCase), tour.getPortee()*2+(Constantes.tailleCase));
 						}
-						
+						else if (typeTourAjoutee != null) {
+							if (typeTourAjoutee == Type_tour.TourForte) {
+								int p = 3*Constantes.tailleCase;
+								tourPortee = new TourForte(((CaseJouable)carte[i][j]));
+								portee = new Ellipse2D.Double(carte[i][j].getX() - p, carte[i][j].getY()- p, 
+										 p*2+(Constantes.tailleCase), p*2+(Constantes.tailleCase));								
+							}
+							else if (typeTourAjoutee == Type_tour.TourRapide) {
+								int p = 4*Constantes.tailleCase;
+								tourPortee = new TourRapide(((CaseJouable)carte[i][j]));
+								portee = new Ellipse2D.Double(carte[i][j].getX() - p, carte[i][j].getY()- p, 
+										 p*2+(Constantes.tailleCase), p*2+(Constantes.tailleCase));								
+							}
+							trouver = true;
+						}
 					}
 				}
 			}
