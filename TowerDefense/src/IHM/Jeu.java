@@ -8,7 +8,16 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.io.IOException;
+import java.net.MalformedURLException;
+import java.net.URL;
 
+import javax.sound.sampled.AudioInputStream;
+import javax.sound.sampled.AudioSystem;
+import javax.sound.sampled.Clip;
+import javax.sound.sampled.FloatControl;
+import javax.sound.sampled.LineUnavailableException;
+import javax.sound.sampled.UnsupportedAudioFileException;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
@@ -32,7 +41,7 @@ public class Jeu extends JFrame{
 	private GameOver gameOver;
 	JPanel jp;
 	JPanel jp2;
-
+    private Clip clip;
 	public static Jeu getInstance() {
 		if (jeu == null) {
 			jeu  = new Jeu(); 			
@@ -51,19 +60,34 @@ public class Jeu extends JFrame{
 	public void lanceMenu() {
 		m = new Menu();
 		this.add(m);
+		URL u1;
+
+		try {
+			u1 = new URL("file:son/menu.wav");
+			AudioInputStream audioInputStream = AudioSystem.getAudioInputStream(u1);
+	        clip = AudioSystem.getClip();
+	        clip.open(audioInputStream);
+	        clip.loop(Clip.LOOP_CONTINUOUSLY);
+		} catch (MalformedURLException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		} catch (UnsupportedAudioFileException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (LineUnavailableException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		pack();
 		this.setVisible(true);
 	}
-	
-	public class Jouer implements ActionListener{
-		
-		@Override
-		public void actionPerformed(ActionEvent arg0) {
-			remove(m);
-			interfaceUtilisateur();
-		}
-		
+	public void stopSonMenu() {
+		clip.stop();
 	}
+
 	
 	public Achats getZone_achats() {
 		return zone_achats;
@@ -89,11 +113,6 @@ public class Jeu extends JFrame{
 	public static Jeu getJeu() {
 		return jeu;
 	}
-
-
-
-	
-	
 	
 	public void afficherAide() {
 		a = new Aide();

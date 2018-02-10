@@ -17,7 +17,11 @@ public class Sprites {
 	private Image spriteTourRapideAchat;
 	private Image spriteLife;
 	private Image spriteNoLife;
-
+	
+	private Image spriteSlime01;
+	private Image spriteSlime02;
+	private Image spriteSlime03;
+	
 	private static Sprites sprite = null;
 	
 	private Sprites () {
@@ -32,8 +36,43 @@ public class Sprites {
 		this.chargespriteLife();
 		this.chargespriteNoLife();
 		
+		this.chargespriteSlime01();
+		this.chargespriteSlime02();
+		this.chargespriteSlime03();
 	}
 
+	private void chargespriteSlime01() {
+		try {
+			this.spriteSlime01 = ImageIO.read(new File("image/slime01.png"));
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+	}
+	private void chargespriteSlime02() {
+		try {
+			this.spriteSlime02 = ImageIO.read(new File("image/slime02.png"));
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+	}
+	private void chargespriteSlime03() {
+		try {
+			this.spriteSlime03 = ImageIO.read(new File("image/slime03.png"));
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+	}
+	
+	public Image getspriteSlime01() {
+		return this.spriteSlime01;
+	}
+	public Image getspriteSlime02() {
+		return this.spriteSlime02;
+	}
+	public Image getspriteSlime03() {
+		return this.spriteSlime03;
+	}
+	 
 	private void chargespriteTourForteAchat() {
 		try {
 			this.spriteTourForteAchat = ImageIO.read(new File("image/tourAchatForte.png"));

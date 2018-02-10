@@ -14,9 +14,6 @@ import javax.imageio.ImageIO;
 import javax.swing.JButton;
 import javax.swing.JPanel;
 
-import IHM.Jeu.Jouer;
-import utils.Constantes;
-
 public class Menu extends JPanel{
 
 	private JButton jouer;
@@ -24,7 +21,7 @@ public class Menu extends JPanel{
 	private Jeu j;
 	private Image fond;
 	private Image titre;
-	
+
 	public Menu() {
 		this.j = Jeu.getInstance();
 		
@@ -38,7 +35,7 @@ public class Menu extends JPanel{
 		jouer = new JButton("Jouer");
 		regles = new JButton("Règles");
 		Jouer jo;
-		jo = j.new Jouer();
+		jo = new Jouer();
 		jouer.addActionListener(jo);
 		Regles ad;
 		ad = new Regles();
@@ -60,6 +57,17 @@ public class Menu extends JPanel{
 		public void actionPerformed(ActionEvent arg0) {
 			j.remove(getMenu());
 			j.afficherAide();
+			j.stopSonMenu();
+		}
+		
+	}
+	public class Jouer implements ActionListener{
+		
+		@Override
+		public void actionPerformed(ActionEvent arg0) {
+			j.remove(getMenu());
+			j.interfaceUtilisateur();
+			j.stopSonMenu();
 		}
 		
 	}

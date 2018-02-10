@@ -64,6 +64,7 @@ public class Aide extends JPanel{
 			// TODO Auto-generated method stub
 			Jeu.getInstance().remove(Jeu.getInstance().getA());
 			Jeu.getInstance().interfaceUtilisateur();
+			Jeu.getInstance().stopSonMenu();
 		}
 		
 	}

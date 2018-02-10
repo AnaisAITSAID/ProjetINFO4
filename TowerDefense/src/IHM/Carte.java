@@ -219,9 +219,6 @@ public class Carte extends JPanel implements Runnable{
 	}
 
 	
-	
-	
-	
 	public void stopGame () {
 		clip1.stop();
 		if (clip2 != null)
