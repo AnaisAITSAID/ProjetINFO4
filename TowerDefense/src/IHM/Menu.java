@@ -43,8 +43,8 @@ public class Menu extends JPanel{
 		this.setLayout(null);
 		jouer.setBounds(700/2-170, 700-90,150,50);
 		regles.setBounds(700/2+40, 700-90,150,50);
-		regles.setBackground(new Color(242, 255, 154));
-		jouer.setBackground(new Color(242, 255, 154));
+		regles.setBackground(new Color(119, 181, 254));
+		jouer.setBackground(new Color(119, 181, 254));
 		this.add(jouer);
 		this.add(regles);
 	}

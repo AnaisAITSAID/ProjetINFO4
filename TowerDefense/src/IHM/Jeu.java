@@ -161,7 +161,7 @@ public class Jeu extends JFrame{
 	
 		this.setVisible(true);
 
-		menuButton.setBackground(new Color(242, 255, 154));
+		menuButton.setBackground(new Color(119, 181, 254));
 		carte.setChateau(joueur);
 		menuButton.addActionListener(new ActionListener() {
 			
