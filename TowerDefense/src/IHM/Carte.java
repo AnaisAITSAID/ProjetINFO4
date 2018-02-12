@@ -212,6 +212,7 @@ public class Carte extends JPanel implements Runnable{
 
 			i_j.repaint();
 		}else {
+			this.tourPortee = null;
 			throw new ExceptionFenetre("vous ne possédez pas l'argent nécessaire pour acheter la tour");
 		}
 	}
