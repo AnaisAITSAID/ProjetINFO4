@@ -132,17 +132,6 @@ public abstract class Tour extends AffichageSprite {
 								displayLaser = true;
 								laser = new Laser(case_position.getX()+Constantes.tailleCase/2, case_position.getY() +Constantes.tailleCase/2, 
 													   x, y);
-								URL u1;
-								AudioClip s1;
-							/*	try {
-									u1 = new URL("file:son/fire.wav");
-									s1 = Applet.newAudioClip(u1);
-									s1.play();
-								} catch (MalformedURLException e1) {
-									// TODO Auto-generated catch block
-									e1.printStackTrace();
-								}
-								*/
 								Jeu.getInstance().getCarte().repaint();
 								try {
 									Thread.sleep(100);

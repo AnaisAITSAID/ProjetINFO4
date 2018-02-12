@@ -144,6 +144,12 @@ public class Carte extends JPanel implements Runnable{
 					carte[j][i].dessiner(g2);
 				}			
 			}
+			g2.setColor(Color.BLACK);
+			
+			for (Tour tour : this.tours_joueur) {
+				tour.dessiner(g2);
+				tour.dessinerLaser(g2);
+			}
 			
 			//on dessine chaque ennemi de la vague
 			for(int i = 0; i < la_vague.getNb_ennemis(); ++i) {
@@ -163,12 +169,6 @@ public class Carte extends JPanel implements Runnable{
 					ennemi.dessiner(g2);
 				}
 
-			}
-			g2.setColor(Color.BLACK);
-			
-			for (Tour tour : this.tours_joueur) {
-				tour.dessiner(g2);
-				tour.dessinerLaser(g2);
 			}
 
 

@@ -34,15 +34,16 @@ public class InfosJoueur extends JPanel{
 			super.paintComponent(g);
 			Graphics2D g2 = (Graphics2D) g;
 			g2.setFont(new Font("default", Font.BOLD, 16));
-//			g2.drawString("Points de vie :" + this.joueur.getVieChateau(), 10, 35);
 			g2.drawString("Points de vie : ", 10, 35);
 			int cpt = 0;
-			for (int i = 0; i < this.joueur.getVieChateau(); ++i) {
+			for (int i = 1; i <= this.joueur.getVieChateau(); ++i) {
 				g.drawImage(sprite.getSpriteLife(), 130+i*16, 22,null);
 				cpt = i;
 			}
-			if (cpt > 0) ++cpt;
-			while (cpt <= 9) {
+			++cpt;
+			
+			
+			while (cpt <= 10) {
 				g.drawImage(sprite.getSpriteNoLife(), 130+cpt*16, 22,null);
 				++cpt;
 			}
