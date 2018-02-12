@@ -88,7 +88,7 @@ public class Aide extends JPanel{
 		g2.setFont(new Font("default", Font.BOLD, 16));
 		g2.drawString("Pour défendre votre château, vous devez placer des tours sur les cases qui",10, 160);
 		g2.drawString("ne font pas parties du chemin (les cases vertes).",10, 180);
-		g2.drawString("Pour placer une tour, il faut acherter des tours.", 10, 200);
+		g2.drawString("Pour placer une tour, il faut acheter des tours.", 10, 200);
 		g2.drawString("Pour acheter une tour il faut cliquer sur la tour que vous souhaitez acquérir",10,220);
 		g2.drawString("dans la zone d'achats située en bas à gauche de l'écran.",10, 240);
 		g2.drawString("Puis, cliquer sur la case où vous souhaitez placer la tour.", 10, 260);
