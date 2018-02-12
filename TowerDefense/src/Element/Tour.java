@@ -145,7 +145,6 @@ public abstract class Tour extends AffichageSprite {
 						});
 						tire.start();
 						vague.getEnnemi(i).setPointsDeVie(vague.getEnnemi(i).getPointsDeVie()-degats);
-						
 						aTire = true;
 					}
 

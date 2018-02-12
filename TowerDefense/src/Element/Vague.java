@@ -86,7 +86,9 @@ public class Vague {
 	public void supprimerEnnemi(Ennemi e) {
 		int ind = 0;
 		boolean trouve=false;
+
 		for(int i = 0; i < nb_ennemis; i++ ) {
+
 			if(collec_ennemi[i] == e) {
 				ind = i;
 				trouve = true;

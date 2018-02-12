@@ -10,7 +10,6 @@ public class Sprites {
 	private Image spriteCaseJouable;
 	private Image spriteCaseChemin;
 	private Image spriteChateau;
-	private Image spriteEnnemi;
 	private Image spriteTourForte;
 	private Image spriteTourForteAchat;
 	private Image spriteTourRapide;
@@ -28,7 +27,6 @@ public class Sprites {
 		this.chargeSpriteCaseJouable();
 		this.chargeSpriteCaseChemin();
 		this.chargeSpriteChateau();
-		this.chargeSpriteEnnemi();
 		this.chargespriteTourForte();
 		this.chargespriteTourForteAchat();
 		this.chargespriteTourRapide();
@@ -145,20 +143,7 @@ public class Sprites {
 		}
 	}
 	
-	/**
-	 * Fonction permettant de charger les sprites des ennemis
-	 */
-	public void chargeSpriteEnnemi(){
-		try {
-			this.spriteEnnemi = ImageIO.read(new File("image/ennemi.png"));
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
-	}
 
-	/**
-	 * Fonction permettant de charger les sprites des ennemis
-	 */
 	public void chargespriteTourForte(){
 		try {
 			this.spriteTourForte = ImageIO.read(new File("image/tour1.png"));
@@ -186,14 +171,7 @@ public class Sprites {
 	public Image getSpriteChateau() {
 		return this.spriteChateau;
 	}
-	
-	/**
-	 * @return le sprite de l'ennemi
-	 */
-	public Image getSpriteEnnemi() {
-		return this.spriteEnnemi;
-	}
-	
+
 	/**
 	 * @return le sprite de la tour1
 	 */

@@ -404,12 +404,7 @@ public class Carte extends JPanel implements Runnable{
 			if (!la_vague.ennemisMorts()) {
 				i_j.repaint();
 				for (int i = 0; i < la_vague.getNb_ennemis(); ++i) {
-					if (chateau.gameOver()) break;
-					if(!la_vague.getEnnemi(i).isBouge()){
-						chateau.setArgent(chateau.getArgent()+la_vague.getEnnemi(i).getMonnaiesGenere());
-						i_j.repaint();
-						la_vague.supprimerEnnemi(la_vague.getEnnemi(i));						
-					}
+					
 					
 					if (la_vague.getEnnemi(i).estArrive() && la_vague.getEnnemi(i).isBouge()) {
 						this.chateau.setVieChateau(la_vague.getEnnemi(i).attaquer());
@@ -422,6 +417,12 @@ public class Carte extends JPanel implements Runnable{
 					} catch (InterruptedException e) {
 						e.printStackTrace();												
 					}	
+					if (chateau.gameOver()) break;
+					if(!la_vague.getEnnemi(i).isBouge()){
+						chateau.setArgent(chateau.getArgent()+la_vague.getEnnemi(i).getMonnaiesGenere());
+						i_j.repaint();
+						la_vague.supprimerEnnemi(la_vague.getEnnemi(i));						
+					}
 					
 					if (la_vague.getEnnemi(i).isBouge()) {
 						la_vague.getEnnemi(i).deplacer();

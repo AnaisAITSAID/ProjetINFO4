@@ -21,7 +21,7 @@ public class TourForte extends Tour{
 
 	@Override
 	public void setDegats() {
-			degats = (degats + (100 *getNiveau()));
+			degats = (degats + (100 *getNiveau()*2));
 	}
 
 
@@ -29,14 +29,14 @@ public class TourForte extends Tour{
 	@Override
 	public int calculDegat() {
 
-		return (100*getNiveau());
+		return (100*getNiveau()*2);
 	}
 
 
 
 	@Override
 	public void setPrix() {
-		this.prix += this.degats + this.calculDegat();
+		this.prix += this.calculDegat();
 	}
 	
 	
